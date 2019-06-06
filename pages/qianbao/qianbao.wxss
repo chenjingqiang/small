@@ -1,0 +1,138 @@
+/* pages/qianbao/qianbao.wxss */
+
+.header{
+  background: #799df1;
+  padding-bottom: 36rpx;
+  margin-bottom: 60rpx;
+}
+.header text{
+  display: block;
+  width: 672rpx;
+  margin: 0 auto;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  letter-spacing: 1.3rpx;
+}
+.money{
+  display: block;
+  width: 672rpx;
+  margin: 0 auto;
+  height: 182rpx;
+  line-height: 182rpx;
+  font-size: 130rpx;
+  color: #FFFFFF;
+  letter-spacing: 5.8rpx;
+  margin-bottom: 30rpx;
+  margin-top: 30rpx;
+}
+.wx{
+  display: block;
+  width: 672rpx;
+  margin: 0 auto;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  letter-spacing: 1.2rpx;
+  margin-bottom: 30rpx;
+}
+.many{
+  display: block;
+  width: 672rpx;
+  margin: 0 auto;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  letter-spacing: 0.12rpx;
+}
+.many view{
+  border: 1rpx solid #FFFFFF;
+  border-radius: 9rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+}
+.change_wx{
+  float: left;
+  width: 181rpx;
+}
+.mingxi{
+  float: right;
+  width: 129rpx;
+}
+.tit{
+  display: block;
+  width: 672rpx;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+  color: #333333;
+  letter-spacing: 1.2rpx;
+}
+.tixian {
+  display: block;
+  width: 672rpx;
+  margin: 0 auto;
+}
+.tixian text{
+  float: left;
+  font-size: 46rpx;
+  color: #333333;
+  margin-right: 20rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.tx_money{
+  width: 250rpx;
+  float: left;
+  font-size: 30rpx;
+  color: #333333;
+  margin-top: 1rpx;
+  height: 50rpx;
+}
+.all{
+  float: right;
+  width: 80rpx;
+  font-size: 32rpx;
+  color: #799DF1;
+  letter-spacing: 5.8rpx;
+  margin-top: 1rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.bor{
+  width: 672rpx;
+  height: 2rpx;
+  background:#CCCCCC;
+  margin: 0 auto;
+  margin-top: 30rpx;
+  margin-bottom: 20rpx;
+}
+.kouchu{
+  width: 672rpx;
+  margin: 0 auto;
+  text-align: right;
+  font-size: 24rpx;
+  color: #999999;
+  letter-spacing: 1rpx;
+  margin-bottom: 120rpx;
+}
+.sub{
+  width: 600rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0 auto;
+  background: #799DF1;
+  border-radius: 8rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  letter-spacing: 1.5rpx;
+  text-align: center;
+}
+.tx_text{
+  text-align: center;
+  font-size: 24rpx;
+  color: #666666;
+  letter-spacing: 1rpx;
+  margin-top: 24rpx;
+}
+.tishi{
+  color: red;
+}

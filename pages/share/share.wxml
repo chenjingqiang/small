@@ -1,0 +1,95 @@
+<!--pages/share/share.wxml-->
+<view class='share'>
+  <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}" catchtouchmove='true'></button>
+  <view class='box' catchtouchmove='true' wx-if="{{t_f2}}"></view>
+  <view class='tanchuang2' wx-if="{{t_f2}}" catchtouchmove='true'>
+    <view class='x' bindtap='close'>
+      <image src='/pages/image/x.png'></image>
+    </view>
+    <view class='tit'>
+      <text class='fl'>翻译赏金</text>
+      <input class='fl inp'  type="number" bindinput='get_money' placeholder='赏金不能低于1元'></input>
+      <text class='fr'>元</text>
+    </view>
+    <view class="box_tishi">
+      赏金越高抢单的速度越快哦！
+    </view>
+    <view class='box_con clearfix'>
+      <view class='fl box_l'>
+        您将为翻译官加菜
+      </view>
+      <view class='fr'>
+        <image src='{{caiimg}}' class='box_cai'></image>
+        <view class='ming'>{{caiming}}</view>
+      </view>
+    </view>
+    <view class="{{sub_status==true ? 'sub2' : 'sub3'}}" bindtap='sub2'>
+      确认加价
+    </view>
+  </view>
+  <view class='sub_box' animation="{{animation_sub}}">
+    订单已被抢到，无需进行加价了
+  </view>
+  <view class='con'>
+    <view class='clearfix wx_fu'>
+      <image  src='{{img}}' class='img fl'></image>
+      <text class='name fl'>{{nickname}}</text>
+    </view>
+  </view>
+  <view class='danmu' wx-if="{{danmu}}">
+    <view class='danmu_list' wx:for="{{select2}}" wx:key="{{index}}" style='top:{{item.top}}rpx;left:{{item.left}}rpx'>
+      <image class='fl danmu_touxiang' src='{{item.img}}'></image>
+      <view class='fl danmu_tet'>{{item.wx_name}}</view>
+      <image class='fl danmu_caiimg' src='{{item.dishimg}}'></image>
+
+    </view>
+  </view>
+  <view class='danmu2' wx-if="{{!danmu}}">
+    <view>
+      还没有人给翻译官加菜，点击下方<text> 【我来加菜】</text>
+    </view>
+    <view>
+      成为<text>第一个</text>加菜的人吧！
+    </view>
+  </view>
+  <view class='money'>
+    <view class='fl l'>原价格{{money}}元</view>
+    |
+    <view class='fr r'>现已加到<text>{{now_money}}</text>元</view>
+  </view>
+  <view class='sub' bindtap='sub'>
+    我来加菜
+  </view>
+  <view class='sub4' bindtap='go_index'>
+    去使用立等翻译官
+  </view>
+  <view class='tishi'>
+    加的菜越多，抢单越快哦~
+  </view>
+  <image src='../image/lishi.png' class='lishi'></image>
+  <view class='list_fu'>
+    <image src='../image/kong.png' class='kong' wx-if="{{kong}}"></image>
+    <view class='list_f' style='height:{{height}}' wx-if="{{!kong}}">
+      <view class='list' wx:for="{{select}}" wx:key="{{index}}" wx-if="{{!kong}}">
+        <image src="{{item.img}}" class='fl touxiang'></image>
+        <view class='fl list_con'>
+          <view class='con_t clearfix'>
+            <text class='fl t1'>{{item.wx_name}}:</text>
+            <text class='fl t2'>{{item.money}}</text>
+          </view>
+          <view class='con_b clearfix'>
+            <text class='fl t3'>{{item.datetime}}</text>
+            <text class='fl t4'>{{item.dishname}}</text>
+          </view>
+        </view>
+        <image src="{{item.dishimg}}" class='fr cai'></image>
+      </view>
+    </view>
+    <view class='gd' bindtap='change_hieght' wx-if="{{zhankai}}">
+        展开全部
+        <image src='../image/gd.png'></image>
+    </view>
+  </view>
+</view>
+
+

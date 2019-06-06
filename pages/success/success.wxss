@@ -1,0 +1,60 @@
+/* pages/success/success.wxss */
+.success{
+  padding-top: 160rpx;
+}
+.chenggong{
+  width: 80rpx;
+  height: 494rpx;
+  margin-left: 40rpx;
+  margin-right: 52rpx;
+}
+.right{
+  margin-top: -10rpx;
+}
+.chenggong_text{
+  display: block;
+  font-size: 40rpx;
+  color: #111111;
+}
+.money{
+  display: block;
+  font-size: 26rpx;
+  color: #333333;
+  margin-bottom: 80rpx;
+}
+.money text{
+  font-size: 38rpx;
+  color: #F59D2B;
+}
+.suc_text{
+  font-size: 26rpx;
+  color: #333333;
+  margin-top:15rpx;
+}
+.weixin{
+  font-size: 40rpx;
+  color: #799DF1;
+}
+.hou{
+  font-size: 40rpx;
+  color: #111111;
+  margin-top: 80rpx;
+  margin-bottom: 12rpx;
+}
+.hou2{
+  font-size: 26rpx;
+  color: #333333;
+}
+.sub{
+  width: 600rpx;
+  height: 80rpx;
+  background: #799DF1;
+  border-radius: 8rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  letter-spacing: 1.5rpx;
+  line-height: 80rpx;
+  margin: 0 auto;
+  margin-top: 233rpx;
+}

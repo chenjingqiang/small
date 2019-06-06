@@ -1,0 +1,57 @@
+<!--pages/pay/pay.wxml-->
+<view class='pay'>
+  <view class='tit clearfix'>
+    <view class='fl'>
+      服务项目
+    </view>
+    <view class='fr'>
+      立等翻译官
+    </view>
+  </view>
+  <view class='tit clearfix'>
+    <view class='fl'>
+      订单金额
+    </view>
+    <view class='money fr'>
+      ￥{{money}}
+    </view>
+  </view>
+  <view class='bor'>
+  
+  </view>
+  <view class='pay_tit'>
+    请选择支付方式
+  </view>
+  <view class='list clearfix'>
+    <image src='/pages/image/money.png' class='money_ico fl'></image>
+    <view class='fl f_l'>
+      <view>账户余额</view>
+      <text>可用余额{{money_jian}}元</text>
+    </view>
+      <image src="{{kong_dian==true? '/pages/image/kong_dian.jpg' : '/pages/image/dian.jpg'}}" class='dian fr' data-type="zhanghu" bindtap='change'></image>
+  </view>
+  <view class='list clearfix'>
+    <image src='/pages/image/wx.png' class='money_ico fl'></image>
+    <view class='fl f_l'>
+      <view>微信支付</view>
+      <text>亿万用户的选择，更快更安全</text>
+    </view>
+    <image src="{{wx_kong_dian==true? '/pages/image/kong_dian.jpg' : '/pages/image/wx_dian.jpg'}}" class='dian fr'  data-type="wx" bindtap='change'></image>
+    
+  </view>
+
+  <view class='sub clearfix'>
+    <view class='fl'>
+      应付金额：
+    </view>
+    <view class='fl money_zhifu'>
+      ¥{{money_zhifu}}
+    </view>
+    <view class='fl money_jian>' wx-if="{{money_jian_tf}}">
+      (¥{{money_jian}})
+    </view>
+    <view class='fr sub_inp' bindtap='pay'>
+      立即支付
+    </view>
+  </view>
+</view>

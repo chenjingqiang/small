@@ -1,0 +1,400 @@
+
+.share{
+  background: #FDCF99;
+  padding-bottom: 100rpx;
+}
+
+.wp{
+  position: absolute;
+  top: 500rpx;
+  left: 0;
+  width: 100%;
+  height: 202rpx;
+  font-size: 28rpx;
+  color: #D15222; 
+}
+.box2{
+  position: relative;
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  overflow: hidden;
+}
+
+.txt{
+  white-space: nowrap;
+}
+
+#txt1{
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: left 1s linear;
+}
+
+#txt2,.flex-box{
+  position: absolute;
+  top: 0;
+}
+
+.flex-box{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+@keyframes roll {
+  0% {left: 750rpx;}
+  100% {left: -100%;}
+}
+
+
+
+.show-author{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    opacity: 0;
+  }
+.con{
+  width: 100%;
+  height: 780rpx;
+  background: url(https://www.uear.net/img2/20190515151537.jpg) no-repeat center;
+  background-size:100% 100%; 
+  overflow: hidden;
+}
+.wx_fu{
+  margin-left: 60rpx;
+  margin-top: 100rpx;
+}
+.img{
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+}
+.name{
+  font-size: 38rpx;
+  color: #FEE4AE;
+  line-height: 130rpx;
+  margin-left: 30rpx;
+}
+.danmu{
+  position: absolute;
+  top: 436rpx;
+  left: 0;
+  width: 100%;
+  height: 350rpx;
+  font-size: 28rpx;
+  color: #D15222; 
+  text-align: center;
+}
+.danmu_list{
+  width: 322rpx;
+  height: 70rpx;
+  position: absolute;
+}
+.danmu_touxiang{
+  width: 38rpx;
+  height: 38rpx;
+  border-radius: 50%;
+  margin-top: 15rpx;
+}
+
+.danmu_tet{
+  width: 158rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 26rpx;
+  color: #D15222;
+  overflow: hidden;
+}
+
+.danmu_caiimg{
+  width: 108rpx;
+  height: 70rpx;
+}
+.danmu2{
+  position: absolute;
+  top: 500rpx;
+  left: 0;
+  width: 100%;
+  height: 202rpx;
+  font-size: 28rpx;
+  color: #D15222; 
+  text-align: center;
+  padding-top: 80rpx;
+}
+.danmu2 view{
+  margin-top: 10rpx;
+}
+.danmu2 text{
+  font-weight:bold;
+  font-size: 32rpx;
+}
+.money{
+  width: 690rpx;
+  height: 80rpx;
+  background: #fff;
+  border-radius: 40rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #666666;
+}
+.money text{
+  font-size: 48rpx;
+  color: #E87B30;
+  margin: 0 15rpx;
+  
+}
+.money .l{
+  margin-left: 40rpx;
+}
+.money .r{
+  margin-right: 40rpx;
+}
+.sub{
+  width: 560rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  background: #E87B30;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  margin-top: 50rpx;
+  text-align: center;
+  line-height: 80rpx;
+}
+.tishi{
+  margin-top: 20rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #D15222;
+  margin-bottom: 48rpx;
+}
+.lishi{
+  display: block;
+  width: 670rpx;
+  height: 70rpx;
+  margin: 0 auto;
+}
+.list_fu{
+  width: 670rpx;
+  background: #fff;
+  margin: 0 auto;
+  padding-bottom: 60rpx;
+  overflow: hidden;
+}
+.kong{
+  display: block;
+  width: 345rpx;
+  height: 255rpx;
+  margin: 0 auto;
+  margin-top: 83rpx;
+}
+.list{
+  width: 590rpx;
+  height: 85rpx;
+  margin: 0 auto;
+  margin-top: 40rpx;
+}
+.list .touxiang{
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 12rpx;
+  border-radius: 50%;
+}
+.list .list_con{
+  margin-left: 20rpx;
+}
+.con_t{
+  font-size: 30rpx;
+}
+.t1{
+  width: 242rpx;
+  height: 42rpx;
+  color: #111111;
+  overflow: hidden;
+}
+.t2{
+  width: 128rpx;
+  height: 42rpx;
+  color: #E87B30;
+  overflow: hidden;
+}
+.t3{
+  width: 138rpx;
+  height: 33rpx;
+  overflow: hidden;
+}
+.t4{
+  width: 242rpx;
+  height: 33rpx;
+  overflow: hidden;
+  margin-left: 20rpx;
+}
+.con_b{
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 10rpx;
+}
+.list .cai{
+  width: 108rpx;
+  height: 70rpx;
+  margin-top: 6rpx;
+}
+.list_f{
+  overflow: hidden;
+  margin-top: 18rpx;
+}
+.gd{
+  font-size: 26rpx;
+  color: #799DF1;
+  text-align: center;
+  padding-top: 30rpx;
+  padding-bottom: 20rpx;
+}
+.gd image{
+  width: 20rpx;
+  height: 24rpx;
+  margin-left: 13rpx;
+}
+
+.sub_box{
+  width: 386rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  position: fixed;
+  left: 50%;
+  bottom: 280rpx;
+  margin-left: -193rpx;
+  background: rgba(0,0,0,0.70);
+  border-radius: 34rpx;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  text-align: center;
+  opacity: 0;
+}
+.box{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.70);
+  z-index: 20;
+}
+.tanchuang2{
+  width: 600rpx;
+  height: 625rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 30;
+  margin-left: -300rpx;
+  margin-top: -295rpx;
+  text-align: center;
+}
+
+.tanchuang2 .x {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  padding: 20rpx;
+}
+.tanchuang2 .x image{
+  width: 34rpx;
+  height: 34rpx;
+  margin: 0;
+}
+.tit{
+  width: 510rpx;
+  height: 90rpx;
+  margin: 0 auto;
+  margin-top: 100rpx;
+}
+.tit text{
+  font-size: 40rpx;
+  color: #F3B331;
+  line-height: 90rpx;
+  font-weight: bold;
+}
+.inp{
+  width: 256rpx;
+  height: 82rpx;
+  border: 4rpx solid #F3AD1E;
+  border-radius: 8rpx;
+  margin: 0 20rpx;
+  font-size: 30rpx;
+}
+.box_tishi{
+  width: 510rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  margin-bottom: 50rpx;
+  font-size: 24rpx;
+  color: #999999;
+  text-align: left;
+}
+.box_con{
+  width: 510rpx;
+  margin: 0 auto;
+}
+.box_cai{
+  width: 138rpx;
+  height: 90rpx;
+}
+.box_l{
+  line-height: 146rpx;
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: bold;
+}
+.ming{
+  font-size: 28rpx;
+  color: #666666;
+  margin-top: 10rpx;
+}
+.sub2{
+  width: 360rpx;
+  height: 80rpx;
+  background: #ccc;
+  border-radius: 40rpx;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 80rpx;
+  margin-top: 44rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+.sub3{
+  width: 360rpx;
+  height: 80rpx;
+  background: #799DF1;
+  border-radius: 40rpx;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 80rpx;
+  margin-top: 44rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+.sub4{
+  width: 560rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  background: #799DF1;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  margin-top: 20rpx;
+  text-align: center;
+  line-height: 80rpx;
+}

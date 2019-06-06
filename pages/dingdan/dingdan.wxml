@@ -1,0 +1,208 @@
+<!--pages/dingdan/dingdan.wxml-->
+<view class='dingdan'>
+  <image class='qiuyi' src='../image/qiuyi.gif' bindtap='qiuyi' wx-if="{{status_t_f}}"></image>
+  <view class='yinying' wx-if="{{yinying}}">
+
+  </view>
+  <!-- 删除弹窗 -->
+  <view class='tanchuang' wx-if="{{yinying_shanchu}}">
+    <view class='shanchu_tit tuidan_tit'>
+      确定要删除订单记录吗？
+    </view>
+    <view class='tuidan_bor'></view>
+    <view class='tuidan_anniu clearfix'>
+      <view class='queren' bindtap='shanchu'>
+        确认
+      </view>
+      <text></text>
+      <view class='zaixiang' bindtap='zaixiang'>
+        我再想想
+      </view>
+    </view>
+  </view>
+
+  <!-- 用户退单弹窗 -->
+  <view class='tanchuang' wx-if="{{yinying_tuidan}}">
+    <view class='tuidan_tit'>
+      将收到{{tit_money}}元
+    </view>
+    <view class='tuidan_qianbao'>
+      确认退单后付款可进入钱包，并且可重新发起翻译单
+    </view>
+    <view class='tuidan_bor'></view>
+    <view class='tuidan_anniu clearfix'>
+      <view class='queren' bindtap='tuidan'>
+        确认
+      </view>
+      <text></text>
+      <view class='zaixiang' bindtap='zaixiang'>
+        我再想想
+      </view>
+    </view>
+  </view>
+
+  <!-- 翻译官退单弹窗 -->
+  <view class='tanchuang' wx-if="{{yinying_tuidan2}}">
+    <view class='tuidan_tit' >
+      确定要退单吗？
+    </view>
+    <view class='tuidan_qianbao' style='margin-top:50rpx;'>
+      退单后将进入单池，无法再接取此单了。
+    </view>
+    <view class='tuidan_bor'></view>
+    <view class='tuidan_anniu clearfix'>
+      <view class='queren' bindtap='tuidan'>
+        确认
+      </view>
+      <text></text>
+      <view class='zaixiang' bindtap='zaixiang'>
+        我再想想
+      </view>
+    </view>
+  </view>
+
+  <!-- 翻译官接受退单弹窗 -->
+  <view class='tanchuang' wx-if="{{yinying_jieshoutuidan}}">
+    <view class='tuidan_tit' >
+      确定接受退单
+    </view>
+    <view class='tuidan_qianbao' style='margin-top:50rpx;'>
+      接受退单则此单金额返还用户，请确认已和用户沟通无异议
+    </view>
+    <view class='tuidan_bor'></view>
+    <view class='tuidan_anniu clearfix'>
+      <view class='queren' bindtap='jieshoutuidan'>
+        确认
+      </view>
+      <text></text>
+      <view class='zaixiang' bindtap='zaixiang'>
+        我再想想
+      </view>
+    </view>
+  </view>
+  
+  <view class='hhhhh'>
+  
+  </view>
+  <view class='header clearfix'>
+    <view wx:for="{{header}}" wx:key="{{item.tet}}" class="{{item.cla ==true ? 'act' : ''}}" bindtap='change' data-index="{{index}}"  >
+      {{item.tet}}
+    </view>
+  </view>
+  <view class='list_fu'>
+    <view class='dd_list' wx:for="{{select}}"  wx:key="key">
+      <view class='tit clearfix'>
+        <view class='dian' wx-if="{{item.redpoint}}">
+        </view>
+        <view class="{{item.title == '抢单' ? 'tit_l tit_l_h' : 'tit_l tit_l_l'}}">
+          {{item.title}}
+        </view>
+        <view class='tit_r cu'>
+          {{item.status}}
+        </view>
+      </view>
+      <view class='fu clearfix'>
+        <view class='tit_l '>
+          订单金额：
+        </view>
+        <view class='tit_r'>
+          <text class='shouxu fr' wx-if="{{item.fencheng}}">（平台分成{{item.fencheng_num}}%）</text>
+          {{item.money}}
+        </view>
+      </view>
+      <!-- <view class='pingtai' wx-if="{{item.code}}">
+        平台将在3个工作日内打款到您的账户
+      </view> -->
+      <view class='fu clearfix'>
+        <view class='tit_l '>
+          服务类型：
+        </view>
+        <view class='tit_r'>
+          {{item.language1}}
+          {{item.language2}}
+        </view>
+      </view>
+      <view class='fu clearfix'>
+        <view class='tit_l '>
+          微信号：
+        </view>
+        <view class='tit_r'>
+          {{item.wxid}}
+        </view>
+      </view>
+      <view class='bor'>
+      </view>
+      <view class='anniu clearfix'>
+        <view class='tit_l '>
+          {{item.datetime}}
+        </view>
+        <button open-type='share' class='fx2' id='2' data-oid="{{item.oid}}"  wx-if="{{item.share}}"></button>
+        <view class='fx fr' wx-if="{{item.share}}">
+          <image src='/pages/image/weixin.png'></image>
+          分享给好友帮忙加价
+        </view>
+        <view class='tit_r shanchu'  wx-if="{{item.delete}}" bindtap="dingdan_shanchu" data-oid="{{item.oid}}" >
+          删除订单
+        </view>
+        <view class='tit_r shenqing'  wx-if="{{item.tuidan}}" bindtap="dingdan_tuidan"  data-money="{{item.money}}" data-shouxufei="{{item.shouxufei}}" data-oid="{{item.oid}}" data-identity="{{item.identity}}">
+          申请退单
+        </view>
+        <view class='tit_r wancheng'  wx-if="{{item.wancheng}}" bindtap="wancheng" data-oid="{{item.oid}}">
+          完成付款
+        </view>
+        <view class='tit_r jieshou'  wx-if="{{item.jieshou}}" bindtap="dingdan_jieshoutuidan" data-oid="{{item.oid}}">
+          接受退单
+        </view>
+        <view class='tit_r jujue'  wx-if="{{item.jujue}}" bindtap="jujue" data-oid="{{item.oid}}">
+          拒绝退单
+        </view>
+        
+      </view>
+      <view class='yiwen' wx-if="{{item.alert}}">
+        如有疑问联系邮箱：service@uear.net 注明您的邮箱
+      </view>
+    </view>
+  </view>
+  <image src='/pages/image/dingdan_kong.jpg' class='kong' wx-if="{{kong}}"></image>
+
+  <!-- 底部导航 -->
+  <view class='footer clearfix'>
+    <view bindtap='fabu'>
+      <image src='{{bar[0]}}'></image>
+    </view>
+    <view bindtap='dingdan'>
+      <image src='{{bar[1]}}'></image>
+    </view>
+    <view bindtap='wode'>
+      <image src='{{bar[2]}}'></image>
+    </view>
+  </view>
+  <!-- 我的 -->
+
+  <view class='wode_box' wx-if="{{wode_tf}}" bindtap='change_wode_tf'  catchtouchmove='true'>
+  </view>
+  <view class='wode_list' wx-if="{{wode_tf}}"  catchtouchmove='true'>
+    <image src='../image/logo.png' class='logo'></image>
+    <text class='logo_text'>立等翻译官</text>
+    <view class='wode_bor'></view>
+    <view class='list'>
+      <view class='clearfix' bindtap='go_qianbao'>
+        <image src='../image/qianbao.png' ></image>
+        <text>钱包</text>
+      </view>
+      <view class='clearfix' bindtap='go_yijian'>
+        <image src='../image/yijianfankui.png' ></image>
+        <text>意见反馈</text>
+      </view>
+      <view class='clearfix' bindtap='onShareAppMessage'>
+        <image src='../image/haoyou.png'  ></image>
+        <text>分享给好友</text>
+      </view>
+      <button open-type='share' class='fenxiang'></button>
+    </view>
+    
+  </view>
+
+
+</view>
+

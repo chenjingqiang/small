@@ -1,0 +1,28 @@
+<!--pages/success/success.wxml-->
+<view class='success'>
+  <view class='clearfix'>
+    <image class='chenggong fl' src="/pages/image/chenggong_h.png"></image>
+    <view class='fl right'>
+      <text class='chenggong_text'>抢单成功</text>
+      <text class='money'>您本单将获得收益<text>¥{{money}}</text>（平台分成{{fencheng}}%）</text>
+      <view class='weixin'>
+        求译者微信号：
+      </view>
+      <view class='weixin'>
+        {{weixin}}
+      </view>
+      <view class='suc_text'>
+        您需添加对方微信提供服务
+      </view>
+      <view class='hou'>
+        完成翻译后
+      </view>
+      <view class='hou2'>
+        记得微信提醒求译者进入小程序完成订单
+      </view>
+    </view>
+  </view>
+  <view class='sub' bindtap='fuzhi'>
+    复制微信号
+  </view>
+</view>

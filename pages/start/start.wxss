@@ -1,0 +1,9 @@
+/* pages/start/start.wxss */
+page{
+  height: 100%;
+}
+.start{
+  height: 100%;
+  background: url(https://www.uear.net/img2/start.jpg) no-repeat center;
+  background-size:100% 100%;
+}

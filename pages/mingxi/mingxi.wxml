@@ -1,0 +1,18 @@
+<!--pages/mingxi/mingxi.wxml-->
+<view class='mingxi'>
+  <image src='../image/mx_kong.jpg' class='kong' wx-if="{{kong}}">
+  </image>
+  <view class='list clearfix' wx:for="{{select}}" wx:key="{{select.index}}">
+    <image class='left' src="{{item.datails_img}}">
+    </image>
+    <view class='con'>
+      <view class="{{item.details_type == 'add' ? 'money2' : 'money' }}">{{item.details_money}}</view>
+      <view class='laizi'>{{item.details_from}}</view>
+    </view>
+    <view class='right'>
+      <view class='sta money'>{{item.details_mark}}</view>
+      <view class='time laizi'>{{item.details_datetime}}</view>
+    </view>
+  </view>
+  
+</view>

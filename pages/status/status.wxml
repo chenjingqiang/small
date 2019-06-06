@@ -1,0 +1,52 @@
+<!--pages/status/status.wxml-->
+<view class='status'>
+
+  <image src='/pages/image/dengdai.gif' class='dengdai'>
+  </image>
+  <view class='box'>
+    <view class='clearfix'>
+      <image src='/pages/image/true.png' class='true fl'></image>
+      <text class='fl tit'>支付成功</text>
+    </view>
+    <view class='zhu'>
+      已为您通知在线的翻译官
+    </view>
+    <view class='zhu2'>
+    请耐心等待
+    </view>
+    <view class='index sub' bindtap='go_index'>
+      返回首页
+    </view>
+    
+    <view class='cancel sub' bindtap='cancel'>
+      取消订单
+    </view>
+  </view>
+  <view class='yinying' wx-if="{{!t_f}}"></view>
+  <view class='tanchuang' wx-if="{{!t_f}}">
+    <image src='/pages/image/chenggong.jpg'></image>
+    <image class='x' src='/pages/image/x.png' bindtap='go_index'></image>
+    <view class='tt_tit'>
+      已有翻译官接单
+    </view>
+    <view class='tt_wx'>
+      翻译官微信号：{{weixin}}
+    </view>
+    <view class='tt_sub' bindtap='fuzhi'>
+      复制微信号
+    </view>
+  </view>
+  <view class='yinying' wx-if="{{!t_f2}}"></view>
+  <view class='tanchuang2' wx-if="{{!t_f2}}">
+    <view class='tit'>恭喜您发单成功</view>
+    <image src='/pages/image/Bitmap.png'></image>
+    <view class='tet'>快去分享给好友帮忙加价吧，加价越高订单就越会被很快抢到哦！</view>
+    <button class='sub' open-type='share' id='2'>
+      分享给好友帮忙加价
+    </button>
+    <view class='x' bindtap='close'>
+      <image src='/pages/image/x.png'></image>
+    </view>
+    
+  </view> 
+</view>
