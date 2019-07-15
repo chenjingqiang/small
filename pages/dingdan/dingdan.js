@@ -1,4 +1,5 @@
 // pages/dingdan/dingdan.js
+var app = getApp();
 var aj = require("../../utils/util.js");
 Page({
 
@@ -6,9 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    openid: '',
+    get_user: true,
+    userInfo: {},
     kong:false,
     header: [{ cla: true, tet: '全部' }, { cla: false, tet: '我发布的' }, { cla: false, tet: '我抢到的' }],
-    openid:'',
     type:'all',
     select:[],
     tit_money:0,
@@ -20,7 +23,7 @@ Page({
     yinying_tuidan:false,
     yinying_tuidan2:false,
     yinying_jieshoutuidan: false,
-    bar: ['../image/fabu2.png', '../image/dingdan.png', '../image/wode2.png'],
+    bar: ['../image/fabu2.png', '../image/dingdan.png', '../image/wode2.png', '../image/liulan2.png'],
     wode_tf: false,
     textarea_tf: true,
     tit:'',
@@ -33,12 +36,28 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '我的订单'
+      title: '发单记录'
     })
     var openid=wx.getStorageSync('openid')||''
     this.setData({
       openid:openid
     })
+    if (app.globalData.userInfo.nickName) {
+      //console.log(app.globalData.userInfo)
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        get_user: false
+      })
+    } else {
+      app.userInfoReadyCallback = res => {
+        //console.log('userInfoReadyCallback: ', res.userInfo);
+        //console.log('获取用户信息成功');
+        this.setData({
+          userInfo: res.userInfo,
+          get_user: false
+        })
+      }
+    }
   },
 
   /**
@@ -60,7 +79,7 @@ Page({
       yinying_jieshoutuidan:false
     })
     wx.request({
-      url: 'https://www.uear.net/ajax2/show_mylist.php',
+      url: 'https://www.uear.net/ajax4/list_myorder1.php',
       data: {
         openid: this.data.openid,
         type:this.data.type
@@ -122,49 +141,16 @@ Page({
       url: '/pages/status/status',
     })
   },
-  change:function(e){
-    var that=this
-    var index = e.currentTarget.dataset.index
-    if(index == 0){
-      this.setData({
-        type:'all'
-      })
-    } else if (index == 1){
-      this.setData({
-        type: 'release'
-      })
-    } else if (index == 2){
-      this.setData({
-        type: 'receive'
-      })
-    }
-    var change_header = this.data.header;
-    for(var i=0;i<change_header.length;i++){
-      change_header[i].cla = false
-    }
-    change_header[index].cla=true;
-    this.setData({
-      header:change_header
-    })
-    wx.request({
-      url: 'https://www.uear.net/ajax2/show_mylist.php',
-      data: {
-        openid: this.data.openid,
-        type: this.data.type
-      },
-      method: 'GET',
+  getUserInfo: function () {
+    var that = this
+    wx.getUserInfo({
       success: function (res) {
-        if (res.data.data == '') {
-          that.setData({
-            kong: true,
-            select: []
-          })
-        } else {
-          that.setData({
-            select: res.data.data, 
-            kong: false,
-          })
-        }
+        //console.log(res.userInfo)
+        getApp().globalData.userInfo = res.userInfo
+        that.setData({
+          get_user: false,
+          userInfo: res.userInfo
+        })
       }
     })
   },
@@ -181,7 +167,7 @@ Page({
     var that = this
     var oid = that.data.oid
     wx.request({
-      url: 'https://www.uear.net/ajax2/btn_delete.php',
+      url: 'https://www.uear.net/ajax4/order_complete.php',
       data: {
         openid: that.data.openid,
         oid: oid
@@ -190,112 +176,7 @@ Page({
       success: function (res) {
         if (res.data.code == 1) {
           wx.showToast({
-            title: '删除成功',
-            icon: 'succes',
-            duration: 1000,
-            mask: true
-          })
-          that.onShow()
-        }
-      }
-    })
-  },
-  //退单
-  dingdan_tuidan: function (e) {
-    //console.log(e)
-    if (e.currentTarget.dataset.identity=="translator"){
-      this.setData({
-        oid:e.currentTarget.dataset.oid,
-        yinying:true,
-        yinying_tuidan2:true
-      })
-    }else{
-      //var shouxufei=e.currentTarget.dataset.shouxufei
-      var money=e.currentTarget.dataset.money.split('￥')[1].split('.')[0]
-      this.setData({
-        oid: e.currentTarget.dataset.oid,
-        yinying: true,
-        yinying_tuidan: true,
-        //shouxufei: shouxufei,
-        tit_money:money
-      })
-    }
-  },
-  tuidan:function(){
-    var that = this
-    var oid = that.data.oid
-    //console.log(oid)
-    wx.request({
-      url: 'https://www.uear.net/ajax2/btn_tuidan.php',
-      data: {
-        openid: that.data.openid,
-        oid: oid
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res)
-        if (res.data.code == 1) {
-          wx.showToast({
-            title: '退单成功',
-            icon: 'succes',
-            duration: 1000,
-            mask: true
-          })
-          that.onShow()
-        }
-      }
-    })  
-  },
-  //接受退单
-  dingdan_jieshoutuidan: function (e) {
-    this.setData({
-      oid: e.currentTarget.dataset.oid,
-      yinying: true,
-      yinying_jieshoutuidan: true
-    })
-  },
-  jieshoutuidan: function () {
-    var that = this
-    var oid = that.data.oid
-    wx.request({
-      url: 'https://www.uear.net/ajax2/btn_jieshou.php',
-      data: {
-        openid: that.data.openid,
-        oid: oid
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res)
-        if (res.data.code == 1) {
-          wx.showToast({
-            title: '退单成功',
-            icon: 'succes',
-            duration: 1000,
-            mask: true
-          })
-          that.onShow()
-        }
-      }
-    })
-  },
-  jujue: function (e) {
-    this.setData({
-      oid: e.currentTarget.dataset.oid,
-    })
-    var that = this
-    var oid = that.data.oid
-    wx.request({
-      url: 'https://www.uear.net/ajax2/btn_jujue.php',
-      data: {
-        openid: that.data.openid,
-        oid: oid
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res)
-        if (res.data.code == 1) {
-          wx.showToast({
-            title: '拒绝成功',
+            title: '成功',
             icon: 'succes',
             duration: 1000,
             mask: true
@@ -312,7 +193,7 @@ Page({
     var that = this
     var oid = that.data.oid
     wx.request({
-      url: 'https://www.uear.net/ajax2/btn_wancheng.php',
+      url: 'https://www.uear.net/ajax4/order_complete.php',
       data: {
         openid: that.data.openid,
         oid: oid
@@ -344,7 +225,12 @@ Page({
   //底部导航
   fabu: function () {
     wx.redirectTo({
-      url: '/pages/release/release',
+      url: '/pages/rob/rob',
+    })
+  },
+  liulan: function () {
+    wx.redirectTo({
+      url: '/pages/liulan/liulan',
     })
   },
   dingdan: function () {
@@ -353,27 +239,8 @@ Page({
     })
   },
   wode: function () {
-    this.setData({
-      wode_tf: true,
-      textarea_tf: false,
-      bar: ['../image/fabu2.png', '../image/dingdan2.png', '../image/wode.png']
-    })
-  },
-  change_wode_tf: function () {
-    this.setData({
-      wode_tf: false,
-      textarea_tf: true,
-      bar: ['../image/fabu2.png', '../image/dingdan.png', '../image/wode2.png']
-    })
-  },
-  go_qianbao: function () {
-    wx.navigateTo({
-      url: '/pages/qianbao/qianbao',
-    })
-  },
-  go_yijian: function () {
-    wx.navigateTo({
-      url: '/pages/yijian/yijian',
+    wx.redirectTo({
+      url: '/pages/wode/wode',
     })
   },
   /**
@@ -408,16 +275,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    if (res.from == 'button') {
-      var oid = res.target.dataset.oid
-      if (res.target.id == 2) {
-        return {
-          title: this.data.tit,
-          imageUrl: "https://www.uear.net/img2/20190513155223.jpg",
-          path: '/pages/share/share?oid=' + oid,
-        }
-      }
-    }
     return {
       title: this.data.tit,
       imageUrl: "https://www.uear.net/img2/start.jpg",

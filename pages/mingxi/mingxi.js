@@ -15,7 +15,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '零钱明细'
+      title: '交易明细'
     })
     var openid=wx.getStorageSync('openid')||''
     this.setData({
@@ -38,7 +38,7 @@ Page({
     var that=this
     wx.request({
       //判断
-      url: 'https://www.uear.net/ajax2/show_details.php',
+      url: 'https://www.uear.net/ajax4/show_details1.php',
       data: {
         openid: this.data.openid
       },

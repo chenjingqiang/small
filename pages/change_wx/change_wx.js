@@ -7,7 +7,8 @@ Page({
   data: {
     openid:'',
     wxid:'',
-    sub_tf:true
+    sub_tf:true,
+    place: '',
   },
 
   /**
@@ -15,7 +16,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '修改微信号'
+      title: '修改联系方式'
     })
     var openid = wx.getStorageSync('openid') || ''
     this.setData({
@@ -29,6 +30,25 @@ Page({
    */
   onReady: function () {
 
+  },
+
+  onShow: function () {
+    var that=this
+    wx.request({
+      //判断
+      url: 'https://www.uear.net/ajax4/get_wxid.php',
+      data: {
+        openid: this.data.openid,
+      },
+      method: 'GET',
+      success: function (res) {
+        //console.log(res.data.data.wxid)
+        that.setData({
+          place: res.data.data.wxid,
+          wxid:''
+        })
+      }
+    })
   },
   inputs:function(e){
     this.setData({
@@ -45,10 +65,11 @@ Page({
     }
   },
   sub: function () {
+    var that=this
     if (!this.data.sub_tf == true) {
       wx.request({
         //判断
-        url: 'https://www.uear.net/ajax2/change_wxid.php',
+        url: 'https://www.uear.net/ajax4/change_wxid.php',
         data: {
           openid: this.data.openid,
           wxid: this.data.wxid
@@ -62,6 +83,7 @@ Page({
               duration: 1000,
               mask: true
             })
+            that.onShow()
           }
         }
       })
@@ -70,9 +92,6 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
 
   /**
    * 生命周期函数--监听页面隐藏

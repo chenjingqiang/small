@@ -1,13 +1,13 @@
 <!--pages/change_wx/change_wx.wxml-->
 <view class='change_wx'>
   <view class='header'>
-    请输入您要修改的微信号
+    请输入您要修改的联系方式
   </view>
-  <input placeholder='输入正确微信号'  bindinput="inputs">
+  <input placeholder='{{place}}'  bindinput="inputs" value='{{wxid}}'>
 
   </input>
   <view class='text'>
-    请正确填写微信号，以便提款以及与翻译官/求译者获得联系。
+    请正确填写您修改后的联系方式，以便翻译官为您提供服务
   </view>
   <view class="{{sub_tf==true ? 'sub2' : 'sub'}}" bindtap='sub'>
     确认修改

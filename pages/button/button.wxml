@@ -1,3 +1,6 @@
 <!--pages/button/button.wxml-->
 <text>pages/button/button.wxml</text>
 <button open-type='contact' send-message-title="呵呵" send-message-img="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIY0OylgicaH6MRIY6Fz8icRLZl4APfyqk3k8ia6PARxjtsDLy0aeoleusXRZnuiaEOPicPLfkJqGg5WHg/132" show-message-card="true">点击进入客服会话</button>
+<view style='width:88rpx;height:88rpx; background:red;'>
+
+</view>

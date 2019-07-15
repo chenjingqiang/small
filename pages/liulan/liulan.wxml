@@ -1,0 +1,90 @@
+<!--pages/liulan/liulan.wxml-->
+
+<view class='liulan'>
+  <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
+  <view class='tanchuang_weixin' catchtouchmove='true' wx-if="{{!t_f2}}">
+    <image src='../image/guanbi.png' class='tanchuang_weixin_close' bindtap='tanchuang_weixin_close'></image>
+    <view class='tw_tit'>
+      使用本功能，需要您填写联系方式
+    </view>
+    <input placeholder='请输入您的联系方式' placeholder-class='txpl' bindinput='get_wxid'></input>
+    <view  class='tw_tit2'>
+      输入您的联系方式，则表示您同意与翻译官交换联系方式，接受服务。
+    </view>
+    <view class='sub' bindtap='wxid_sub'>
+      提交
+    </view>
+  </view>
+  <view class='list_fu'>
+    <view class='list' wx:for="{{select}}" wx:key="{{index}}" bindtap='ckeak_detil' data-detil_id='{{item.openid}}'>
+       <image src='../image/year.png' class='year_img' wx-if="{{item.work_years!=0}}"></image>
+       <view class='year' wx-if="{{item.work_years!=''}}">
+        工作{{item.work_years}}年
+       </view>
+      <view class='clearfix'>
+        <view class='fl'>
+          <image src='{{item.wx_img}}' class='touxiang'></image>
+          <view class='sex'  wx-if="{{item.wx_sex=='女'}}">
+            <image src='../image/nv_m.png'></image>
+            {{item.wx_age}}岁
+          </view>
+          <view class='sexn' wx-if="{{item.wx_sex=='男'}}">
+            <image src='../image/nan_m.png'></image>
+            {{item.wx_age}}岁
+          </view>
+        </view>
+        <view class='fl list_r'>
+          <view class='name'>
+              {{item.wx_name}}
+          </view>
+          <view class='clearfix'>
+            <view class='add fl'>
+              {{item.address}}
+            </view>
+            <view class='peo fr'>
+                <image src='../image/peo.png'></image>
+                {{item.browse}}
+            </view>
+          </view>
+          <view class='biaoqian clearfix'>
+            <view wx:for="{{item.major_scene}}" wx:for-item="biaoqian_list" wx:key="index">
+              {{biaoqian_list}}
+            </view>
+            <image  src='../image/biaoqian_more.png' wx-if="{{item.major_scene.length==3}}"></image>
+          </view>
+          <view class='yuyan clearfix'>
+            <image  src='../image/yuyan_more2.png' class='more2'></image>
+            <view wx:for="{{item.language}}" wx:for-item="yuyan_list" wx:key="index">
+              {{yuyan_list}}
+            </view>
+            <image  src='../image/yuyan_more.png' wx-if="{{item.language.length==3}}"></image>
+          </view>
+        </view>
+      </view>
+      <view class='list_sub'>
+        联系Ta
+      </view>
+    </view>
+  </view>
+
+
+
+
+
+ <!-- 底部导航 -->
+  <view class='footer clearfix'>
+    <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
+    <view bindtap='fabu'>
+      <image src='{{bar[0]}}'></image>
+    </view>
+    <view  bindtap='liulan'>
+      <image src='{{bar[3]}}'></image>
+    </view>
+    <view bindtap='dingdan'>
+      <image src='{{bar[1]}}'></image>
+    </view>
+    <view bindtap='wode'>
+      <image src='{{bar[2]}}'></image>
+    </view>
+  </view>
+</view>

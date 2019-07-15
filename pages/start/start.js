@@ -1,4 +1,5 @@
 // pages/start/start.js
+var app=getApp();
 Page({
 
   /**
@@ -12,55 +13,52 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '立等翻译官'
-    })
     var openid = wx.getStorageSync('openid') || ''
-    this.setData({
-      openid: openid
-    })
-    wx.request({
-      //判断
-      url: 'https://www.uear.net/ajax2/check_user.php',
-      data: {
-        openid: this.data.openid,
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res)
-        if (res.data.code == 1) {
-          wx.redirectTo({
-            url: '/pages/index/index',
-          })
-        } else if (res.data.code == 0) {
-          wx.redirectTo({
-            url: '/pages/release/release',
-          })
-        }
-      },
-    })
+    // console.log(1)
+    // console.log(openid)
+    if (openid==''){
+      app.getToken().then((resArg) => {
+        // console.log(resArg)
+        // console.log(1)
+        wx.redirectTo({
+          url: '/pages/rob/rob',
+        })
+      })
+    }else{
+      //console.log(2)
+      wx.redirectTo({
+        url: '/pages/rob/rob',
+      })
+    }
+    // var openid = wx.getStorageSync('openid')||''
+    // console.log(openid)
+    // if (openid!=''){
+    //   wx.redirectTo({
+    //     url: '/pages/rob/rob',
+    //   })
+    // }
+   
+    
   },
-  onShow:function(){
-    wx.request({
-      //判断
-      url: 'https://www.uear.net/ajax2/check_user.php',
-      data: {
-        openid: this.data.openid,
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res)
-        if (res.data.code == 1) {
-          wx.redirectTo({
-            url: '/pages/index/index',
-          })
-        } else if (res.data.code == 0) {
-          wx.redirectTo({
-            url: '/pages/release/release',
-          })
-        }
-      },
-    })
+  onShow: function () {
+    var openid = wx.getStorageSync('openid') || ''
+    // console.log(2)
+    // console.log(openid)
+    if (openid == '') {
+      app.getToken().then((resArg) => {
+        // console.log(resArg)
+        // console.log(1)
+        wx.redirectTo({
+          url: '/pages/rob/rob',
+        })
+      })
+    } else {
+      //console.log(2)
+      wx.redirectTo({
+        url: '/pages/rob/rob',
+      })
+    }
+    
   },
 
   /**

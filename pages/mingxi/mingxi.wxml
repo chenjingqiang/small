@@ -7,10 +7,10 @@
     </image>
     <view class='con'>
       <view class="{{item.details_type == 'add' ? 'money2' : 'money' }}">{{item.details_money}}</view>
-      <view class='laizi'>{{item.details_from}}</view>
+      <view class='laizi'>{{item.details_mark}}</view>
     </view>
     <view class='right'>
-      <view class='sta money'>{{item.details_mark}}</view>
+      <view class='sta money'>{{item.details_mark1}}</view>
       <view class='time laizi'>{{item.details_datetime}}</view>
     </view>
   </view>

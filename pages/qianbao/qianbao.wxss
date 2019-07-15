@@ -1,17 +1,28 @@
 /* pages/qianbao/qianbao.wxss */
 
 .header{
+  height: 470rpx;
   background: #799df1;
-  padding-bottom: 36rpx;
-  margin-bottom: 60rpx;
 }
-.header text{
-  display: block;
-  width: 672rpx;
-  margin: 0 auto;
+.header .yue{
+  width: 500rpx;
   font-size: 30rpx;
   color: #FFFFFF;
   letter-spacing: 1.3rpx;
+  margin-left: 40rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.header .mingxi{
+  width: 129rpx;
+  border: 1rpx solid #FFFFFF;
+  border-radius: 9rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  margin-right: 40rpx;
 }
 .money{
   display: block;
@@ -22,17 +33,7 @@
   font-size: 130rpx;
   color: #FFFFFF;
   letter-spacing: 5.8rpx;
-  margin-bottom: 30rpx;
   margin-top: 30rpx;
-}
-.wx{
-  display: block;
-  width: 672rpx;
-  margin: 0 auto;
-  font-size: 26rpx;
-  color: #FFFFFF;
-  letter-spacing: 1.2rpx;
-  margin-bottom: 30rpx;
 }
 .many{
   display: block;
@@ -42,80 +43,61 @@
   color: #FFFFFF;
   letter-spacing: 0.12rpx;
 }
-.many view{
-  border: 1rpx solid #FFFFFF;
-  border-radius: 9rpx;
-  height: 50rpx;
-  line-height: 50rpx;
+.duihuan{
+  width: 620rpx;
+  height: 645rpx;
+  position: relative;
+  margin: 0 auto;
+  margin-top: -80rpx;
+  overflow: hidden;
+}
+.duihuan image{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.duihuan .tit{
+  width: 109rpx;
+  font-size: 36rpx;
+  color: #E3A33D;
   text-align: center;
-}
-.change_wx{
-  float: left;
-  width: 181rpx;
-}
-.mingxi{
-  float: right;
-  width: 129rpx;
-}
-.tit{
-  display: block;
-  width: 672rpx;
+  border-bottom: 4rpx solid #E3A33D;
   margin: 0 auto;
-  margin-bottom: 20rpx;
-  font-size: 28rpx;
-  color: #333333;
-  letter-spacing: 1.2rpx;
+  margin-top: 70rpx;
+  margin-bottom: 60rpx;
+  position: relative;
+  z-index: 2;
 }
-.tixian {
-  display: block;
-  width: 672rpx;
+.duihuan input{
+  position: relative;
+  z-index: 2;
+  width: 512rpx;
+  height: 88rpx;
+  border: 2rpx solid #CCCCCC;
+  border-radius: 4rpx;
   margin: 0 auto;
+  margin-bottom: 160rpx;
+  text-align: center;
+  color: #EBAE4D;
+  font-size: 38rpx;
 }
-.tixian text{
-  float: left;
-  font-size: 46rpx;
-  color: #333333;
-  margin-right: 20rpx;
-  height: 50rpx;
-  line-height: 50rpx;
+.pl{
+  
+  font-size: 26rpx;
 }
-.tx_money{
-  width: 250rpx;
-  float: left;
-  font-size: 30rpx;
-  color: #333333;
-  margin-top: 1rpx;
-  height: 50rpx;
-}
-.all{
-  float: right;
-  width: 80rpx;
-  font-size: 32rpx;
-  color: #799DF1;
-  letter-spacing: 5.8rpx;
-  margin-top: 1rpx;
-  height: 50rpx;
-  line-height: 50rpx;
-}
-.bor{
-  width: 672rpx;
-  height: 2rpx;
-  background:#CCCCCC;
-  margin: 0 auto;
-  margin-top: 30rpx;
-  margin-bottom: 20rpx;
-}
-.kouchu{
-  width: 672rpx;
-  margin: 0 auto;
-  text-align: right;
+.tishi{
+  position: relative;
+  z-index: 2;
   font-size: 24rpx;
-  color: #999999;
-  letter-spacing: 1rpx;
-  margin-bottom: 120rpx;
+  color: #E93737;
+  text-align: center;
+  margin-bottom: 24rpx;
 }
 .sub{
-  width: 600rpx;
+  width: 450rpx;
   height: 80rpx;
   line-height: 80rpx;
   margin: 0 auto;
@@ -125,14 +107,6 @@
   color: #FFFFFF;
   letter-spacing: 1.5rpx;
   text-align: center;
-}
-.tx_text{
-  text-align: center;
-  font-size: 24rpx;
-  color: #666666;
-  letter-spacing: 1rpx;
-  margin-top: 24rpx;
-}
-.tishi{
-  color: red;
+  position: relative;
+  z-index: 2;
 }

@@ -1,0 +1,167 @@
+/* pages/become/become.wxss */
+.become{
+  padding-top: 80rpx;
+  padding-bottom: 80rpx;
+}
+.nan_nv{
+  margin-bottom: 25rpx;
+}
+.nan_nv image{
+  width: 181rpx;
+  height: 304rpx;
+}
+.nan_nv .nan{
+  margin-left: 120rpx;
+  margin-right: 148rpx;
+}
+.con{
+  padding: 0 40rpx;
+}
+.con .fu{
+  position: relative;
+}
+.fu view{
+  height: 86rpx;
+  line-height: 86rpx;
+  font-size: 32rpx;
+  color: #333333;
+}
+.fu input{
+  width: 512rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  font-size: 32rpx;
+  color: #333333;
+  border-bottom: 2rpx solid #ccc;
+}
+.place{
+  color: #CCCCCC;
+}
+.place2{
+  color: #666;
+}
+.fu .add{
+  width: 242rpx;
+  text-align: center;
+}
+.fu .add1{
+  margin-right: 30rpx;
+}
+.fu picker{
+  width: 512rpx;
+  height: 86rpx;
+  line-height: 86rpx;
+  font-size: 32rpx;
+  color: #ccc;
+  border-bottom: 2rpx solid #ccc;
+}
+.fu .picker1{
+  color: #333333;
+  border-bottom: 2rpx solid #ccc;
+}
+.right{
+  position: absolute;
+  top: 26rpx;
+  right: 0;
+  z-index: 10;
+  width: 17rpx;
+  height: 30rpx;
+}
+.fu text{
+  margin-left: 25rpx;
+  font-size: 32rpx;
+  color: #9D9D9D;
+}
+.fu .yuyan{
+  width: 550rpx;
+  height: 60rpx;
+  border: 2rpx solid #CCCCCC;
+  border-radius: 8rpx;
+  text-align: center;
+  margin-top: 10rpx;
+}
+.yuyan_arr{
+  width: 690rpx;
+  margin-top: 10rpx;
+  margin-bottom: 40rpx;
+}
+.yuyan_arr .sss{
+  float: left;
+  height: 60rpx;
+  border: 2rpx solid #799DF1;
+  border-radius: 6rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  color: #799DF1;
+  margin-right: 24rpx;
+  margin-top: 24rpx;
+  padding:0 26rpx 
+}
+.yuyan_arr text{
+  margin-left: 33rpx;
+}
+.fu .jia{
+  width: 60rpx;
+  height: 60rpx;
+  font-size: 70rpx;
+  background: #799DF1;
+  text-align: center;
+  line-height: 50rpx;
+  margin-left: 40rpx;
+  color: #fff;
+  margin-top: 10rpx;
+}
+.border{
+  display: block;
+  width: 672rpx;
+  height: 31rpx;
+  margin: 0 auto;
+  margin-top: 60rpx;
+  margin-bottom: 30rpx;
+}
+.fu textarea{
+  width: 670rpx;
+  height: 222rpx;
+  font-size: 32rpx;
+  color: #333;
+  line-height: 45rpx;
+}
+.bor{
+ height: 2rpx;
+ background: #ccc;
+ margin: 20rpx 0;
+}
+.fus{
+  width:680rpx;
+}
+.fus view{
+  float: left;
+  width: 134rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  color: #999999;
+  margin-bottom: 30rpx;
+  margin-right:32rpx;
+  border: 2rpx solid #CCCCCC;
+  border-radius: 6rpx;
+}
+.fus .biaoqian_class{
+  background: #799DF1;
+  color: #fff;
+}
+.sub{
+  width: 600rpx;
+  height: 80rpx;
+  background: #799DF1;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  margin-top: 80rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+

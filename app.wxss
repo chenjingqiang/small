@@ -20,3 +20,45 @@ input{
   clear: both;
   visibility: hidden;
 }
+
+/* 底部导航 */
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 750rpx;
+  height: 106rpx;
+  background: #FFFFFF;
+  box-shadow: 0 -1px 0 0 #DDDDDD;
+  z-index: 5;
+}
+.footer view{
+  float: left;
+  width: 25%;
+  height: 106rpx;
+  text-align: center;
+}
+.footer image{
+  width: 75rpx;
+  height: 68rpx;
+  margin-top: 18rpx;
+}
+.footer .dingdan_dian{
+  width: 20rpx;
+  height: 20rpx;
+  background: #EA5129 ;
+  position: absolute;
+  border-radius:50%; 
+  top: 14rpx;
+  left: 384rpx;
+}
+
+#show-author{
+  width: 25%;
+  height: 110rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 6;
+  opacity: 0;
+}

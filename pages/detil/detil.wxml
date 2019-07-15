@@ -1,0 +1,103 @@
+<!--pages/detil/detil.wxml-->
+<view class='detil'>
+    <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
+    <view class='tanchuang' wx-if="{{!t_f}}" catchtouchmove='true'>
+    <image class='x' src='/pages/image/guanbi2.png' bindtap='change_wxid'></image>
+    <view class='tt_tit'>
+      查看联系方式
+    </view>
+    <view class='tt_wx'>
+      翻译官联系方式：
+    </view>
+    <view class='tt_wx'>{{wxid}}
+    </view>
+    <view class='tt_sub' bindtap='fuzhi'>
+      复制联系方式
+    </view>
+  </view>
+    <view class='list'>
+       <image src='../image/year.png' class='year_img' wx-if="{{nianxian!=0}}"></image>
+       <view class='year' wx-if="{{nianxian!=''}}">
+        工作{{nianxian}}年
+       </view>
+      <view class='clearfix'>
+        <view class='fl'>
+          <image src='{{wx_img}}' class='touxiang'></image>
+          <view class='sex'  wx-if="{{nan_nv=='女'}}">
+            <image src='../image/nv_m.png'></image>
+            {{age}}岁
+          </view>
+          <view class='sexn' wx-if="{{nan_nv=='男'}}">
+            <image src='../image/nan_m.png'></image>
+            {{age}}岁
+          </view>
+        </view>
+        <view class='fl list_r'>
+          <view class='name'>
+              {{name}}
+          </view>
+          <view class='clearfix'>
+            <view class='add fl'>
+              {{add1}}·{{add2}}
+            </view>
+            <view class='peo fr'>
+                <image src='../image/peo.png'></image>
+                {{browse}}次浏览
+            </view>
+          </view>
+          <view class='biaoqian clearfix'>
+            <view wx:for="{{biaoqian_select}}" wx:key="index">
+              {{item}}
+            </view>
+          </view>
+          <view class='yuyan clearfix'>
+            <image  src='../image/yuyan_more2.png' class='more2'></image>
+            <view wx:for="{{yuyan_arr}}" wx:key="index">
+              {{item}}
+            </view>
+          </view>
+        </view>
+      </view>
+      
+    </view>
+    <view class='bor'>
+    </view>
+    <view class='con'>
+      <view class='tit'>
+        最高学历
+      </view>
+      <view class='tet'>
+        {{picker_value}}
+      </view>
+      <view class='bor' wx:if="{{beijing!=''}}">
+      </view>
+      <view class='tit' wx:if="{{beijing!=''}}">
+        教育背景
+      </view>
+      <view class='tet' wx:if="{{beijing!=''}}">
+        {{beijing}}
+      </view>
+      <view class='bor' wx:if="{{yuyan2_arr!=''}}">
+      </view>
+      <view class='tit' wx:if="{{yuyan2_arr!=''}}">
+        语言能力等级
+      </view>
+      <view class='tet clearfix' wx:if="{{yuyan2_arr!=''}}">
+        <view class='fl'  wx:for="{{yuyan2_arr}}" wx:key='index'>
+          {{item}}
+        </view>
+      </view>
+      <view class='bor' wx:if="{{jingli!=''}}">
+      </view>
+      <view class='tit' wx:if="{{jingli!=''}}">
+        工作经历
+      </view>
+      <view class='tet' wx:if="{{jingli!=''}}">
+        {{jingli}}
+      </view>
+    </view>
+    <view class='list_sub' bindtap='ckwxid'>
+        查看联系方式
+    </view>
+
+</view>

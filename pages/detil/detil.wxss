@@ -1,0 +1,255 @@
+/* pages/detil/detil.wxss */
+.detil{
+  padding-bottom: 180rpx;
+}
+.yinying{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.60);
+  z-index: 10;
+}
+.tanchuang{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  margin-left: -271rpx;
+  margin-top: -182rpx;
+  width: 542rpx;
+  height: 364rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  text-align: center;
+}
+.tanchuang image{
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  margin-top: 40rpx;
+  margin-bottom:20rpx; 
+}
+.tanchuang .x{
+  position: absolute;
+  top: -30rpx;
+  right: 5rpx;
+  z-index: 30;
+  width: 80rpx;
+  height: 80rpx;
+}
+.tt_tit{
+  width: 464rpx;
+  font-size: 34rpx;
+  color: #333333;
+  font-weight: bold;
+  padding-top: 40rpx;
+  border-bottom: 1px solid #CCCCCC;
+  padding-bottom: 20rpx;
+  margin: 0 auto;
+  margin-bottom: 30rpx;
+}
+.tt_wx{
+  font-size: 28rpx;
+  color: #799DF1;
+  margin-bottom: 20rpx;
+}
+.tt_sub{
+  width: 300rpx;
+  height: 60rpx;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  background: #799DF1;
+  border-radius: 8px;
+  line-height: 60rpx;
+  margin: 0 auto;
+  margin-top: 40rpx;
+}
+
+.list{
+  position: relative;
+  padding-top: 30rpx;
+  margin-bottom: 20rpx;
+}
+.year{
+  position: absolute;
+  top: 10;
+  right: 0;
+  z-index: 5;
+  font-size: 24rpx;
+  color:#fff;
+  transform:rotate(46deg);
+}
+.year_img{
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 4;
+}
+.touxiang{
+  width: 168rpx;
+  height: 168rpx;
+  border-radius: 50%;
+  margin-left: 40rpx;
+  margin-right: 30rpx;
+}
+.sex{
+  position: relative;
+  z-index: 2;
+  width: 108rpx;
+  height: 40rpx;
+  background: #FF80B3;
+  border-radius: 6rpx;
+  margin-left: 70rpx;
+  margin-top: -30rpx;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sex image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 8rpx;
+}
+.sexn image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 8rpx;
+}
+.sexn{
+  position: relative;
+  z-index: 2;
+  width: 108rpx;
+  height: 40rpx;
+  background: #78BDF0;
+  border-radius: 6rpx;
+  margin-left: 70rpx;
+  margin-top: -30rpx;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.list_r{
+  width: 470rpx;
+}
+.name{
+  font-size: 34rpx;
+  color: #333333;
+}
+.add{
+  height: 44rpx;
+  border: 2rpx solid #CCCCCC;
+  border-radius: 6rpx;
+  padding: 0 16rpx;
+  margin-top: 18rpx;
+  margin-bottom: 24rpx;
+  font-size: 26rpx;
+  color: #999;
+  text-align: center;
+  line-height: 44rpx;
+}
+.peo{
+  margin-top: 18rpx;
+  height: 44rpx;
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 44rpx;
+}
+.peo image{
+  width: 30rpx;
+  height: 20rpx;
+  margin-right: 5rpx;
+}
+.biaoqian{
+  width: 500rpx;
+}
+.biaoqian view{
+  float: left;
+  width: 104rpx;
+  height: 48rpx;
+  background: #799DF1;
+  border-radius: 6rpx;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 48rpx;
+  margin-right: 18rpx;
+  margin-bottom: 24rpx;
+}
+.biaoqian image{
+  float: left;
+  width: 48rpx;
+  height: 48rpx;
+}
+.yuyan{
+  width: 506rpx;
+}
+.yuyan view{
+  float: left;
+  height: 48rpx;
+  font-size: 26rpx;
+  color: #799DF1;
+  border: 2rpx solid #799DF1;
+  border-radius: 6rpx;
+  padding: 0 26rpx;
+  line-height: 48rpx;
+  margin-right: 30rpx;
+  margin-bottom: 24rpx;
+}
+.yuyan image{
+  float: left;
+  width: 48rpx;
+  height: 48rpx;
+  margin-left: 18rpx;
+}
+.yuyan .more2{
+  float: left;
+  width: 60rpx;
+  height: 48rpx;
+  margin: 0;
+  margin-right: 30rpx;
+}
+.bor{
+  width: 100%;
+  height: 3rpx;
+  background: #ebebeb;
+}
+.con{
+  width: 670rpx;
+  margin: 0 auto;
+}
+.con .tit{
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: bold;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+}
+.con .tet{
+  font-size: 32rpx;
+  color: #333333;
+}
+.con .bor{
+  margin-top: 20rpx;
+}
+.list_sub{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+  background: #8A8BF6;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 34rpx;
+  color: #FFFFFF;
+  margin-top: 80rpx;
+}

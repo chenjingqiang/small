@@ -1,15 +1,16 @@
-const innerAudioContext = wx.createInnerAudioContext()
+var app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    openid:'',
+    openid: '',
+    get_user:true,
+    userInfo:{},
     wode_tf:false,
     textarea_tf:true,
     t_length:0,
-    bar: ['../image/fabu.png', '../image/dingdan2.png', '../image/wode2.png'],
+    bar: ['../image/fabu.png', '../image/dingdan2.png', '../image/wode2.png','../image/liulan2.png'],
     tit:'',
     dingdan_dian: false,
     height:'',
@@ -22,124 +23,80 @@ Page({
     animation_shibai2: '',
     kong: false,
     index:0,
-    status_t_f:false
+    status_t_f:false,
+    yinying:true,
+    t_f:true,
+    t_f2:true,
+    page:1,
+    zaixian:0,
+    wxid_true:false,
+    wxid_value:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '立等翻译官'
-    })
+    var that=this
     var openid = wx.getStorageSync('openid') || ''
     this.setData({
       openid: openid
     })
-    //停止播放
-    innerAudioContext.onEnded(() => {
-      //console.log('自动停止')
-      var select=this.data.select
-      select[this.data.index].dong = false
+    //console.log(openid)
+    if (app.globalData.userInfo.nickName) {
+      //console.log(app.globalData.userInfo)
       this.setData({
-        select: select
-      })
-    })
-    //停止播放
-    innerAudioContext.onStop(() => {
-      //console.log('手动停止')
-      var select = this.data.select
-      select[this.data.index].dong = false
-      this.setData({
-        select: select
-      })
-    })
-    
-  },
-  //更改顺序
-  change_paixu:function(){
-    if (this.data.paixu =='desc'){
-      this.setData({
-        paixu: 'asc'
-      })
-    }else{
-      this.setData({
-        paixu: 'desc'
-      })
-    }
-    this.onShow()
-  },
-  //更改抢单状态
-  change_rob: function () {
-    if (this.data.order_status==0) {
-      this.setData({
-        order_status:1
+        userInfo: app.globalData.userInfo,
+        get_user:false
       })
     } else {
-      this.setData({
-        order_status: 0
-      })
+      app.userInfoReadyCallback = res => {
+        //console.log('userInfoReadyCallback: ', res.userInfo);
+        //console.log('获取用户信息成功');
+        that.setData({
+          userInfo: res.userInfo,
+          get_user: false
+        })
+      }
     }
-    this.onShow()
-
-  },
-  release:function(){
-    wx.redirectTo({
-      url: '/pages/release/release',
+    const updateManager = wx.getUpdateManager()
+    updateManager.onCheckForUpdate(function (res) {
+      // 请求完新版本信息的回调
+      //console.log(res.hasUpdate)
+      if (res.hasUpdate) {
+        updateManager.onUpdateReady(function () {
+          wx.showModal({
+            title: '更新提示',
+            content: '新版本已经准备好，是否重启应用？',
+            success: function (res) {
+              updateManager.applyUpdate()
+            }
+          })
+        })
+        updateManager.onUpdateFailed(function () {
+          // 新的版本下载失败
+          wx.showModal({
+            title: '已经有新版本了哟~',
+            content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
+          })
+        })
+      }
     })
   },
-  translate: function () {
-    wx.redirectTo({
-      url: '/pages/rob/rob',
-    })
-  },
-  fabu: function () {
-    wx.redirectTo({
-      url: '/pages/release/release',
-    })
-  },
-  dingdan: function () {
-    wx.redirectTo({
-      url: '/pages/dingdan/dingdan',
-    })
-  },
-  wode: function () {
-    this.setData({
-      wode_tf:true,
-      textarea_tf: false,
-      bar: ['../image/fabu2.png', '../image/dingdan2.png', '../image/wode.png']
-    })
-  },
-  change_wode_tf:function(){
-    this.setData({
-      wode_tf: false,
-      textarea_tf: true,
-      bar: ['../image/fabu.png', '../image/dingdan2.png', '../image/wode2.png']
-    })
-  },
-  go_qianbao:function(){
-    wx.navigateTo({
-      url: '/pages/qianbao/qianbao',
-    })
-  },
-  go_yijian: function () {
-    wx.navigateTo({
-      url: '/pages/yijian/yijian',
-    })
-  },
-  
-  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
   
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
     var that = this
     //初始动画
     var animation = wx.createAnimation({
@@ -152,12 +109,43 @@ Page({
       animationData: animation.export(),
     })
     that.setData({
+      page:1,
       select:[],
-      kong:false
+      kong:false,
+      yinying: true,
+      t_f2: true,
+      wxid_true:false
+    })
+    //获取用户是否填写微信号
+    wx.request({
+      url: 'https://www.uear.net/ajax4/get_mywxid.php',
+      data: {
+        openid: this.data.openid,
+      },
+      method: 'GET',
+      success: function (res) {
+        //console.log(res)
+        that.setData({
+          wxid_true: res.data.data
+        })
+      }
+      //请求完成后执行的函数
+    })
+    //在线人数
+    wx.request({
+      url: 'https://www.uear.net/ajax4/peo_num.php',
+      data: {
+      },
+      method: 'GET',
+      success: function (res) {
+        //console.log(res.data.data)
+        that.setData({
+          zaixian: res.data.data
+        })
+      }
     })
     //分享标题
     wx.request({
-      //判断
       url: 'https://www.uear.net/ajax2/random_text.php',
       data: {
       },
@@ -169,32 +157,18 @@ Page({
         })
       }
     })
-    //提示点
+    //求译列表
     wx.request({
-      url: 'https://www.uear.net/ajax2/redpoint.php',
-      data: {
-        openid:that.data.openid
-      },
-      method: 'GET',
-      success: function (res) {
-        if(res.data.code==1){
-          that.setData({
-            dingdan_dian: true
-          })
-        }
-        
-      }
-    })
-    wx.request({
-      url: 'https://www.uear.net/ajax2/show_order.php',
+      url: 'https://www.uear.net/ajax4/show_order1.php',
       data: {
         openid:this.data.openid,
         orderby:this.data.paixu,
-        order_status: this.data.order_status
+        order_status: this.data.order_status,
+        page:1
       },
       method: 'GET',
       success: function (res) {
-        console.log(res)
+        //console.log(res.data.data)
         if (res.data.data==''){
           that.setData({
             kong:true
@@ -204,160 +178,213 @@ Page({
             select: res.data.data
           })
         }
+      },
+      complete: function () {
+        wx.hideLoading()
       }
     })
-    //获取求译状态
-    wx.request({
-      url: 'https://www.uear.net/ajax2/check_success.php',
-      data: {
-        openid: that.data.openid
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data)
-        if (res.data.code == 1) {
-          that.setData({
-            status_t_f: true,
-          })
-        } else {
-          that.setData({
-            status_t_f: false,
-          })
-        }
-      },
-    })
-    
   },
   //下拉动画
   gettextHeight: function (e) {
-    if (e.currentTarget.dataset.text_mark){
-      var that = this
-      var fu_id = e.currentTarget.dataset.oid
-      var index = e.currentTarget.dataset.index
-      var change_select=that.data.select
-      change_select[index].text_mark=false
-      change_select[index].text_short = ''
-      that.setData({
-        fu_id: fu_id,
-        select:change_select
-      })
-      var zi_id = e.currentTarget.dataset.oid2
-      const query = wx.createSelectorQuery()
-      var iii = '#' + zi_id
-      query.select(iii).boundingClientRect()
-      query.exec(function (res) {
-        var animation = wx.createAnimation({
-          duration: 1000,
-          timingFunction: "linear",
-          delay: 0,
-        })
-        animation.height(res[0].height).step()
+    if (this.data.wxid_true) {
+      if (e.currentTarget.dataset.text_mark) {
+        var that = this
+        var fu_id = e.currentTarget.dataset.oid
+        var index = e.currentTarget.dataset.index
+        var change_select = that.data.select
+        change_select[index].text_mark = false
+        change_select[index].text_short = ' '
         that.setData({
-          animationData: animation.export(),
+          fu_id: fu_id,
+          select: change_select
         })
-      })
+        var zi_id = e.currentTarget.dataset.oid2
+        const query = wx.createSelectorQuery()
+        var iii = '#' + zi_id
+        query.select(iii).boundingClientRect()
+        query.exec(function (res) {
+          var animation = wx.createAnimation({
+            duration: 400,
+            timingFunction: "linear",
+            delay: 0,
+          })
+          animation.height(res[0].height).step()
+          that.setData({
+            animationData: animation.export(),
+          })
+        })
 
+      }
+    } else {
+      this.setData({
+        yinying: false,
+        t_f2: false
+      })
     }
     
+    
   },
-  //播放录音
-  play: function (res) {
-    var index = res.currentTarget.dataset.index
-    var mp3 = res.currentTarget.dataset.mp3
-    var select=this.data.select
-    for(var i=0;i<select.length;i++){
-      select[i].dong=false
-    }
-    select[index].dong = true
-    this.setData({
-      index:index,
-      select:select
+  getUserInfo: function () {
+    var that = this
+    wx.getUserInfo({
+      success: function (res) {
+        //console.log(res.userInfo)
+        getApp().globalData.userInfo = res.userInfo
+        that.setData({
+          get_user: false,
+          userInfo: res.userInfo
+        })
+      }
     })
-    innerAudioContext.src = mp3,
-    innerAudioContext.autoplay = true
-    innerAudioContext.play()
-    innerAudioContext.onPlay(() => {
-      //console.log('开始播放')
+  },
+  //获取用户微信id
+  get_wxid:function(e){
+    var wxid_value = e.detail.value
+    this.setData({
+      wxid_value: wxid_value
+    })
+  },
+  //关闭微信号弹窗
+  tanchuang_weixin_close: function () {
+    this.setData({
+      yinying: true,
+      t_f2: true
+    })
+  },
+  //wxid提交
+  wxid_sub:function(){
+    var that=this
+    if (that.data.wxid_value==''){
+      wx.showToast({
+        title: '联系方式不能为空',
+        icon: 'none',
+        duration: 1000,
+        mask: true
+      })
+      return
+    }
+    wx.request({
+      url: 'https://www.uear.net/ajax4/change_wxid.php',
+      data: {
+        openid: this.data.openid,
+        wxid: this.data.wxid_value
+      },
+      method: 'GET',
+      success: function (res) {
+        //console.log(res)
+        if (res.data.code == 1) {
+          wx.showToast({
+            title: '提交成功',
+            icon: 'succes',
+            duration: 1000,
+            mask: true
+          })
+          that.onShow()
+        }else{
+          wx.showToast({
+            title: '提交失败',
+            icon: 'none',
+            duration: 1000,
+            mask: true
+          })
+        }
+      }
     })
   },
   //刷新
   shuaxin:function(){
     this.onShow()
   },
-  qiuyi: function () {
-    wx.navigateTo({
-      url: '/pages/status/status',
+  ckwxid:function(e){
+    var wx_id = e.currentTarget.dataset.wx_id
+    this.setData({
+      yinying: false,
+      t_f:false,
+      weixin:wx_id
     })
   },
-  //抢单
-  sub:function (e){
-    var that=this
-    var oid = e.currentTarget.dataset.oid
-    wx.request({
-      url: 'https://www.uear.net/ajax2/receive.php',
-      data: {
-        openid: this.data.openid,
-        oid: oid
-      },
-      method: 'GET',
+  change_wxid:function(){
+    this.setData({
+      yinying: true,
+      t_f: true
+    })
+  },
+  fuzhi: function () {
+    var that = this
+    wx.setClipboardData({
+      data: this.data.weixin,
       success: function (res) {
-        if(res.data.code==1){
-          wx.setStorageSync('oid', oid)
-          wx.navigateTo({
-            url: '/pages/success/success',
-          })
-        } else if (res.data.code == 0){
-          var animation = wx.createAnimation({
-            duration: 1000,
-          })
-          animation.opacity(0.7).step();
-          that.setData({
-            animation_shibai: animation.export()
-          })
-          clearTimeout(timer)
-          var timer = setTimeout(function () {
-            var animation = wx.createAnimation({
-              duration: 1000,
-            })
-            animation.opacity(0).step();
-            that.setData({
-              animation_shibai: animation.export()
-            })
-          }, 1000)
-        } else if (res.data.code == 2){
-          var animation = wx.createAnimation({
-            duration: 1000,
-          })
-          animation.opacity(0.7).step();
-          that.setData({
-            animation_shibai2: animation.export()
-          })
-          clearTimeout(timer)
-          var timer = setTimeout(function () {
-            var animation = wx.createAnimation({
-              duration: 1000,
-            })
-            animation.opacity(0).step();
-            that.setData({
-              animation_shibai2: animation.export()
-            })
-          }, 1000)
-        }
       }
     })
   },
+  //跳转发布
+  release: function () {
+    if (this.data.wxid_true) {
+      wx.redirectTo({
+        url: '/pages/release/release',
+      })
+    } else {
+      this.setData({
+        yinying: false,
+        t_f2: false
+      })
+    }
+  },
+  //跳转列表
+  translate: function () {
+   wx.redirectTo({
+      url: '/pages/rob/rob',
+    })
+   
+  },
+
+  //底部导航
+  fabu: function () {
+    wx.redirectTo({
+      url: '/pages/rob/rob',
+    })
+  },
+  liulan: function () {
+    wx.redirectTo({
+      url: '/pages/liulan/liulan',
+    })
+  },
+  dingdan: function () {
+    if(this.data.wxid_true){
+      wx.redirectTo({
+        url: '/pages/dingdan/dingdan',
+      })
+    }else{
+      this.setData({
+        yinying: false,
+        t_f2: false
+      })
+    }
+    
+  },
+  wode: function () {
+    if (this.data.wxid_true) {
+      wx.redirectTo({
+        url: '/pages/wode/wode',
+      })
+    } else {
+      this.setData({
+        yinying: false,
+        t_f2: false
+      })
+    }
+  },
+  
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    innerAudioContext.stop()
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    innerAudioContext.stop()
   },
 
   /**
@@ -371,19 +398,34 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    //console.log('触发')
+    var that=this
+    var page = that.data.page+1
+    that.setData({
+      page:page
+    })
+    wx.request({
+      url: 'https://www.uear.net/ajax4/show_order1.php',
+      data: {
+        openid: this.data.openid,
+        orderby: this.data.paixu,
+        order_status: this.data.order_status,
+        page: that.data.page
+      },
+      method: 'GET',
+      success: function (res) {
+        //console.log(res.data.data)
+        that.setData({
+          select: that.data.select.concat(res.data.data)
+        })
+        //console.log('成功')
+      }
+    })
+
+
 
   },
   onShareAppMessage: function (res) {
-    if (res.from=='button'){
-      var oid = res.target.dataset.oid
-      if (res.target.id == 2) {
-        return {
-          title: this.data.tit,
-          imageUrl: "https://www.uear.net/img2/20190513155223.jpg",
-          path: '/pages/share/share?oid=' + oid,
-        }
-      }
-    }
     return {
       title: this.data.tit,
       imageUrl: "https://www.uear.net/img2/start.jpg",

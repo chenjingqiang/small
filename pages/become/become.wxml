@@ -1,0 +1,117 @@
+<view class='become'>
+  <view class='nan_nv'>
+    <image src="{{nan_nv == '男' ? '/pages/image/nan.png' : '/pages/image/nan_start.png'}}" class='nan' bindtap='nan'></image>
+    <image src="{{nan_nv == '女' ? '/pages/image/nv.png' : '/pages/image/nv_start.png'}}" bindtap='nv'></image>
+  </view>
+  <view class='con'>
+    <view class='fu clearfix'>
+      <view class='fl'>
+        昵称
+      </view>
+      <input class='fr' placeholder='请输入您的翻译官昵称' placeholder-class='place' bindinput='name_value' value='{{name}}'></input>
+    </view>
+    <view class='fu clearfix'>
+      <view class='fl'>
+        年龄
+      </view>
+      <input class='fr' placeholder='请输入您的年龄' maxlength='2' type='number' placeholder-class='place' bindinput='age_value' value='{{age}}'></input>
+    </view>
+    <view class='fu clearfix'>
+      <view class='fl'>
+        地区
+      </view>
+      <input class='fr add' placeholder='城市' placeholder-class='place' bindinput='add1_value' value='{{add1}}'></input>
+      <input class='fr add add1' placeholder='国家' placeholder-class='place' bindinput='add2_value' value='{{add2}}'></input>
+    </view>
+    <view class='fu clearfix'>
+      <view class='fl'>
+        联系方式
+      </view>
+      <input class='fr'  bindinput='phone_value' value="{{wxid}}"></input>
+    </view>
+    <view class='fu clearfix'>
+      <image src='/pages/image/right.png' class='right'></image>
+      <view class='fl'>
+        最高学历
+      </view>
+      <picker class="{{picker_value == '点击选择学历' ? 'fr' : 'fr picker1' }}" mode="selector" range="{{range}}"  bindchange="bindPickerChange">
+        {{picker_value}}
+      </picker>
+    </view>
+    <view class='fu clearfix'>
+      <view>
+        语言 <text>({{yuyan_arr_length}}/8)</text>
+      </view>
+      <input class='yuyan fl' placeholder='请填写语言标签' placeholder-class='place2' bindinput='yuyan_value'></input>
+      <view class='jia fl' wx-if="{{yuyan_arr_length!=8}}" bindtap='add_yuyan'>
+        +
+      </view>
+    </view>
+    <view class='yuyan_arr clearfix' wx-if="{{yuyan_arr_length!=0}}">
+      <view wx:for="{{yuyan_arr}}" wx:key="{{index}}" class='sss'  bindtap='remove_yuyan' data-index='{{index}}'>
+        {{item}}
+        <text>x</text>
+      </view>
+    </view>
+    <image src='/pages/image/border.png' class='border'></image>
+    <view class='fu clearfix'>
+      <view class='fl'>
+        教育背景
+      </view>
+      <input class='fr' placeholder='请填写您的教育背景' placeholder-class='place' bindinput='beijing_value' value='{{beijing}}' ></input>
+    </view>
+    <view class='fu clearfix'>
+      <view class='fl'>
+        工作年限
+      </view>
+      <input class='fr' placeholder='请输入您的工作年限' type='number' placeholder-class='place' bindinput='nianxian_value' value='{{nianxian}}'></input>
+    </view>
+    <view class='fu clearfix'>
+      <view>
+        工作经历
+      </view>
+      <textarea placeholder='请填写您的工作经历' bindinput='jingli_value' value='{{jingli}}'></textarea>
+    </view>
+    <view class='bor'></view>
+    <view class='fu clearfix'>
+      <view>
+        语言能力等级 <text>({{yuyan2_arr_length}}/8)</text>
+      </view>
+      <input class='yuyan fl' placeholder='请填写语言能力等级' placeholder-class='place2' bindinput='yuyan2_value'></input>
+      <view class='jia fl' wx-if="{{yuyan2_arr_length!=8}}" bindtap='add2_yuyan'>
+        +
+      </view>
+    </view>
+    <view class='yuyan_arr clearfix' wx-if="{{yuyan2_arr_length!=0}}">
+      <view wx:for="{{yuyan2_arr}}" wx:key="{{index}}" class='sss'  bindtap='remove2_yuyan' data-index='{{index}}'>
+        {{item}}
+        <text>x</text>
+      </view>
+    </view>
+    <view class='fu clearfix' style='margin-top:40rpx;'>
+      <view>
+        专业标签 <text>({{biaoqian_select_length}}/8)</text>
+      </view>
+    </view>
+    <view class='biaoqian'>
+      <view class='fus clearfix'>
+        <view class="{{item.mark==true ? '' : 'biaoqian_class'}}" wx:for="{{biaoqian_select}}" wx:key="index" bindtap='biaoqian_click' data-name='{{item.name}}' data-mark='{{item.mark}}' data-index='{{index}}'>{{item.name}}</view>
+      </view>
+    </view>
+    <view class='fu clearfix'>
+      <view class='fl'>
+        来源
+      </view>
+      <input class='fr' placeholder='您是通过何种渠道得知我们产品的' placeholder-class='place' bindinput='source_value' value='{{source}}'></input>
+    </view>
+    <view class='sub' bindtap='sub'>
+      提交认证
+    </view>
+
+
+
+
+  </view>
+  
+</view>
+

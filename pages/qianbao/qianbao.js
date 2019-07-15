@@ -11,7 +11,8 @@ Page({
     tixian:'',
     tishi: '',
     input_money:0,
-    zuidi:0
+    zuidi:0,
+    input_value:''
   },
 
   /**
@@ -68,90 +69,50 @@ Page({
       }
     })
   },
-  tx_money:function(e){
-    var that=this
-    //提现金额
-    var input_money = Number(e.detail.value)
-    var money=Number(this.data.money.split('￥')[1])
+  input_value:function(e){
+    //console.log(e.detail.value)
     this.setData({
-      input_money: input_money
+      input_value: e.detail.value
     })
-    if (input_money < this.data.zuidi){
-      this.setData({
-        tishi: '提现金额小于'+this.data.zuidi+'元'
-      })
-      return
-    }
-    if (input_money > money) {
-      this.setData({
-        tishi: '提现金额超过钱包金额'
+  },
+  sub:function(){
+    var that=this
+    if (this.data.input_value==''){
+      wx.showToast({
+        title: '兑换码不能为空',
+        icon: 'none',
+        duration: 1000,
+        mask: true
       })
       return
     }
     wx.request({
-      url: 'https://www.uear.net/ajax2/count_withdrawal.php',
+      url: 'https://www.uear.net/ajax4/coupon_money.php',
       data: {
-        money: input_money
+        openid: this.data.openid,
+        coupon_number: this.data.input_value
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res.data.data)
-        that.setData({
-          tixian: res.data.data,
-          tishi: ''
-        })
-      }
-    })
-  },
-  all:function(){
-    var that=this
-    var money = Number(this.data.money.split('￥')[1])
-    if (money!=0){
-      wx.request({
-        url: 'https://www.uear.net/ajax2/count_withdrawal.php',
-        data: {
-          money: money
-        },
-        method: 'GET',
-        success: function (res) {
-          //console.log(res.data.data)
-          that.setData({
-            tixian: res.data.data,
-            tishi: ''
+        if (res.data.code == 1) {
+          wx.showToast({
+            title: '' + res.data.message+'',
+            icon: 'succes',
+            duration: 1000,
+            mask: true
+          })
+          that.onShow()
+        }else{
+          wx.showToast({
+            title: '优惠券错误或已使用',
+            icon: 'none',
+            duration: 1000,
+            mask: true
           })
         }
-      })
-      this.setData({
-        input_money:money,
-        tishi: ''
-      })
-    }
-  },
-  sub:function(){
-    var that=this
-    if (this.data.tishi==''&&this.data.tixian!==''){
-      wx.request({
-        url: 'https://www.uear.net/ajax2/withdrawal.php',
-        data: {
-          openid: this.data.openid,
-          money: this.data.input_money
-        },
-        method: 'GET',
-        success: function (res) {
-          //console.log(res.data)
-          if(res.data.code==1){
-            wx.showToast({
-              title: '提现成功',
-              icon: 'succes',
-              duration: 1000,
-              mask: true
-            })
-            that.onShow()
-          }
-
-        }
-      })
-    }
+      }
+    })
+     
     
   },
   /**

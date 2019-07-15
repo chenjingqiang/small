@@ -1,44 +1,26 @@
 <!--pages/qianbao/qianbao.wxml-->
 <view class='qianbao'>
   <view class='header'>
-    <text>
-      可提现余额（元）
-    </text>
+    <view class='clearfix'>
+      <view class='fl yue'>
+        可用余额（元）
+      </view>
+      <view class='mingxi fr' bindtap='mingxi'>
+          交易明细
+      </view>
+    </view>
     <view class='money'>
       {{money}}
     </view>
-    <view class='wx'>
-      提款微信：{{wxid}}
-    </view>
-    <view class='many clearfix'>
-      <view class='change_wx' bindtap='change_wx'>
-        修改绑定微信
-      </view>
-      <view class='mingxi' bindtap='mingxi'>
-        钱包明细
-      </view>
+  </view>
+  <view class='duihuan'>
+    <image src='../image/duihuan.png'></image>
+    <view class='tit'>兑换码</view>
+    <input placeholder='请输入您的兑换码' placeholder-class='pl' bindinput='input_value'></input>
+    <view class='tishi'>兑换码不能为空</view>
+    <view class='sub' bindtap='sub'>
+      确认兑换
     </view>
   </view>
-  <view class='tit'>
-    提现到微信
-  </view>
-  <view class='tixian clearfix'>
-    <text>￥</text>
-    <input class='tx_money' placeholder='请输入提现金额' type="number" bindblur='tx_money'  value='{{tixian}}'></input>
-    <view class='all' bindtap='all'>
-      全部
-    </view>
-  </view>
-  <view class='bor'>
-  </view>
-  <view class='kouchu clearfix'>
-    <text class="fl tishi">{{tishi}}</text>
-    <text class="fr">扣除手续费{{service_charge}}</text>
-  </view>
-  <view class='sub' bindtap='sub'>
-    确认提现
-  </view>
-  <view class='tx_text'>
-    单笔提现最低{{zuidi}}元，3个工作日到账
-  </view>
+ 
 </view>

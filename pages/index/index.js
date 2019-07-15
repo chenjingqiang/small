@@ -61,7 +61,7 @@ Page({
         success: function (res) {
           if (res.data.code==1){
             wx.redirectTo({
-              url: '/pages/release/release',
+              url: '/pages/rob/rob',
             })
           }
         }

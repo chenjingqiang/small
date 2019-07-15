@@ -1,75 +1,47 @@
 
 <view class='release'>
 
-<button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" catchtouchmove='true' wx-if="{{get_user}}"></button>
-  <!-- <view class='fu3'>
-  aaa
-  </view> -->
-  <image class='qiuyi' src='../image/qiuyi.gif' bindtap='qiuyi' wx-if="{{status_t_f}}"></image>
+<!-- <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" catchtouchmove='true' wx-if="{{get_user}}"></button> -->
   <view class='title clearfix'>
-    <view bindtap='release'>
-    </view>
     <view bindtap='translate'>
     </view>
-  </view>
-  <view class='con clearfix'>
-    <textarea class='textarea' placeholder='输入您的场景，如我在购物，需要与导购沟通…' maxlength='100' bindinput="inputs" wx-if="{{textarea_tf}}" value='{{value}}'></textarea>
-    <view class='textarea' wx-if="{{!textarea_tf}}" style='box-sizing: border-box;padding-left:10rpx;padding-top:14rpx;'>
-      {{value}}
-    </view>
-    <text class='number'>{{t_length}}/100</text>
-  </view>
-  <view class='bor'></view>
-  <view class='yuyin'>语音求译<text>（选填）</text></view>
-  <view class='luyin_fu clearfix'> 
-   <view class='luyin' wx-if="{{!luyin_wancheng}}" bindtap='open_luyin_ing'>
-      <image src='/pages/image/huatong.png'></image>
-      <text>点击说出您的求译内容</text>
-    </view>
-    <view class='luyin2' wx-if="{{luyin_wancheng}}" bindtap='play'>
-      <image src='/pages/image/laba.png' wx-if="{{show_dong}}"></image>
-      <image src='/pages/image/laba.gif' wx-if="{{!show_dong}}"></image>
-      <text>{{miao}}``</text>
-    </view>
-    <image src='/pages/image/chong.png' class='chong' wx-if="{{luyin_wancheng}}" bindtap='open_luyin_ing'></image>
-  </view>
-  <view class='bor2'>
-
-  </view>
-
-  <!-- 录音弹窗 -->
-  <view class='luyin_box' catchtouchmove='true' wx-if="{{yin_box}}"></view>
-  <view class='luyin_ing' catchtouchmove='true' wx-if="{{luyin_ing}}">
-    <image src='/pages/image/x.png' class='x' bindtap='close_luyin_ing'></image>
-    <view class='lu_tit'>
-      请说，我正在聆听您的求译…
-    </view>
-    <view class='lu_click' bindtap='stop_luyin'>
-      点击结束录音
-    </view>
-    <image src='/pages/image/dong.gif' class='gif'></image>
-    <view class='lu_miao'>
-      {{miao}}s
+    <view bindtap='release'>
     </view>
   </view>
-  <view class='luyin_complete' wx-if="{{luyin_complete}}">
-    <view class='lu_tit'>
-      可以试听自己的求译内容哦
-    </view>
-    <view class='mp3 clearfix' bindtap='play'>
-      <image src='/pages/image/mp3.png' wx-if="{{show_dong}}"></image>
-      <image src='/pages/image/mp3.gif' wx-if="{{!show_dong}}"></image>
-      <text>{{miao}}s</text>
-    </view>
-    <view class='anniu'>
-      <image src='/pages/image/com.png' class='com' bindtap='wancheng'></image>
-      <image src='/pages/image/chonglu.png' bindtap='chonglu'></image>
-    </view>
+  <view class='lange clearfix'>
+      <image src='/pages/image/yiwen.jpg' class='yiwen fl'></image>
+      <input placeholder='源语言' class='fl' bindinput='lange1_value'></input>
+      <image src='/pages/image/zhuanhuan22.png' class='zhuanhuan fl'></image>
+      <input placeholder='目标语言' class='fl' bindinput='lange2_value'></input>
   </view>
-
+  <view class='fus clearfix'>
+    <view class='type_zi'>
+      项目时间
+    </view>
+    <input placeholder='请输入项目时间' maxlength='15' bindinput='get_time'></input>
+  </view>
+  <view class='fus clearfix'>
+    <view class='type_zi'>
+      项目地点
+    </view>
+    <input placeholder='请输入项目地点' maxlength='15' bindinput='get_didian'></input>
+  </view>
+  <view class='fus clearfix'>
+    <view class='type_zi'>
+      工作内容
+    </view>
+    <input placeholder='请输入所需项目，如：展会、谈判' maxlength='15' bindinput='get_neirong'></input>
+  </view>
+  <view class='fus clearfix' style='border:none;'>
+    <view class='type_zi'>
+      专业要求
+    </view>
+    <input placeholder='请输入专业需求，如：医学、时尚' maxlength='15' bindinput='get_yaoqiu'></input>
+  </view>
+  <view class='bor2' style='margin-top:0;'></view>
   <!-- 标签选择 -->
   <view class='biaoqian_fu'>
-    <view class='yuyin'>标签<text>（选填）</text></view>
+    <view class='yuyin'>服务标签<text>（选填）</text></view>
     <view class='biaoqian'>
       <view bindtap='open_biaoqian' wx-if="{{name}}">
         +请选择标签
@@ -81,7 +53,7 @@
     </view>
   </view>
   <!-- 标签弹窗 -->
-  <view class='biaoqian_box' wx-if="{{biaoqian_box}}">
+  <view class='biaoqian_box' wx-if="{{biaoqian_box}}" catchtouchmove='true'>
     <view class='biaoqian_tit'>
       标签选择
       <image src='/pages/image/x.png' bindtap='close_biaoqian'></image>
@@ -96,56 +68,44 @@
         确认
     </view>
   </view>
-  <view class='bor'>
-
-  </view>
-
-  <view class='type clearfix'>
-    <view class='type_zi fl' style='margin-top: 52rpx;'>
-      翻译类型
+  <view class='bor'></view>
+  <view class='con clearfix'>
+    <textarea class='textarea' placeholder='请输入您的项目需求...' maxlength="-1"  bindinput="inputs" wx-if="{{textarea_tf}}" value='{{value}}'></textarea>
+    <view class='textarea' wx-if="{{!textarea_tf}}" style='box-sizing: border-box;padding-left:10rpx;padding-top:14rpx;'>
+      {{value2}}
     </view>
-    <view class='type_r clearfix'>
-      <picker bindchange="bindPickerChange" value="{{arr_index}}" range="{{array}}">
-        <view class="picker">
-          当前选择：{{arr_value}}
-          <!-- 当前选择：{{array[arr_index]}}{{arr_value}} -->
-          <image src='/pages/image/jiao.png' class='jiao'></image>
-        </view>
-      </picker>
-      <image src='/pages/image/zhuanhuan2.jpg' class='zhuanhuan'></image>
-      <picker bindchange="bindPickerChange2" value="{{arr_index2}}" range="{{array2}}">
-        <view class="picker">
-          当前选择：{{arr_value2}}
-          <image src='/pages/image/jiao.png' class='jiao'></image>
-        </view>
-      </picker>
-      
-    </view>
-   
   </view>
   <view class='bor'></view>
+  <view class='fus clearfix' style="padding-top:0;">
+    <view class='type_zi'>
+      发布时长
+    </view>
+    <view class='type_r fr'>
+      <input placeholder='1天=1元' maxlength='15' bindinput='get_day' type="number"></input>
+      <view>天</view>
+    </view>
+  </view>
   <view class='shangjin clearfix'>
     <view class='type_zi'>
-      翻译赏金
+      翻译赏金 <text style='font-weight: normal;'>（选填）</text>
     </view>
-    <view class='type_r clearfix'>
-      <input placeholder='输入赏金' bindinput='get_money' type="number"></input>
+    <view class='type_r fr'>
+      <input placeholder='输入赏金' bindinput='get_money'  type="number"></input>
       <view>元</view>
     </view>
   </view>
   <view class='shangjin_tishi clearfix'>
-    <text class='l'>赏金越高抢单的速度越快哦</text>
-    <text class='r'>（不能低于{{zuidi_money}}元）</text>
+    <text class='l'>赏金越高订单排名越靠前</text>
+    <!-- <text class='r'>（不能低于{{zuidi_money}}元）</text> -->
   </view>
   <view class='bor'></view>
   <view class='sub_fu clearfix'>
     <view class='l'>
-      预计费用：<text>{{money}}元</text> 
+      平台费用：<text>{{money}}元</text> 
     </view>
     <view class='r' bindtap='sub'>
       下单
     </view>
-    
   </view>
   <!-- 发布弹窗 -->
   
@@ -172,8 +132,12 @@
 
   <!-- 底部导航 -->
   <view class='footer clearfix'>
+    <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu'>
       <image src='{{bar[0]}}'></image>
+    </view>
+    <view bindtap='liulan'>
+      <image src='{{bar[3]}}'></image>
     </view>
     <view bindtap='dingdan'>
       <image src='{{bar[1]}}'></image>
@@ -184,30 +148,4 @@
       <image src='{{bar[2]}}'></image>
     </view>
   </view>
-
-  <!-- 我的 -->
-  <view class='wode_box' wx-if="{{wode_tf}}" bindtap='change_wode_tf'  catchtouchmove='true'>
-  </view>
-  <view class='wode_list' wx-if="{{wode_tf}}"  catchtouchmove='true'>
-    <image src='../image/logo.png' class='logo'></image>
-    <text class='logo_text'>立等翻译官</text>
-    <view class='wode_bor'></view>
-    <view class='list'>
-      <view class='clearfix' bindtap='go_qianbao'>
-        <image src='../image/qianbao.png' ></image>
-        <text>钱包</text>
-      </view>
-      <view class='clearfix' bindtap='go_yijian'>
-        <image src='../image/yijianfankui.png' ></image>
-        <text>意见反馈</text>
-      </view>
-      <view class='clearfix' bindtap='onShareAppMessage'>
-        <image src='../image/haoyou.png'  ></image>
-        <text>分享给好友</text>
-      </view>
-      <button open-type='share' class='fenxiang'></button>
-    </view>
-    
-  </view>
-
 </view>

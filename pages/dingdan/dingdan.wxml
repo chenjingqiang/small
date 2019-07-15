@@ -1,13 +1,13 @@
 <!--pages/dingdan/dingdan.wxml-->
 <view class='dingdan'>
-  <image class='qiuyi' src='../image/qiuyi.gif' bindtap='qiuyi' wx-if="{{status_t_f}}"></image>
-  <view class='yinying' wx-if="{{yinying}}">
+  <!-- <image class='qiuyi' src='../image/qiuyi.gif' bindtap='qiuyi' wx-if="{{status_t_f}}"></image> -->
+  <view class='yinying' wx-if="{{yinying}}" catchtouchmove='true'>
 
   </view>
   <!-- 删除弹窗 -->
-  <view class='tanchuang' wx-if="{{yinying_shanchu}}">
+  <view class='tanchuang' wx-if="{{yinying_shanchu}}" catchtouchmove='true'>
     <view class='shanchu_tit tuidan_tit'>
-      确定要删除订单记录吗？
+      确定要完成订单吗？
     </view>
     <view class='tuidan_bor'></view>
     <view class='tuidan_anniu clearfix'>
@@ -84,24 +84,32 @@
   <view class='hhhhh'>
   
   </view>
-  <view class='header clearfix'>
+  <!-- <view class='header clearfix'>
     <view wx:for="{{header}}" wx:key="{{item.tet}}" class="{{item.cla ==true ? 'act' : ''}}" bindtap='change' data-index="{{index}}"  >
       {{item.tet}}
     </view>
-  </view>
+  </view> -->
   <view class='list_fu'>
     <view class='dd_list' wx:for="{{select}}"  wx:key="key">
+      <image src='/pages/image/wancheng.png' class='wancheng' wx-if="{{item.status==1}}"></image>
+      <image src='/pages/image/shixiao.png' class='shixiao' wx-if="{{item.status==2}}"></image>
       <view class='tit clearfix'>
         <view class='dian' wx-if="{{item.redpoint}}">
         </view>
+        <!-- 
         <view class="{{item.title == '抢单' ? 'tit_l tit_l_h' : 'tit_l tit_l_l'}}">
-          {{item.title}}
+          <!-- {{item.title}}
+          我发布的求译
+        </view> 
+         -->
+        <view class='tit_l tit_l_h'>
+          ¥{{item.now_money}}.00（{{item.money}}天+{{item.plus_money}}元置顶赏金）
         </view>
-        <view class='tit_r cu'>
+        <!-- <view class='tit_r cu'>
           {{item.status}}
-        </view>
+        </view> -->
       </view>
-      <view class='fu clearfix'>
+      <!-- <view class='fu clearfix'>
         <view class='tit_l '>
           订单金额：
         </view>
@@ -109,25 +117,67 @@
           <text class='shouxu fr' wx-if="{{item.fencheng}}">（平台分成{{item.fencheng_num}}%）</text>
           {{item.money}}
         </view>
-      </view>
+      </view> -->
       <!-- <view class='pingtai' wx-if="{{item.code}}">
         平台将在3个工作日内打款到您的账户
       </view> -->
       <view class='fu clearfix'>
         <view class='tit_l '>
-          服务类型：
+          服务语言：
         </view>
         <view class='tit_r'>
           {{item.language1}}
+          <image src='/pages/image/zhuanhuan.jpg' class='zhuanhuan'></image>
           {{item.language2}}
         </view>
       </view>
-      <view class='fu clearfix'>
+      <view class='fu clearfix' wx-if="{{item.project_time}}">
         <view class='tit_l '>
-          微信号：
+          项目时间：
         </view>
         <view class='tit_r'>
-          {{item.wxid}}
+          {{item.project_time}}
+        </view>
+      </view>
+      <view class='fu clearfix' wx-if="{{item.project_address}}">
+        <view class='tit_l '>
+          项目地点：
+        </view>
+        <view class='tit_r'>
+          {{item.project_address}}
+        </view>
+      </view>
+      <view class='fu clearfix' wx-if="{{item.project_theme}}">
+        <view class='tit_l '>
+          工作内容：
+        </view>
+        <view class='tit_r'>
+          {{item.project_theme}}
+        </view>
+      </view>
+      <view class='fu clearfix' wx-if="{{item.project_skill}}">
+        <view class='tit_l '>
+          专业要求：
+        </view>
+        <view class='tit_r'>
+          {{item.project_skill}}
+        </view>
+      </view>
+      
+      <view class='fu clearfix'>
+        <view class='tit_l '>
+          联系方式：
+        </view>
+        <view class='tit_r'>
+          {{item.mywxid}}
+        </view>
+      </view>
+      <view class='fu clearfix'  wx-if="{{item.text}}">
+        <view class='tit_l '>
+          翻译要求
+        </view>
+        <view class='tit_r'>
+           {{item.text}}
         </view>
       </view>
       <view class='bor'>
@@ -136,27 +186,9 @@
         <view class='tit_l '>
           {{item.datetime}}
         </view>
-        <button open-type='share' class='fx2' id='2' data-oid="{{item.oid}}"  wx-if="{{item.share}}"></button>
-        <view class='fx fr' wx-if="{{item.share}}">
-          <image src='/pages/image/weixin.png'></image>
-          分享给好友帮忙加价
+        <view class='tit_r shanchu'  bindtap="dingdan_shanchu" data-oid="{{item.oid}}" wx-if="{{item.status==0}}" >
+          完成订单
         </view>
-        <view class='tit_r shanchu'  wx-if="{{item.delete}}" bindtap="dingdan_shanchu" data-oid="{{item.oid}}" >
-          删除订单
-        </view>
-        <view class='tit_r shenqing'  wx-if="{{item.tuidan}}" bindtap="dingdan_tuidan"  data-money="{{item.money}}" data-shouxufei="{{item.shouxufei}}" data-oid="{{item.oid}}" data-identity="{{item.identity}}">
-          申请退单
-        </view>
-        <view class='tit_r wancheng'  wx-if="{{item.wancheng}}" bindtap="wancheng" data-oid="{{item.oid}}">
-          完成付款
-        </view>
-        <view class='tit_r jieshou'  wx-if="{{item.jieshou}}" bindtap="dingdan_jieshoutuidan" data-oid="{{item.oid}}">
-          接受退单
-        </view>
-        <view class='tit_r jujue'  wx-if="{{item.jujue}}" bindtap="jujue" data-oid="{{item.oid}}">
-          拒绝退单
-        </view>
-        
       </view>
       <view class='yiwen' wx-if="{{item.alert}}">
         如有疑问联系邮箱：service@uear.net 注明您的邮箱
@@ -167,8 +199,12 @@
 
   <!-- 底部导航 -->
   <view class='footer clearfix'>
+    <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu'>
       <image src='{{bar[0]}}'></image>
+    </view>
+    <view bindtap='liulan'>
+      <image src='{{bar[3]}}'></image>
     </view>
     <view bindtap='dingdan'>
       <image src='{{bar[1]}}'></image>
@@ -176,33 +212,7 @@
     <view bindtap='wode'>
       <image src='{{bar[2]}}'></image>
     </view>
-  </view>
-  <!-- 我的 -->
-
-  <view class='wode_box' wx-if="{{wode_tf}}" bindtap='change_wode_tf'  catchtouchmove='true'>
-  </view>
-  <view class='wode_list' wx-if="{{wode_tf}}"  catchtouchmove='true'>
-    <image src='../image/logo.png' class='logo'></image>
-    <text class='logo_text'>立等翻译官</text>
-    <view class='wode_bor'></view>
-    <view class='list'>
-      <view class='clearfix' bindtap='go_qianbao'>
-        <image src='../image/qianbao.png' ></image>
-        <text>钱包</text>
-      </view>
-      <view class='clearfix' bindtap='go_yijian'>
-        <image src='../image/yijianfankui.png' ></image>
-        <text>意见反馈</text>
-      </view>
-      <view class='clearfix' bindtap='onShareAppMessage'>
-        <image src='../image/haoyou.png'  ></image>
-        <text>分享给好友</text>
-      </view>
-      <button open-type='share' class='fenxiang'></button>
-    </view>
     
   </view>
-
-
 </view>
 

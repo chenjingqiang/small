@@ -1,8 +1,157 @@
 
 
 .release{
-  padding-top: 140rpx;
+  padding-top: 110rpx;
   padding-bottom: 110rpx;
+}
+.yinying{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.60);
+  z-index: 10;
+}
+.tanchuang_weixin{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  margin-left: -301rpx;
+  margin-top: -308rpx;
+  width: 602rpx;
+  height: 616rpx; 
+  background: url(https://www.uear.net/img2/wx_bg.png) center no-repeat;
+  background-size:100% 100%; 
+  border-radius: 12rpx;
+  text-align: center;
+}
+.tanchuang_weixin_close{
+  width: 96rpx;
+  height: 96rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.tw_tit{
+  font-size: 32rpx;
+  color: #FFFFFF;
+  font-weight: bold;
+  margin-top: 94rpx;
+  margin-bottom: 46rpx;
+}
+.tanchuang_weixin input{
+  width: 514rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+  background: rgba(255,255,255,0.40);
+  margin: 0 auto;
+  font-size: 32rpx;
+  color: #FFFFFF;
+}
+.tw_tit2{
+  width: 511rpx;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  margin: 0 auto;
+  margin-top: 20rpx;
+}
+.txpl{
+  color: #fff;
+}
+.tanchuang_weixin .sub{
+  width: 345rpx;
+  height: 70rpx;
+  background: rgba(255,255,255,0.80);
+  border-radius: 35rpx;
+  font-size: 32rpx;
+  color: #6282FF;
+  margin: 0 auto;
+  margin-top: 87rpx;
+  line-height: 70rpx;
+  font-weight: bold;
+}
+.tanchuang{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  margin-left: -271rpx;
+  margin-top: -182rpx;
+  width: 542rpx;
+  height: 364rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  text-align: center;
+}
+.tanchuang image{
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  margin-top: 40rpx;
+  margin-bottom:20rpx; 
+}
+.tanchuang .x{
+  position: absolute;
+  top: -30rpx;
+  right: 5rpx;
+  z-index: 30;
+  width: 80rpx;
+  height: 80rpx;
+}
+.zaixian{
+  width: 100%;
+  height: 76rpx;
+  background: #FFF6E2;
+}
+.zaixian image{
+  float: left;
+  width: 30rpx;
+  height: 35rpx;
+  margin-left: 156rpx;
+  margin-right: 40rpx;
+  margin-top: 20rpx;
+}
+.zaixian view{
+  font-size: 28rpx;
+  color: #666666;
+  margin-top: 20rpx;
+  letter-spacing: 2rpx;
+}
+.zaixian text{
+  font-size: 28rpx;
+  color: #E24932;
+  margin: 0 4rpx;
+  margin-top: 20rpx;
+}
+.tt_tit{
+  width: 464rpx;
+  font-size: 34rpx;
+  color: #333333;
+  font-weight: bold;
+  padding-top: 40rpx;
+  border-bottom: 1px solid #CCCCCC;
+  padding-bottom: 20rpx;
+  margin: 0 auto;
+  margin-bottom: 30rpx;
+}
+.tt_wx{
+  font-size: 28rpx;
+  color: #799DF1;
+  margin-bottom: 20rpx;
+}
+.tt_sub{
+  width: 300rpx;
+  height: 60rpx;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  background: #799DF1;
+  border-radius: 8px;
+  line-height: 60rpx;
+  margin: 0 auto;
+  margin-top: 40rpx;
 }
 .shuaxin{
   position: fixed;
@@ -26,7 +175,7 @@
   left: 0;
   width: 100%;
   height: 112rpx;
-  background: url(https://www.uear.net/img2/title2.png) center no-repeat;
+  background: url(https://www.uear.net/img2/title_left.jpg) center no-repeat;
   background-size:100% 100%; 
 }
 .title view{
@@ -103,15 +252,14 @@
 }
 .list_fu{
   background: #EBEBEB;
-  margin-top: 40rpx;
 }
 .dd_list{
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 20rpx;
   background: #fff;
-  padding: 0 39rpx;
-  padding-bottom: 30rpx;
+  padding: 30rpx 39rpx;
+
 }
 .tit{
   border-bottom:2rpx solid #ccc; 
@@ -210,7 +358,7 @@
 .sub3{
   width: 610rpx;
   height: 80rpx;
-  background: #D1D1D1;
+  background: #799DF1;
   border-radius: 8rpx;
   font-size: 36rpx;
   color: #FFFFFF;
@@ -219,6 +367,29 @@
   line-height: 80rpx;
   margin-top: 30rpx;
 }
+
+.sub4{
+  width: 610rpx;
+  height: 80rpx;
+  background: #d1d1d1;
+  border-radius: 8rpx;
+  font-size: 36rpx;
+  color: #FFFFFF;
+  text-align: center;
+  margin: 0 auto;
+  line-height: 80rpx;
+  margin-top: 30rpx;
+}
+.zhiding{
+  width: 670rpx;
+  border-bottom:2rpx solid #ccc; 
+  margin: 0 auto;
+}
+.zhiding image{
+  width: 92rpx;
+  height: 26rpx;
+}
+
 
 
 
@@ -230,10 +401,6 @@
 
 
 /* 动画 */
-.zhankai{
-  font-size: 26rpx;
-  color: #666666;
-}
 .jiantou{
   width: 26rpx;
   height: 26rpx;
@@ -257,136 +424,30 @@
   float: left;
 }
 .zhankai{
-  padding-top: 6rpx;
-  padding-left: 10rpx;
-  padding-right: 10rpx;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 底部导航 */
-.footer{
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 750rpx;
-  height: 106rpx;
-  background: #FFFFFF;
-  box-shadow: 0 -1px 0 0 #DDDDDD;
-  z-index: 5;
-}
-.footer view{
-  float: left;
-  width: 250rpx;
-  height: 106rpx;
-  text-align: center;
-}
-.footer image{
-  width: 75rpx;
-  height: 68rpx;
-  margin-top: 18rpx;
-}
-.footer .dingdan_dian{
-  width: 20rpx;
-  height: 20rpx;
-  background: #EA5129 ;
-  position: absolute;
-  border-radius:50%; 
-  top: 14rpx;
-  left: 384rpx;
-}
-
-
-/* 我的 */
-.wode_box{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.60);
-  z-index: 10;
-}
-.wode_list{
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 510rpx;
-  height: 100%;
-  background: #fff;
-  z-index: 11;
-}
-.logo{
-  display: block;
-  width: 132rpx;
-  height: 132rpx;
-  margin: 0 auto;
-  margin-top: 173rpx;
-  margin-bottom: 40rpx;
-}
-.logo_text{
-  display: block;
-  text-align: center;
   font-size: 32rpx;
-  color: #333333;
-  letter-spacing: 1.67rpx;
+  color: #799DF1;
+  text-decoration: underline ;
+  margin-left: 30rpx;
 }
-.wode_bor{
-  width: 100%;
-  height: 20rpx;
-  background: #EBEBEB;
-  margin-top: 70rpx;
-  margin-bottom: 20rpx;
-}
-.list{
-  position: relative;
-}
-.list view{
-  height: 115rpx;
-  border-bottom: 1rpx solid #CCCCCC;
-}
-.list image{
-  float: left;
-  width: 40rpx;
-  height: 40rpx;
-  margin-left: 67rpx;
-  margin-right: 34rpx;
-  margin-top: 42rpx;
-}
-.list text{
-  float: left;
-  font-size: 32rpx;
-  color: #333333;
-  letter-spacing: 1.67rpx;
-   margin-top: 40rpx;
-}
-.fenxiang{
-  position: absolute;
-  width: 100%;
-  left: 0;
-  top: 232rpx;
-  height: 115rpx;
-  opacity: 0;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

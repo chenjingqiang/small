@@ -206,16 +206,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    if (res.from == 'button') {
-      var oid =this.data.oid
-      if (res.target.id == 2) {
-        return {
-          title: this.data.tit,
-          imageUrl: "https://www.uear.net/img2/20190513155223.jpg",
-          path: '/pages/share/share?oid=' + oid,
-        }
-      }
-    }
     return {
       title: this.data.tit,
       imageUrl: "https://www.uear.net/img2/start.jpg",

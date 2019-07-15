@@ -1,0 +1,8 @@
+<!--pages/map/map.wxml-->
+<map  id="map" latitude='{{latitude}}' longitude='{{longitude}}' markers="{{markers}}" bindmarkertap='markersAction' bindupdated='jieshu'></map>
+
+
+
+
+
+

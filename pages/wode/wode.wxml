@@ -1,0 +1,59 @@
+
+<view class='wode_list' >
+  <image src='{{wx_img}}' class='logo'></image>
+  <text class='logo_text'>{{wx_name}}</text>
+  <view class='wode_btn' wx-if="{{code==0}}" bindtap='go_become'>
+    点击成为翻译官
+  </view>
+  <view class='wode_btn' wx-if="{{code==1}}" bindtap='go_become'>
+    编辑
+  </view>
+  <view class='wode_btn' wx-if="{{code==2}}" bindtap='go_become'>
+    修改认证信息
+  </view>
+  <view class='wode_btn3' wx-if="{{code==3}}">
+    认证中
+  </view>
+  <view class='wode_bor'></view>
+  <view class='list'>
+    <view class='clearfix' bindtap='go_qianbao'>
+    <image src='../image/qianbao.png' ></image>
+    <text>钱包</text>
+  </view>
+  <view class='clearfix' bindtap='go_xiugai'>
+    <image src='../image/xiugai.png' ></image>
+    <text>修改联系方式</text>
+  </view>
+  <view class='clearfix' bindtap='go_yijian'>
+    <image src='../image/yijianfankui.png' ></image>
+    <text>意见反馈</text>
+  </view>
+  <view class='clearfix' style='position: relative;'>
+    <image src='../image/haoyou.png'></image>
+    <text>分享给好友</text>
+    <button open-type='share' class='fenxiang'></button>
+  </view>
+  </view>
+  <view class='shibai_tishi'  wx-if="{{code==2}}">
+    <image src='../image/tishi.png'></image>
+    <text></text>
+    {{message}}
+  </view>
+
+  <!-- 底部导航 -->
+  <view class='footer clearfix'>
+    <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
+    <view bindtap='fabu'>
+      <image src='{{bar[0]}}'></image>
+    </view>
+    <view  bindtap='liulan'>
+      <image src='{{bar[3]}}'></image>
+    </view>
+    <view bindtap='dingdan'>
+      <image src='{{bar[1]}}'></image>
+    </view>
+    <view bindtap='wode'>
+      <image src='{{bar[2]}}'></image>
+    </view>
+  </view>
+</view>

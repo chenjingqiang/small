@@ -1,11 +1,38 @@
 
 <view class='release'>
-  <image class='shuaxin' src='../image/shuaxin.png' bindtap='shuaxin'></image>
-  <image class='qiuyi' src='../image/qiuyi.gif' bindtap='qiuyi' wx-if="{{status_t_f}}"></image>
-  <view class='title clearfix'>
-    <view bindtap='release'>
+  <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
+  <view class='tanchuang_weixin' catchtouchmove='true' wx-if="{{!t_f2}}">
+    <image src='../image/guanbi.png' class='tanchuang_weixin_close' bindtap='tanchuang_weixin_close'></image>
+    <view class='tw_tit'>
+      使用本功能，需要您填写联系方式
     </view>
+    <input placeholder='请输入您的联系方式' placeholder-class='txpl' bindinput='get_wxid'></input>
+    <view  class='tw_tit2'>
+      输入您的联系方式，则表示您同意与翻译官交换联系方式，接受服务。
+    </view>
+    <view class='sub' bindtap='wxid_sub'>
+      提交
+    </view>
+  </view>
+  <view class='tanchuang' wx-if="{{!t_f}}" catchtouchmove='true'>
+    <image class='x' src='/pages/image/guanbi2.png' bindtap='change_wxid'></image>
+    <view class='tt_tit'>
+      查看联系方式
+    </view>
+    <view class='tt_wx'>
+      求译者联系方式：
+    </view>
+    <view class='tt_wx'>{{weixin}}
+    </view>
+    <view class='tt_sub' bindtap='fuzhi'>
+      复制联系方式
+    </view>
+  </view>
+  <image class='shuaxin' src='../image/shuaxin.png' bindtap='shuaxin'></image>
+  <view class='title clearfix'>
     <view bindtap='translate'>
+    </view>
+    <view bindtap='release'>
     </view>
   </view>
   <view class='shibai' animation="{{animation_shibai}}">
@@ -14,31 +41,22 @@
   <view class='shibai2' animation="{{animation_shibai2}}">
     存在未完成的订单
   </view>
+  <view class='zaixian'>
+    <image src='../image/zaixian.png'></image>
+    <view class='fl'>当前有<text>{{zaixian}}</text>位翻译官在线</view>
+    
+  </view>
   <view class='con'>
-    <view class='paixu clearfix'>
-      <view class='hot2 fl hot' bindtap='change_rob'>
-       <text class='fl' >只显示可抢单</text>
-       <image src="{{order_status==1 ? '../image/kai.png' :'../image/guan.png' }}" class='fl'></image>
-      </view>
-      <view class='hot fr' bindtap='change_paixu'>
-        <image src="{{paixu=='asc' ? '../image/shengxu.jpg' :'../image/paixu-jiangxu.jpg' }}"></image>
-        <text >按价格</text>
-      </view>
-        
-    </view>
     <!-- 空 -->
     <image src='/pages/image/kong2.jpg' class='kong' wx-if="{{kong}}"></image>
+    <view class='zhiding' wx-if="{{!kong}}">
+      <image src='../image/zhiding.jpg'></image>
+    </view>
     <view class='list_fu'>
       <view class='dd_list' wx:for="{{select}}"  wx:key="key">
-        <view class='tit clearfix'>
-          <view class='tit_l tit_l_h'>
-            {{item.money}} <text wx-if="{{item.plus_money}}" style="color: #E2442D; margin-left:10rpx;">(+{{item.plus_money}})</text>
-          </view>
-          <text class='fr fencheng'>（平台分成{{item.fencheng}}%）</text>
-        </view>
         <view class='fu clearfix'>
           <view class='tit_l '>
-            服务类型：
+            服务语言：
           </view>
           <view class='tit_r'>
             {{item.language1}}
@@ -46,9 +64,42 @@
             {{item.language2}}
           </view>
         </view>
-        <view class='fu clearfix' wx-if="{{item.scene_mark}}">
+        <view class='fu clearfix' wx-if="{{item.project_time}}">
           <view class='tit_l '>
-            服务场景：
+            项目时间：
+          </view>
+          <view class='tit_r'>
+            {{item.project_time}}
+          </view>
+        </view>
+        <view class='fu clearfix' wx-if="{{item.project_address}}">
+          <view class='tit_l '>
+            服务地点：
+          </view>
+          <view class='tit_r'>
+            {{item.project_address}}
+          </view>
+        </view>
+        <view class='fu clearfix' wx-if="{{item.project_theme}}">
+          <view class='tit_l '>
+            服务内容：
+          </view>
+          <view class='tit_r'>
+            {{item.project_theme}}
+          </view>
+        </view>
+        <view class='fu clearfix' wx-if="{{item.project_skill}}">
+          <view class='tit_l '>
+            服务要求：
+          </view>
+          <view class='tit_r'>
+            {{item.project_skill}}
+          </view>
+        </view>
+        
+        <view class='fu clearfix' wx-if="{{item.scene}}">
+          <view class='tit_l '>
+            服务标签：
           </view>
           <view class='tit_r'>
             {{item.scene}}
@@ -66,16 +117,16 @@
             </view>
           </view>
         </view>
-        <view class='fu clearfix'>
+        <view class='fu clearfix' wx-if='{{item.text_short}}'>
           <view class='tit_l '>
             翻译要求：
           </view>
           <view class='tit_r yaoqiu' data-oid="{{item.oid}}" data-oid2="{{item.oid2}}" data-index="{{index}}" data-text_mark="{{item.text_mark}}"  bindtap='gettextHeight' >
-            <view>{{item.text_short}}</view>
+            <view>{{item.text_short}}</view> 
             <view class='zhankai' wx-if="{{item.text_mark}}">
-              展开
+              更多
             </view>
-            <image src='/pages/image/jiantou.jpg' class='jiantou' wx-if="{{item.text_mark}}"></image>
+            <!-- <image src='/pages/image/jiantou.jpg' class='jiantou' wx-if="{{item.text_mark}}"></image> -->
           </view>
         </view>
         <view id="{{item.oid}}" class='dong' animation="{{item.oid==fu_id ? animationData : '' }}" >
@@ -85,18 +136,14 @@
         </view>
         <view class='bor'>
         </view>
-        <view class='sub_fu clearfix' wx-if="{{item.status}}">
-          <button open-type='share' class='fx2' id='2' data-oid="{{item.oid}}"></button>
-          <view class='fl fx'>
-            <image src='/pages/image/weixin.png' class='fl'></image>
-            分享给好友加价
-          </view>
-          <view class='fr' bindtap='sub' data-oid="{{item.oid}}">
-            抢单
-          </view>
+        <view class='sub3' bindtap='ckwxid' data-wx_id='{{item.wxid}}' wx-if='{{item.status == 0}}'>
+          查看联系方式
         </view>
-        <view class='sub3' wx-if="{{!item.status}}">
-          已被抢
+        <view class='sub4'  wx-if='{{item.status == 1}}'>
+          已完成
+        </view>
+        <view class='sub4'  wx-if='{{item.status == 2}}'>
+          已失效
         </view>
       </view>
   </view>
@@ -107,42 +154,19 @@
 
   <!-- 底部导航 -->
   <view class='footer clearfix'>
+    <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu'>
       <image src='{{bar[0]}}'></image>
     </view>
+    <view  bindtap='liulan'>
+      <image src='{{bar[3]}}'></image>
+    </view>
     <view bindtap='dingdan'>
       <image src='{{bar[1]}}'></image>
-      <view class='dingdan_dian' wx-if="{{dingdan_dian}}">
-      </view>
     </view>
     <view bindtap='wode'>
       <image src='{{bar[2]}}'></image>
     </view>
-  </view>
-
-  <!-- 我的 -->
-  <view class='wode_box' wx-if="{{wode_tf}}" bindtap='change_wode_tf'  catchtouchmove='true'>
-  </view>
-  <view class='wode_list' wx-if="{{wode_tf}}"  catchtouchmove='true'>
-    <image src='../image/logo.png' class='logo'></image>
-    <text class='logo_text'>立等翻译官</text>
-    <view class='wode_bor'></view>
-    <view class='list'>
-      <view class='clearfix' bindtap='go_qianbao'>
-        <image src='../image/qianbao.png' ></image>
-        <text>钱包</text>
-      </view>
-      <view class='clearfix' bindtap='go_yijian'>
-        <image src='../image/yijianfankui.png' ></image>
-        <text>意见反馈</text>
-      </view>
-      <view class='clearfix'>
-        <image src='../image/haoyou.png'></image>
-        <text>分享给好友</text>
-      </view>
-      <button open-type='share' class='fenxiang' id='1'></button>
-    </view>
-    
   </view>
 
 </view>

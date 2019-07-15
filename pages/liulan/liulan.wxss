@@ -1,0 +1,235 @@
+/* pages/liulan/liulan.wxss */
+.liulan{
+  padding-bottom: 90rpx;
+}
+.yinying{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.60);
+  z-index: 10;
+}
+.tanchuang_weixin{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  margin-left: -301rpx;
+  margin-top: -308rpx;
+  width: 602rpx;
+  height: 616rpx; 
+  background: url(https://www.uear.net/img2/wx_bg.png) center no-repeat;
+  background-size:100% 100%; 
+  border-radius: 12rpx;
+  text-align: center;
+}
+.tanchuang_weixin_close{
+  width: 96rpx;
+  height: 96rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.tw_tit{
+  font-size: 32rpx;
+  color: #FFFFFF;
+  font-weight: bold;
+  margin-top: 94rpx;
+  margin-bottom: 46rpx;
+}
+.tanchuang_weixin input{
+  width: 514rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+  background: rgba(255,255,255,0.40);
+  margin: 0 auto;
+  font-size: 32rpx;
+  color: #FFFFFF;
+}
+.tw_tit2{
+  width: 511rpx;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  margin: 0 auto;
+  margin-top: 20rpx;
+}
+.txpl{
+  color: #fff;
+}
+.tanchuang_weixin .sub{
+  width: 345rpx;
+  height: 70rpx;
+  background: rgba(255,255,255,0.80);
+  border-radius: 35rpx;
+  font-size: 32rpx;
+  color: #6282FF;
+  margin: 0 auto;
+  margin-top: 87rpx;
+  line-height: 70rpx;
+  font-weight: bold;
+}
+
+.list_fu{
+  background: #EBEBEB;
+}
+.list{
+  position: relative;
+  padding-top: 30rpx;
+  margin-bottom: 20rpx;
+  background: #fff;
+}
+.year{
+  position: absolute;
+  top: 10;
+  right: 0;
+  z-index: 5;
+  font-size: 24rpx;
+  color:#fff;
+  transform:rotate(46deg);
+}
+.year_img{
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 4;
+}
+.touxiang{
+  width: 168rpx;
+  height: 168rpx;
+  border-radius: 50%;
+  margin-left: 40rpx;
+  margin-right: 30rpx;
+}
+.sex{
+  position: relative;
+  z-index: 2;
+  width: 108rpx;
+  height: 40rpx;
+  background: #FF80B3;
+  border-radius: 6rpx;
+  margin-left: 70rpx;
+  margin-top: -30rpx;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sex image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 8rpx;
+}
+.sexn image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 8rpx;
+}
+.sexn{
+  position: relative;
+  z-index: 2;
+  width: 108rpx;
+  height: 40rpx;
+  background: #78BDF0;
+  border-radius: 6rpx;
+  margin-left: 70rpx;
+  margin-top: -30rpx;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.list_r{
+  width: 470rpx;
+}
+.name{
+  font-size: 34rpx;
+  color: #333333;
+}
+.add{
+  height: 44rpx;
+  border: 2rpx solid #CCCCCC;
+  border-radius: 6rpx;
+  margin-top: 18rpx;
+  margin-bottom: 24rpx;
+  font-size: 26rpx;
+  color: #999;
+  text-align: center;
+  line-height: 44rpx;
+  padding: 0 16rpx;
+}
+.peo{
+  margin-top: 18rpx;
+  height: 44rpx;
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 44rpx;
+}
+.peo image{
+  width: 30rpx;
+  height: 20rpx;
+  margin-right: 5rpx;
+}
+.biaoqian{
+  width: 500rpx;
+  margin-bottom: 24rpx;
+}
+.biaoqian view{
+  float: left;
+  width: 104rpx;
+  height: 48rpx;
+  background: #799DF1;
+  border-radius: 6rpx;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 48rpx;
+  margin-right: 18rpx;
+}
+.biaoqian image{
+  float: left;
+  width: 48rpx;
+  height: 48rpx;
+}
+.yuyan{
+  width: 500rpx;
+}
+.yuyan view{
+  float: left;
+  height: 48rpx;
+  font-size: 26rpx;
+  color: #799DF1;
+  border: 2rpx solid #799DF1;
+  border-radius: 6rpx;
+  padding: 0 26rpx;
+  line-height: 48rpx;
+  margin-right: 30rpx;
+  margin-bottom: 20rpx;
+}
+.yuyan image{
+  float: left;
+  width: 48rpx;
+  height: 48rpx;
+}
+.yuyan .more2{
+  float: left;
+  width: 60rpx;
+  height: 48rpx;
+  margin: 0;
+  margin-right: 30rpx;
+}
+.list_sub{
+  width: 100%;
+  height: 80rpx;
+  background: #8A8BF6;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 34rpx;
+  color: #FFFFFF;
+  margin-top: 50rpx;
+}

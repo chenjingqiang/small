@@ -1,26 +1,36 @@
 {
   "pages": [
     "pages/start/start",
-    "pages/index/index",
-    "pages/release/release",
-    "pages/dingdan/dingdan",
+    "pages/map/map",
     "pages/rob/rob",
+    "pages/become/become",
+    "pages/liulan/liulan",
+    "pages/detil/detil",
+    "pages/wode/wode",
+    "pages/release/release",
+    "pages/qianbao/qianbao",
+    "pages/mingxi/mingxi",
+    "pages/dingdan/dingdan",
+    "pages/change_wx/change_wx",
     "pages/success/success",
     "pages/xieyi/xieyi",
     "pages/pay/pay",
-    "pages/change_wx/change_wx",
     "pages/yijian/yijian",
-    "pages/mingxi/mingxi",
     "pages/status/status",
-    "pages/qianbao/qianbao",
     "pages/share/share",
-    "pages/button/button"
+    "pages/button/button",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#799df1",
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": false
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   },
   "sitemapLocation": "sitemap.json"
 }

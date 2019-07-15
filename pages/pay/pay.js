@@ -11,9 +11,9 @@ Page({
     money_jian_tf:false,
     money:0,
     money_zhifu:0,
-    money_jian: 0
+    money_jian: 0, 
+    release_oid:''
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -38,9 +38,15 @@ Page({
    */
   onShow: function () {
     var that=this
+    var money=wx.getStorageSync('money') || ''
+    var release_oid = wx.getStorageSync('release_oid') || ''
     that.setData({
-      pay_tf:true
+      pay_tf:true,
+      money: money,
+      money_zhifu: money,
+      release_oid: release_oid
     })
+
     wx.request({
       url: 'https://www.uear.net/ajax2/check_money.php',
       data: {
@@ -49,10 +55,7 @@ Page({
       method: 'GET',
       success: function (res) {
         var data = res.data.data
-        //console.log(data)
         that.setData({
-          money: data.money,
-          money_zhifu: data.money,
           money_jian: data.wallet
         })
       }
@@ -106,6 +109,7 @@ Page({
   },
   pay:function(){
     //console.log(this.data.money_zhifu)
+    //console.log(this.data.release_oid)
     var that = this
       //混合支付
     if (that.data.wx_kong_dian == false && that.data.kong_dian == false) {
@@ -128,23 +132,27 @@ Page({
             paySign: data.paySign,     //签名
             success(res) {
               wx.request({
-                url: 'https://www.uear.net/ajax2/release_success.php',
+                url: 'https://www.uear.net/ajax4/release_success1.php',
                 data: {
                   openid: that.data.openid,
-                  mark:1
+                  oid: that.data.release_oid,
+                  mark: 1
                 },
                 method: 'GET',
                 success: function (res) {
                   if (res.data.code == 1) {
-                    wx.setStorageSync('status', true)
-                    wx.reLaunch({
-                      url: '/pages/status/status',
+                    wx.showModal({
+                      title: '提示',
+                      content: '支付成功',
+                      success: function (res) {
+                        wx.reLaunch({
+                          url: '/pages/release/release',
+                        })
+                      }
                     })
                   }
-
                 }
               })
-
             },
             fail(res) { }
           })
@@ -173,22 +181,27 @@ Page({
             paySign: data.paySign,     //签名
             success(res) {
               wx.request({
-                url: 'https://www.uear.net/ajax2/release_success.php',
+                url: 'https://www.uear.net/ajax4/release_success1.php',
                 data: {
-                  openid: that.data.openid
+                  openid: that.data.openid,
+                  oid: that.data.release_oid,
+                  mark: 1
                 },
                 method: 'GET',
                 success: function (res) {
-                  if(res.data.code==1){
-                    wx.setStorageSync('status', true)
-                    wx.reLaunch({
-                      url: '/pages/status/status',
+                  if (res.data.code == 1) {
+                    wx.showModal({
+                      title: '提示',
+                      content: '支付成功',
+                      success: function (res) {
+                        wx.reLaunch({
+                          url: '/pages/release/release',
+                        })
+                      }
                     })
                   }
-                
                 }
               })
-
             },
             fail(res) { }
           })
@@ -200,29 +213,36 @@ Page({
     if (that.data.kong_dian == false && that.data.wx_kong_dian == true){
      //console.log('账户支付')
       wx.request({
-        url: 'https://www.uear.net/ajax2/pay_wallet.php',
+        url: 'https://www.uear.net/ajax4/pay_wallet.php',
         data: {
-          openid: that.data.openid
+          openid: that.data.openid,
+          money:that.data.money
         },
         method: 'GET',
         success: function (res) {
-          if (res.data.code==1){
-            wx.request({
-              url: 'https://www.uear.net/ajax2/release_success.php',
-              data: {
-                openid: that.data.openid
-              },
-              method: 'GET',
-              success: function (res) {
-                if (res.data.code == 1) {
-                  wx.setStorageSync('status', true)
-                  wx.reLaunch({
-                    url: '/pages/status/status',
-                  })
-                }
+          wx.request({
+            url: 'https://www.uear.net/ajax4/release_success1.php',
+            data: {
+              openid: that.data.openid,
+              oid: that.data.release_oid,
+              mark: 1
+            },
+            method: 'GET',
+            success: function (res) {
+              //console.log(res)
+              if (res.data.code == 1) {
+                wx.showModal({
+                  title: '提示',
+                  content: '支付成功',
+                  success: function (res) {
+                    wx.reLaunch({
+                      url: '/pages/release/release',
+                    })
+                  }
+                })
               }
-            })
-          }
+            }
+          })
         }
       })
     }
