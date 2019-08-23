@@ -1,0 +1,69 @@
+
+<view class='release'>
+  <view class='lange clearfix'>
+      <image src='/pages/image/yiwen.jpg' class='yiwen fl'></image>
+      <input placeholder='源语言' class='fl' bindinput='lange1_value'></input>
+      <image src='/pages/image/zhuanhuan22.png' class='zhuanhuan fl'></image>
+      <input placeholder='目标语言' class='fl' bindinput='lange2_value'></input>
+  </view>
+  <view class='fus clearfix'>
+    <view class='type_zi'>
+      项目时间
+    </view>
+    <input placeholder='请输入项目时间' maxlength='15' bindinput='get_time'></input>
+  </view>
+  <view class='fus clearfix' style='border:none;'>
+    <view class='type_zi'>
+      专业要求
+    </view>
+    <input placeholder='请输入专业需求，如：医学、时尚' maxlength='15' bindinput='get_yaoqiu'></input>
+  </view>
+  
+  <view class='bor'></view>
+  <view class='con clearfix'>
+    <textarea class='textarea' placeholder='请输入您的项目需求...' maxlength="-1"  bindinput="inputs" value='{{value}}'></textarea>
+  </view>
+  <view class='bor'></view>
+  <view class='fus clearfix' style="padding-top:0; border:none; margin-top:300rpx;">
+    <view class='type_zi'>
+      口译赏金
+    </view>
+    <view class='type_r fr'>
+      <input bindinput='get_day' type="number" placeholder="请填写费用"></input>
+      <view>元</view>
+    </view>
+  </view>
+  
+  <view class='sub_fu clearfix'>
+    <view class='l'>
+      平台费用：<text>{{money}}元</text> 
+    </view>
+    <view class='r' bindtap='sub'>
+      下单
+    </view>
+  </view>
+  <!-- 发布弹窗 -->
+  
+  <view class='sub_box' animation="{{animation_sub}}" style="margin-left:{{left}};">
+    {{sub_box_text}}
+  </view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</view>

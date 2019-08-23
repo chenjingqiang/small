@@ -1,0 +1,125 @@
+/* pages/fly/fly.wxss */
+page{
+  height: 100%;
+}
+.box{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.60);
+  z-index: 10;
+}
+.tanchuang{
+  width: 542rpx;
+  height: 534rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -271rpx;
+  margin-top: -267rpx;
+  z-index: 11;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+}
+.tanchuang .x{
+  position: absolute;
+  top: 0rpx;
+  right:0rpx;
+  z-index: 12;
+  width: 96rpx;
+  height: 96rpx;
+}
+.tt{
+  font-size: 32rpx;
+  color: #111111;
+  text-align: center;
+  margin-top: 40rpx;
+  margin-bottom: 26rpx;
+  font-weight: bold;
+}
+.tanchuang_text{
+  width: 454rpx;
+  margin: 0 auto;
+  font-size: 30rpx;
+  color: #111111;
+  margin-top: 44rpx;
+  text-align: center;
+  line-height: 42rpx;
+}
+.tanchuang_text text{
+ color: #799DF1;
+}
+.tc_sub{
+  width: 410rpx;
+  height: 80rpx;
+  background: #799DF1;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 80rpx;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+}
+.tc_sub2{
+  box-sizing: border-box;
+  width: 410rpx;
+  height: 80rpx;
+  border: 2rpx solid #799DF1;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  font-size: 30rpx;
+  color: #799DF1;
+  text-align: center;
+  line-height: 80rpx;
+}
+.bor{
+  width: 464rpx;
+  border-bottom: 1px solid #CCCCCC;
+  margin: 0 auto;
+}
+.fly{
+  width: 100%;
+  height: 100%;
+  background: url('https://www.uear.net/img/beijing2.jpg') no-repeat center;
+  background-size:cover;
+  overflow: hidden;
+}
+.con{
+  margin-top: 667rpx;
+  margin-left: 70rpx;
+  margin-bottom: 100rpx;
+}
+.con input{
+  float: left;
+  box-sizing: border-box;
+  width:410rpx;
+  height: 96rpx;
+  background: #fff;
+  font-size: 34rpx;
+  text-align: center;
+}
+.sub{
+  float: left;
+  width: 200rpx;
+  height: 96rpx;
+  background: #F3AD1E;
+  font-size: 34rpx;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 96rpx;
+}
+.sub2{
+  width: 320rpx;
+  height: 90rpx;
+  border: 2px solid #80DCFD;
+  border-radius: 45rpx;
+  margin: 0 auto;
+  font-size: 40rpx;
+  color: #80DCFD;
+  text-align: center;
+  line-height: 90rpx;
+}

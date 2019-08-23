@@ -1,4 +1,5 @@
 // pages/pay/pay.js
+var util = require("../../utils/util.js")
 Page({
 
   /**
@@ -38,7 +39,9 @@ Page({
    */
   onShow: function () {
     var that=this
+    util.get_title(that)
     var money=wx.getStorageSync('money') || ''
+    console.log(money)
     var release_oid = wx.getStorageSync('release_oid') || ''
     that.setData({
       pay_tf:true,
@@ -132,7 +135,7 @@ Page({
             paySign: data.paySign,     //签名
             success(res) {
               wx.request({
-                url: 'https://www.uear.net/ajax4/release_success1.php',
+                url: 'https://www.uear.net/ajax4/release_success1_oral.php',
                 data: {
                   openid: that.data.openid,
                   oid: that.data.release_oid,
@@ -145,8 +148,8 @@ Page({
                       title: '提示',
                       content: '支付成功',
                       success: function (res) {
-                        wx.reLaunch({
-                          url: '/pages/release/release',
+                        wx.navigateBack({
+                          delta: 1
                         })
                       }
                     })
@@ -181,7 +184,7 @@ Page({
             paySign: data.paySign,     //签名
             success(res) {
               wx.request({
-                url: 'https://www.uear.net/ajax4/release_success1.php',
+                url: 'https://www.uear.net/ajax4/release_success1_oral.php',
                 data: {
                   openid: that.data.openid,
                   oid: that.data.release_oid,
@@ -194,8 +197,8 @@ Page({
                       title: '提示',
                       content: '支付成功',
                       success: function (res) {
-                        wx.reLaunch({
-                          url: '/pages/release/release',
+                        wx.navigateBack({
+                          delta: 1
                         })
                       }
                     })
@@ -221,7 +224,7 @@ Page({
         method: 'GET',
         success: function (res) {
           wx.request({
-            url: 'https://www.uear.net/ajax4/release_success1.php',
+            url: 'https://www.uear.net/ajax4/release_success1_oral.php',
             data: {
               openid: that.data.openid,
               oid: that.data.release_oid,
@@ -235,8 +238,8 @@ Page({
                   title: '提示',
                   content: '支付成功',
                   success: function (res) {
-                    wx.reLaunch({
-                      url: '/pages/release/release',
+                    wx.navigateBack({
+                      delta: 1
                     })
                   }
                 })
@@ -279,6 +282,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: this.data.tit,
+      imageUrl: "https://www.uear.net/img2/start.jpg",
+      path: '/pages/start/start',
+    }
   }
 })

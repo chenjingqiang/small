@@ -18,7 +18,7 @@ page{
   overflow: hidden;
   padding-bottom: 100rpx;
 }
-.wancheng,.shixiao{
+.wancheng{
   width: 169rpx;
   height: 128rpx;
   position: absolute;
@@ -120,27 +120,34 @@ page{
 .tuidan_anniu .zaixiang{
   color: #799DF1;
 }
-
-.header{
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 792rpx;
-  height: 102rpx;
+.map_footer{
+  width: 100%;
+  height: 80rpx;
   background: #799DF1;
-  margin-left: -42rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
 }
-.header view{
-  box-sizing: border-box;
-  display: inline-block;
-  line-height: 102rpx;
+.map_footer view{
+  float: left;
+  width: 130rpx;
   font-size: 32rpx;
   color: #BCD0FD;
-  letter-spacing: 1.4rpx;
-  margin-left: 128rpx;
+  margin-top: 17rpx;
+  text-align: center;
+  margin-left: 40rpx;
+  margin-right: 10rpx;
 }
-.header .act{
-  font-weight: bold;
+.map_footer .act text{
+  display: block;
+  width: 64rpx;
+  height: 6rpx;
+  margin-left: 30rpx;
+  background: #FFFFFF;
+  margin-top: 16rpx;
+}
+.map_footer .act{
   color: #fff;
 }
 .zhuanhuan{
@@ -150,6 +157,7 @@ page{
 }
 .list_fu{
   background: #EBEBEB;
+  margin-top: 80rpx;
 }
 .dd_list{
   box-sizing: border-box;
@@ -179,6 +187,11 @@ page{
 }
 .tit_r{
   float: right;
+}
+.tit_r .fuzhi{
+  font-size: 32rpx;
+  color: #799BEF;
+  margin-left: 10rpx;
 }
 .fu{
   font-size: 30rpx;

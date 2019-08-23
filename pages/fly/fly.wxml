@@ -1,0 +1,54 @@
+<!--pages/fly/fly.wxml-->
+<view class="fly">
+  <view class="box" wx-if="{{!yinying}}" catchtouchmove='true'></view>
+  <view class='tanchuang' wx-if="{{!t_f}}" catchtouchmove='true'>
+    <image class='x' src='/pages/image/jiao_x.png' bindtap='close_tanchuang'></image>
+    <view class="tt">
+      提示
+    </view>
+    <view class="bor"></view>
+    <view class="tanchuang_text">
+      发布前您需联系我们的客服微信<text>{{kefu}}</text>进行询价才可以发布哦～
+    </view>
+    <view class="tc_sub" bindtap="copyBtn">
+      复制客服微信
+    </view>
+    <view class="tc_sub2"  bindtap="go_kouyi">
+      我已询价，进行发布
+    </view>
+  </view>
+  <view class="con clearfix">
+    <input placeholder="请输入房间号"></input>
+    <view class="sub">进入语音</view>
+  </view>
+  <view class="sub2" bindtap="open_tanchuang">需求发布</view>
+
+
+
+
+
+
+
+
+
+<!-- 底部导航 -->
+  <view class='footer clearfix'>
+    <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
+    <view bindtap='fabu' class="footer_fabu">
+      <image src='{{bar[0]}}'></image>
+    </view>
+    <view  bindtap='map'>
+      <image src='{{bar[3]}}'></image>
+    </view>
+    <view bindtap='fly' class="footer_map">
+      <image src='{{bar[4]}}'></image>
+    </view>
+    <view bindtap='dingdan' class="footer_fadan">
+      <image src='{{bar[1]}}'></image>
+    </view>
+    <view bindtap='wode'>
+      <image src='{{bar[2]}}'></image>
+    </view>
+  </view>
+
+</view>

@@ -84,15 +84,19 @@
   <view class='hhhhh'>
   
   </view>
-  <!-- <view class='header clearfix'>
-    <view wx:for="{{header}}" wx:key="{{item.tet}}" class="{{item.cla ==true ? 'act' : ''}}" bindtap='change' data-index="{{index}}"  >
+  <view class="map_footer">
+    <view wx:for="{{header}}" wx:key="{{index}}" class="{{item.cla ? 'act' :''}}" bindtap="header_act" data-index="{{index}}">
       {{item.tet}}
+      <text wx-if="{{item.cla}}"></text>
     </view>
-  </view> -->
+   
+  </view>
   <view class='list_fu'>
-    <view class='dd_list' wx:for="{{select}}"  wx:key="key">
+    <view class='dd_list' wx:for="{{select}}"  wx:key="{{index}}">
       <image src='/pages/image/wancheng.png' class='wancheng' wx-if="{{item.status==1}}"></image>
-      <image src='/pages/image/shixiao.png' class='shixiao' wx-if="{{item.status==2}}"></image>
+      <image src='/pages/image/shixiao.png' class='wancheng' wx-if="{{item.status==2}}"></image>
+      <image src='/pages/image/jinxing.png' class='wancheng' wx-if="{{item.status==0}}"></image>
+      <image src='/pages/image/fukuan.png' class='wancheng' wx-if="{{item.status==3}}"></image>
       <view class='tit clearfix'>
         <view class='dian' wx-if="{{item.redpoint}}">
         </view>
@@ -102,8 +106,11 @@
           我发布的求译
         </view> 
          -->
-        <view class='tit_l tit_l_h'>
+        <view class='tit_l tit_l_h' wx-if="{{item.status!=3}}">
           ¥{{item.now_money}}.00（{{item.money}}天+{{item.plus_money}}元置顶赏金）
+        </view>
+        <view class='tit_l tit_l_h'  wx-if="{{item.status==3}}">
+          ¥{{item.now_money}}
         </view>
         <!-- <view class='tit_r cu'>
           {{item.status}}
@@ -121,7 +128,16 @@
       <!-- <view class='pingtai' wx-if="{{item.code}}">
         平台将在3个工作日内打款到您的账户
       </view> -->
-      <view class='fu clearfix'>
+      <view class='fu clearfix' bindtap="copyBtn" data-oid="{{item.oid}}" wx-if="{{item.oid}}">
+        <view class='tit_l '>
+          订单编号
+        </view>
+        <view class='tit_r'>
+          {{item.oid}}
+          <text class="fuzhi">复制</text>
+        </view>
+      </view>
+      <view class='fu clearfix' wx-if="{{item.language1}}">
         <view class='tit_l '>
           服务语言：
         </view>
@@ -194,25 +210,28 @@
         如有疑问联系邮箱：service@uear.net 注明您的邮箱
       </view>
     </view>
+    
   </view>
   <image src='/pages/image/dingdan_kong.jpg' class='kong' wx-if="{{kong}}"></image>
 
   <!-- 底部导航 -->
   <view class='footer clearfix'>
     <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
-    <view bindtap='fabu'>
+    <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>
-    <view bindtap='liulan'>
+    <view  bindtap='map'>
       <image src='{{bar[3]}}'></image>
     </view>
-    <view bindtap='dingdan'>
+    <view bindtap='fly' class="footer_map">
+      <image src='{{bar[4]}}'></image>
+    </view>
+    <view bindtap='dingdan' class="footer_fadan">
       <image src='{{bar[1]}}'></image>
     </view>
     <view bindtap='wode'>
       <image src='{{bar[2]}}'></image>
     </view>
-    
   </view>
 </view>
 

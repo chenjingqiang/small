@@ -1,8 +1,103 @@
 /* pages/map/map.wxss */
-page{
+page , .map{
   height: 100%;
+}
+.map_footer{
+  width: 100%;
+  height: 80rpx;
+  background: #799DF1;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 6;
+}
+.map_footer view{
+  font-size: 32rpx;
+  color: #BCD0FD;
+  margin-top: 17rpx;
+  text-align: center;
+}
+.map_footer .act text{
+  display: block;
+  width: 64rpx;
+  height: 6rpx;
+  margin-left: 30rpx;
+  background: #FFFFFF;
+  margin-top: 16rpx;
+}
+.map_footer .v1{
+  margin-left: 199rpx;
+  margin-right: 100rpx;
+}
+.map_footer .act{
+  color: #fff;
 }
 map{
   width: 100%;
   height: 100%;
 }
+.shezhi{
+  position: fixed;
+  top: 120rpx;
+  right: 40rpx;
+  width: 80rpx;
+  height: 80rpx;
+  z-index: 5;
+}
+.qp{
+  position: fixed;
+  top: 130rpx;
+  left: 120rpx;
+  width: 486rpx;
+  height: 63rpx;
+  z-index: 5;
+}
+.footer2{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 750rpx;
+  height: 136rpx;
+}
+.footer2 .footer{
+  width: 750rpx;
+  height: 106rpx;
+  box-shadow: 0 -1px 0 0 #DDDDDD;
+}
+.footer cover-view{
+  float: left;
+  height: 106rpx;
+  text-align: center;
+}
+.footer cover-image{
+  width: 75rpx;
+  height: 68rpx;
+  margin-top: 18rpx;
+}
+.footer .footer_fabu{
+  margin-left: 40rpx;
+  margin-right: 70rpx;
+}
+.footer .footer_fabu{
+  margin-left: 40rpx;
+  margin-right: 70rpx;
+}
+.footer2 .footer_map{
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 337rpx;
+}
+.footer2 .footer_map cover-image{
+  width: 84rpx;
+  height: 116rpx;
+  position: relative;
+  z-index: 6;
+}
+.footer .footer_fadan{
+  margin-right: 70rpx;
+  margin-left: 230rpx;
+}
+
+
