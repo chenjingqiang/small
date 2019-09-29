@@ -4,14 +4,14 @@
   <view class='yinying' wx-if="{{yinying}}" catchtouchmove='true'>
 
   </view>
-  <!-- 删除弹窗 -->
+  <!-- 完成订单弹窗 -->
   <view class='tanchuang' wx-if="{{yinying_shanchu}}" catchtouchmove='true'>
     <view class='shanchu_tit tuidan_tit'>
       确定要完成订单吗？
     </view>
     <view class='tuidan_bor'></view>
     <view class='tuidan_anniu clearfix'>
-      <view class='queren' bindtap='shanchu'>
+      <view class='queren' bindtap='wancheng'>
         确认
       </view>
       <text></text>
@@ -21,66 +21,6 @@
     </view>
   </view>
 
-  <!-- 用户退单弹窗 -->
-  <view class='tanchuang' wx-if="{{yinying_tuidan}}">
-    <view class='tuidan_tit'>
-      将收到{{tit_money}}元
-    </view>
-    <view class='tuidan_qianbao'>
-      确认退单后付款可进入钱包，并且可重新发起翻译单
-    </view>
-    <view class='tuidan_bor'></view>
-    <view class='tuidan_anniu clearfix'>
-      <view class='queren' bindtap='tuidan'>
-        确认
-      </view>
-      <text></text>
-      <view class='zaixiang' bindtap='zaixiang'>
-        我再想想
-      </view>
-    </view>
-  </view>
-
-  <!-- 翻译官退单弹窗 -->
-  <view class='tanchuang' wx-if="{{yinying_tuidan2}}">
-    <view class='tuidan_tit' >
-      确定要退单吗？
-    </view>
-    <view class='tuidan_qianbao' style='margin-top:50rpx;'>
-      退单后将进入单池，无法再接取此单了。
-    </view>
-    <view class='tuidan_bor'></view>
-    <view class='tuidan_anniu clearfix'>
-      <view class='queren' bindtap='tuidan'>
-        确认
-      </view>
-      <text></text>
-      <view class='zaixiang' bindtap='zaixiang'>
-        我再想想
-      </view>
-    </view>
-  </view>
-
-  <!-- 翻译官接受退单弹窗 -->
-  <view class='tanchuang' wx-if="{{yinying_jieshoutuidan}}">
-    <view class='tuidan_tit' >
-      确定接受退单
-    </view>
-    <view class='tuidan_qianbao' style='margin-top:50rpx;'>
-      接受退单则此单金额返还用户，请确认已和用户沟通无异议
-    </view>
-    <view class='tuidan_bor'></view>
-    <view class='tuidan_anniu clearfix'>
-      <view class='queren' bindtap='jieshoutuidan'>
-        确认
-      </view>
-      <text></text>
-      <view class='zaixiang' bindtap='zaixiang'>
-        我再想想
-      </view>
-    </view>
-  </view>
-  
   <view class='hhhhh'>
   
   </view>
@@ -202,7 +142,7 @@
         <view class='tit_l '>
           {{item.datetime}}
         </view>
-        <view class='tit_r shanchu'  bindtap="dingdan_shanchu" data-oid="{{item.oid}}" wx-if="{{item.status==0}}" >
+        <view class='tit_r shanchu'  bindtap="dingdan_wancheng" data-oid="{{item.oid}}" wx-if="{{item.status==0}}" >
           完成订单
         </view>
       </view>
@@ -216,7 +156,7 @@
 
   <!-- 底部导航 -->
   <view class='footer clearfix'>
-    <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
+    <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>

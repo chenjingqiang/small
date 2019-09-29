@@ -9,14 +9,111 @@ Page({
     bar: ['../image/fabu2.png', '../image/dingdan2.png', '../image/wode2.png', '../image/liulan2.png', '../image/map.png'],
     yinying:true,
     t_f:true,
-    kefu:''
+    kefu:'',
+    openid: '',
+    roomNo: '',
+    userID: '',
+    tapTime: '',
+    template: 'bigsmall',
+    tapTime:''
   },
+  // 绑定输房间号入框
+  bindRoomNo: function (e) {
+    var self = this;
+    self.setData({
+      roomNo: e.detail.value
+    });
+  },
+  // 进入rtcroom页面
+  joinRoom: function () {
+    var self = this;
+    // 防止两次点击操作间隔太快
+    var nowTime = new Date();
+    if (nowTime - this.data.tapTime < 1000) {
+      console.log(1)
+      return;
+    }
 
+    if (!self.data.roomNo) {
+      wx.showToast({
+        title: '请输入房间号',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+
+    if (/^\d\d+$/.test(self.data.roomNo) === false) {
+      wx.showToast({
+        title: '只能为数字',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    wx.request({
+      url: '' + util.ajaxurl + 'get_room.php',
+      method: 'GET', //请求方式
+      header: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        openid: self.data.openid,  //参数
+        room: self.data.roomNo
+      },
+      success: function (res) {
+        if(res.data.code==1){
+          self.data.userID = self.data.openid
+          wx.request({
+            url: '' + util.ajaxurl + 'demo1.php',
+            method: 'GET', //请求方式
+            header: {
+              'Content-Type': 'application/json',
+            },
+            data: {
+              userid: self.data.openid,  //参数
+            },
+            success: function (res) {
+              //console.log(res.data)
+              self.data.userSig = res.data.data
+              //console.log(self.data.userSig)
+              var url = `../webrtc-room/room/room?roomID=${self.data.roomNo}&template=${self.data.template}&sdkAppID=1400255908&userId=${self.data.userID}&userSig=${self.data.userSig}`;
+              wx.navigateTo({
+                url: url
+              });
+
+              wx.showToast({
+                title: '进入房间',
+                icon: 'success',
+                duration: 1000
+              })
+
+              self.setData({
+                'tapTime': nowTime
+              });
+            },
+          })
+        }else{
+          wx.showToast({
+            title: ''+res.data.message+'',
+            icon:'none'
+          })
+        }
+        
+      }
+    })
+    
+
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this
+    var openid = wx.getStorageSync('openid')
+    this.setData({
+      openid: openid
+    })
   },
 
   /**
@@ -35,9 +132,13 @@ Page({
       title: '加载中',
       mask:true
     })
+    that.setData({
+      yinying: true,
+      t_f: true,
+    })
     util.get_title(that)
     wx.request({
-      url: 'https://www.uear.net/ajax4/service_phone.php',
+      url: '' + util.ajaxurl + 'service_phone.php',
       data: {
       },
       method: 'GET',
@@ -117,7 +218,7 @@ Page({
           })
         } else {
           wx.request({
-            url: 'https://www.uear.net/ajax4/translator_status1.php',
+            url: '' + util.ajaxurl + 'translator_status1.php',
             data: {
               openid: that.data.openid
             },
@@ -139,7 +240,7 @@ Page({
                     mark: 1
                   }
                   wx.request({
-                    url: 'https://www.uear.net/ajax4/translator_flower_submit.php',
+                    url: '' + util.ajaxurl + 'translator_flower_submit.php',
                     data: data,
                     method: 'GET',
                     success: function (res) {

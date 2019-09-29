@@ -10,7 +10,6 @@ Page({
     longitude: '',
     get_user: true,
     userInfo: {},
-    ajaxurl: util.ajaxurl,
     wode_tf: false,
     textarea_tf: false,
     t_length: 0,
@@ -92,50 +91,13 @@ Page({
   onShow: function () {
     var that = this
     util.get_title(that)
-    if (!that.data.userInfo) {
-      that.setData({
-        get_user: true
-      })
-    } else {
-      that.setData({
-        get_user: false
-      })
-      wx.request({
-        url: 'https://www.uear.net/ajax2/wx_information.php',
-        data: {
-          openid: that.data.openid,
-          nickName: that.data.userInfo.nickName,
-          avatarUrl: that.data.userInfo.avatarUrl,
-          city: that.data.userInfo.city,
-          gender: that.data.userInfo.gender,
-
-        },
-        method: 'GET',
-        success: function (res) {
-          //console.log(res)
-        }
-      })
-    }
     that.setData({
       arr_index: 0,
       arr_index2: 0
     })
-
-    //获取标签
-    wx.request({
-      url: 'https://www.uear.net/ajax2/show_scene.php',
-      data: {
-      },
-      method: 'GET',
-      success: function (res) {
-        that.setData({
-          biaoqian_select: res.data.data
-        })
-      }
-    })
     //获取最低价格
     wx.request({
-      url: 'https://www.uear.net/ajax2/check_order1.php',
+      url: '' + util.ajaxurl +'check_order1.php',
       data: {
       },
       method: 'GET',
@@ -146,27 +108,6 @@ Page({
         })
       }
     })
-    //获取求译状态
-    wx.request({
-      url: 'https://www.uear.net/ajax2/check_success.php',
-      data: {
-        openid: that.data.openid
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data)
-        if (res.data.code == 1) {
-          that.setData({
-            status_t_f: true,
-          })
-        } else {
-          that.setData({
-            status_t_f: false,
-          })
-        }
-      },
-    })
-
   },
   //获取用户头像
   getUserInfo: function () {
@@ -512,7 +453,7 @@ Page({
     })
     
     wx.request({
-      url: 'https://www.uear.net/ajax4/release1_oral.php',
+      url: '' + util.ajaxurl +'release1_oral.php',
       data: data,
       method: 'GET',
       success: function (res) {

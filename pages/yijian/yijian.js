@@ -72,7 +72,7 @@ Page({
     if(!this.data.sub_tf==true){
       wx.request({
         //判断
-        url: 'https://www.uear.net/ajax2/opinion.php',
+        url: '' + util.ajaxurl +'opinion.php',
         data: {
           openid: this.data.openid,
           content:this.data.te_value,

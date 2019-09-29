@@ -1,22 +1,22 @@
 <!--pages/map/map.wxml-->
 <view class="map">
-  <view class="map_footer">
-    <view class="fl v1 act" bindtap="map">
+  <cover-view  class="map_footer">
+    <cover-view class="fl v1 act" bindtap="map">
       按图索译
-      <text></text>
-    </view>
-    <view class="fl" bindtap="liulan">
+      <cover-view class="text"></cover-view>
+    </cover-view>
+    <cover-view class="fl" bindtap="liulan">
       译员列表
-      <text></text>
-    </view>
-  </view>
+      <cover-view class="text"></cover-view>
+    </cover-view>
+  </cover-view>
   <map  id="map" latitude='{{latitude}}' longitude='{{longitude}}' markers="{{markers}}" bindmarkertap='markersAction'>
     <cover-image src="/pages/image/shezhi.png" class="shezhi" bindtap="shezhi" wx-if="{{shezhi_tf}}"></cover-image >
     <cover-image  src="/pages/image/qp.png" class="qp" bindtap="qp" wx-if="{{qp_tf==0}}"></cover-image >
     <!-- 底部导航 -->
     <cover-view class="footer2">
       <cover-view class='footer clearfix'>
-        <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
+        <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
         <cover-view bindtap='fabu' class="footer_fabu">
           <cover-image src='{{bar[0]}}'></cover-image>
         </cover-view>

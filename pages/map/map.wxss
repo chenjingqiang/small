@@ -12,19 +12,18 @@ page , .map{
   left: 0;
   z-index: 6;
 }
-.map_footer view{
+.map_footer cover-view{
   font-size: 32rpx;
   color: #BCD0FD;
   margin-top: 17rpx;
   text-align: center;
 }
-.map_footer .act text{
-  display: block;
+.map_footer .act .text{
   width: 64rpx;
   height: 6rpx;
-  margin-left: 30rpx;
   background: #FFFFFF;
-  margin-top: 16rpx;
+  margin-left: 30rpx;
+  margin-top: 20rpx;
 }
 .map_footer .v1{
   margin-left: 199rpx;

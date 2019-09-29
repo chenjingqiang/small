@@ -1,5 +1,5 @@
 // pages/detil/detil.js
-
+var util = require("../../utils/util.js")
 const innerAudioContext = wx.createInnerAudioContext()
 Page({
 
@@ -88,19 +88,18 @@ Page({
     //分享标题
     wx.request({
       //判断
-      url: 'https://www.uear.net/ajax2/random_text.php',
+      url: '' + util.ajaxurl +'random_text.php',
       data: {
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res.data.data)
         that.setData({
           tit: res.data.data
         })
       }
     })
     wx.request({
-      url: 'https://www.uear.net/ajax4/browse_plus.php',
+      url: '' + util.ajaxurl +'browse_plus.php',
       data: {
         openid: detil_id
       },
@@ -109,7 +108,7 @@ Page({
       }
     })
     wx.request({
-      url: 'https://www.uear.net/ajax4/trandlator_details.php',
+      url: '' + util.ajaxurl +'trandlator_details.php',
       data: {
         openid: detil_id,
         longitude: this.data.longitude,

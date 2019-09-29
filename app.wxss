@@ -1,4 +1,5 @@
 
+
 button{
   border:none;
   border-radius:0;
@@ -79,7 +80,7 @@ input{
 .footer .footer_fadan{
   margin-right: 70rpx;
 }
-#show-author{
+.footer .show-author{
   width: 150rpx;
   height: 110rpx;
   position: absolute;

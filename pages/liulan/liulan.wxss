@@ -19,12 +19,12 @@
   text-align: center;
 }
 .map_footer .act text{
-  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 456rpx;
   width: 64rpx;
   height: 6rpx;
-  margin-left: 30rpx;
   background: #FFFFFF;
-  margin-top: 16rpx;
 }
 .map_footer .v1{
   margin-left: 199rpx;
@@ -324,7 +324,6 @@
   font-size: 24rpx;
   color: #999999;
   line-height: 44rpx;
-  margin-left: 238rpx;
 }
 .peo image{
   width: 30rpx;

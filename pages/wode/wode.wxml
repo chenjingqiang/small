@@ -18,32 +18,40 @@
   <view class='wode_bor'></view>
   <view class='list'>
     <view class='clearfix' bindtap='go_qianbao'>
-    <image src='../image/qianbao.png' ></image>
-    <text>钱包</text>
+      <image src='../image/qianbao.png' ></image>
+      <text>钱包</text>
+      <image src='../image/fl.png' class="right" ></image>
+    </view>
+    <view class='clearfix' bindtap='go_xiugai'>
+      <image src='../image/xiugai.png' ></image>
+      <text>修改联系方式</text>
+      <image src='../image/fl.png' class="right" ></image>
+    </view>
+    <view class='clearfix' bindtap='go_yijian'>
+      <image src='../image/yijianfankui.png' ></image>
+      <text>意见反馈</text>
+      <image src='../image/fl.png' class="right" ></image>
+    </view>
+    <view class='clearfix' style='position: relative;'>
+      <image src='../image/haoyou.png'></image>
+      <text>分享给好友</text>
+      <button open-type='share' class='fenxiang'></button>
+      <image src='../image/fl.png' class="right" ></image>
+    </view>
   </view>
-  <view class='clearfix' bindtap='go_xiugai'>
-    <image src='../image/xiugai.png' ></image>
-    <text>修改联系方式</text>
+  <view class="biaozhun" bindtap="biaozhun">
+    《服务标准及违约责任约定》
   </view>
-  <view class='clearfix' bindtap='go_yijian'>
-    <image src='../image/yijianfankui.png' ></image>
-    <text>意见反馈</text>
-  </view>
-  <view class='clearfix' style='position: relative;'>
-    <image src='../image/haoyou.png'></image>
-    <text>分享给好友</text>
-    <button open-type='share' class='fenxiang'></button>
-  </view>
-  </view>
-  <view class='shibai_tishi'  wx-if="{{code==2}}">
+  
+  <view class='shibai_tishi' wx-if="{{code==2}}">
     <image src='../image/tishi.png'></image>
-    <text></text>
+    <text>aaaaaa</text>
     {{message}}
   </view>
 
   <!-- 底部导航 -->
   <view class='footer clearfix'>
-    <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
+    <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>

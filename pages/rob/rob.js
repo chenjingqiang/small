@@ -147,14 +147,13 @@ Page({
     })
     //获取翻译官状态
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_status.php',
+      url: '' + util.ajaxurl +'translator_status.php',
       data: {
         openid: this.data.openid
       },
       method: 'GET',
       success: function (res) {
-        console.log(res.data)
-        
+        //console.log(res.data)
         if (res.data.code == 0) {
           that.setData({
             type: false,
@@ -168,13 +167,13 @@ Page({
     })
     //获取用户是否填写微信号
     wx.request({
-      url: 'https://www.uear.net/ajax4/get_mywxid.php',
+      url: '' + util.ajaxurl +'/get_mywxid.php',
       data: {
         openid: this.data.openid,
       },
       method: 'GET',
       success: function (res) {
-        console.log(res)
+        //console.log(res.data)
         that.setData({
           wxid_true: res.data.data
         })
@@ -183,12 +182,12 @@ Page({
     })
     //在线人数
     wx.request({
-      url: 'https://www.uear.net/ajax4/peo_num.php',
+      url: '' + util.ajaxurl +'/peo_num.php',
       data: {
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res.data.data)
+        //console.log(res.data)
         that.setData({
           zaixian: res.data.data
         })
@@ -196,7 +195,7 @@ Page({
     })
     //求译列表
     wx.request({
-      url: 'https://www.uear.net/ajax4/show_order1.php',
+      url: '' + util.ajaxurl +'/show_order1.php',
       data: {
         openid:this.data.openid,
         orderby:this.data.paixu,
@@ -205,7 +204,7 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res.data.data)
+        //console.log(res.data)
         if (res.data.data==''){
           that.setData({
             kong:true
@@ -314,7 +313,7 @@ Page({
       return
     }
     wx.request({
-      url: 'https://www.uear.net/ajax4/change_wxid.php',
+      url: '' + util.ajaxurl +'/change_wxid.php',
       data: {
         openid: this.data.openid,
         wxid: this.data.wxid_value
@@ -440,13 +439,15 @@ Page({
               }
             })
           } else {
+            //判断翻译官是否有花
             wx.request({
-              url: 'https://www.uear.net/ajax4/translator_status1.php',
+              url: '' + util.ajaxurl +'translator_status1.php',
               data: {
                 openid: that.data.openid
               },
               method: 'GET',
               success: function (res) {
+                //console.log(res)
                 if (res.data.code == 0) {
                   if (that.data.longitude == '' || that.data.latitude == '') {
                     wx.showToast({
@@ -463,7 +464,7 @@ Page({
                       mark: 1
                     }
                     wx.request({
-                      url: 'https://www.uear.net/ajax4/translator_flower_submit.php',
+                      url: '' + util.ajaxurl +'translator_flower_submit.php',
                       data: data,
                       method: 'GET',
                       success: function (res) {
@@ -570,7 +571,7 @@ Page({
       page:page
     })
     wx.request({
-      url: 'https://www.uear.net/ajax4/show_order1.php',
+      url: '' + util.ajaxurl +'/show_order1.php',
       data: {
         openid: this.data.openid,
         orderby: this.data.paixu,
@@ -580,18 +581,21 @@ Page({
       method: 'GET',
       success: function (res) {
         //console.log(res.data.data)
-        that.setData({
-          select: that.data.select.concat(res.data.data)
-        })
-        //console.log('成功')
-      },
-      complete: function () {
+        if (res.data.data==''){
+          wx.showToast({
+            title: '没有更多了',
+            icon: 'none',
+            duration: 1000,
+            mask: true
+          })
+        }else{
+          that.setData({
+            select: that.data.select.concat(res.data.data)
+          })
+        }
         wx.hideLoading()
-      }
+      },
     })
-
-
-
   },
   onShareAppMessage: function (res) {
     return {

@@ -1,5 +1,5 @@
 //app.js
-var uitl = require('/utils/util.js')
+var util = require('/utils/util.js')
 App({
   onLaunch: function () {
     // wx.getLocation({ // 请求位置信息
@@ -42,7 +42,7 @@ App({
             //发送res.code 到后台
             wx.request({
               //获取openid接口
-              url: 'https://www.uear.net/ajax2/getopenid.php',
+              url: '' + util.ajaxurl+'getopenid.php',
               data: {
                 code: res.code
               },

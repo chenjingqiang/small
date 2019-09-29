@@ -49,10 +49,6 @@
   height: 20rpx;
   background: #EBEBEB;
   margin-top: 30rpx;
-  margin-bottom: 20rpx;
-}
-.list{
-  position: relative;
 }
 .list view{
   width: 670rpx;
@@ -72,20 +68,21 @@
   font-size: 32rpx;
   color: #333333;
   letter-spacing: 1.67rpx;
-   margin-top: 40rpx;
+  margin-top: 40rpx;
 }
 .fenxiang{
   position: absolute;
   width: 100%;
   left: 0;
   top: 0;
+  z-index: 2;
   height: 115rpx;
   opacity: 0;
 }
 .shibai_tishi{
   font-size: 28rpx;
   color: #E2442D;
-  margin-top: 100rpx;
+  margin-top: 30rpx;
   line-height: 34rpx;
   display:flex;
   align-items: center;
@@ -95,4 +92,21 @@
   width: 34rpx;
   height: 34rpx;
   margin-right: 20rpx;
+}
+.list .right{
+  width: 27rpx;
+  height: 27rpx;
+  float: right;
+  margin-right: 0rpx;
+}
+.biaozhun{
+  width: 430rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  text-align: center;
+  color: #799DF1;
+  margin: 0 auto;
+  margin-top: 46rpx;
+  text-decoration:underline;
 }

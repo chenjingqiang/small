@@ -38,7 +38,7 @@ Page({
     util.get_title(that)
     wx.request({
       //判断
-      url: 'https://www.uear.net/ajax4/get_wxid.php',
+      url: '' + util.ajaxurl +'get_wxid.php',
       data: {
         openid: this.data.openid,
       },
@@ -71,7 +71,7 @@ Page({
     if (!this.data.sub_tf == true) {
       wx.request({
         //判断
-        url: 'https://www.uear.net/ajax4/change_wxid.php',
+        url: '' + util.ajaxurl +'change_wxid.php',
         data: {
           openid: this.data.openid,
           wxid: this.data.wxid

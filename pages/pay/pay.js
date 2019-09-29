@@ -41,7 +41,6 @@ Page({
     var that=this
     util.get_title(that)
     var money=wx.getStorageSync('money') || ''
-    console.log(money)
     var release_oid = wx.getStorageSync('release_oid') || ''
     that.setData({
       pay_tf:true,
@@ -51,7 +50,7 @@ Page({
     })
 
     wx.request({
-      url: 'https://www.uear.net/ajax2/check_money.php',
+      url: '' + util.ajaxurl +'check_money.php',
       data: {
         openid: that.data.openid
       },
@@ -118,7 +117,7 @@ Page({
     if (that.data.wx_kong_dian == false && that.data.kong_dian == false) {
       //console.log('混合支付')
       wx.request({
-        url: 'https://www.uear.net/ajax2/pay.php',
+        url: '' + util.ajaxurl +'pay.php',
         data: {
           openid: that.data.openid,
           total_fee: that.data.money_zhifu
@@ -135,7 +134,7 @@ Page({
             paySign: data.paySign,     //签名
             success(res) {
               wx.request({
-                url: 'https://www.uear.net/ajax4/release_success1_oral.php',
+                url: '' + util.ajaxurl +'release_success1_oral.php',
                 data: {
                   openid: that.data.openid,
                   oid: that.data.release_oid,
@@ -167,7 +166,7 @@ Page({
     if (that.data.wx_kong_dian == false && that.data.kong_dian == true){
       //console.log('微信支付')
       wx.request({
-        url: 'https://www.uear.net/ajax2/pay.php',
+        url: '' + util.ajaxurl +'pay.php',
         data: {
           openid: that.data.openid,
           total_fee: that.data.money_zhifu
@@ -184,7 +183,7 @@ Page({
             paySign: data.paySign,     //签名
             success(res) {
               wx.request({
-                url: 'https://www.uear.net/ajax4/release_success1_oral.php',
+                url: '' + util.ajaxurl +'release_success1_oral.php',
                 data: {
                   openid: that.data.openid,
                   oid: that.data.release_oid,
@@ -216,7 +215,7 @@ Page({
     if (that.data.kong_dian == false && that.data.wx_kong_dian == true){
      //console.log('账户支付')
       wx.request({
-        url: 'https://www.uear.net/ajax4/pay_wallet.php',
+        url: '' + util.ajaxurl +'pay_wallet.php',
         data: {
           openid: that.data.openid,
           money:that.data.money
@@ -224,7 +223,7 @@ Page({
         method: 'GET',
         success: function (res) {
           wx.request({
-            url: 'https://www.uear.net/ajax4/release_success1_oral.php',
+            url: '' + util.ajaxurl +'release_success1_oral.php',
             data: {
               openid: that.data.openid,
               oid: that.data.release_oid,

@@ -13,7 +13,7 @@ Page({
     get_user: true,
     userInfo: {},
     kong:false,
-    header: [{ cla: true, tet: '进行中' }, { cla: false, tet: '已完成' }, { cla: false, tet: '已失效' }, { cla: false, tet: '在线口译'}],
+    header: [{ cla: true, tet: '进行中' }, { cla: false, tet: '已完成' }, { cla: false, tet: '已失效' }, { cla: false, tet: '空中传译'}],
     type:'all',
     select:[],
     tit_money:0,
@@ -87,27 +87,6 @@ Page({
       yinying_jieshoutuidan:false
     })
     that.list(0)
-    //获取求译状态
-    wx.request({
-      url: 'https://www.uear.net/ajax2/check_success.php',
-      data: {
-        openid: that.data.openid
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data)
-        if (res.data.code == 1) {
-          that.setData({
-            status_t_f: true,
-          })
-        }else{
-          that.setData({
-            status_t_f: false,
-          })
-        }
-      },
-    })
-   
   },
   header_act:function(e){
     var index = e.currentTarget.dataset.index
@@ -140,7 +119,7 @@ Page({
     })
   },
   //删除订单
-  dingdan_shanchu: function (e) {
+  dingdan_wancheng: function (e) {
     this.setData({
       oid: e.currentTarget.dataset.oid,
       yinying: true,
@@ -148,11 +127,11 @@ Page({
     })
 
   },
-  shanchu: function () {
+  wancheng: function () {
     var that = this
     var oid = that.data.oid
     wx.request({
-      url: 'https://www.uear.net/ajax4/order_complete.php',
+      url: '' + util.ajaxurl +'order_complete.php',
       data: {
         openid: that.data.openid,
         oid: oid
@@ -167,36 +146,18 @@ Page({
             mask: true
           })
           that.onShow()
-        }
-      }
-    })
-  },
-  wancheng: function (e) {
-    this.setData({
-      oid: e.currentTarget.dataset.oid,
-    })
-    var that = this
-    var oid = that.data.oid
-    wx.request({
-      url: 'https://www.uear.net/ajax4/order_complete.php',
-      data: {
-        openid: that.data.openid,
-        oid: oid
-      },
-      method: 'GET',
-      success: function (res) {
-        if (res.data.code == 1) {
+        }else{
           wx.showToast({
-            title: '完成订单',
-            icon: 'succes',
+            title: '失败',
+            icon: 'none',
             duration: 1000,
             mask: true
           })
-          that.onShow()
         }
       }
     })
   },
+  
   zaixiang:function(){
     this.setData({
       yinying: false,
@@ -213,7 +174,7 @@ Page({
     })
     var that=this
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_list_order.php',
+      url: '' + util.ajaxurl +'translator_list_order.php',
       data: {
         openid: this.data.openid,
         order_status: order_status
@@ -290,7 +251,7 @@ Page({
           })
         } else {
           wx.request({
-            url: 'https://www.uear.net/ajax4/translator_status1.php',
+            url: '' + util.ajaxurl +'translator_status1.php',
             data: {
               openid: that.data.openid
             },
@@ -312,7 +273,7 @@ Page({
                     mark: 1
                   }
                   wx.request({
-                    url: 'https://www.uear.net/ajax4/translator_flower_submit.php',
+                    url: '' + util.ajaxurl +'translator_flower_submit.php',
                     data: data,
                     method: 'GET',
                     success: function (res) {

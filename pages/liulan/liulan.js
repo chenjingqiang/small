@@ -63,7 +63,7 @@ Page({
       mask: true
     })
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_search.php',
+      url: '' + util.ajaxurl +'translator_search.php',
       data: {
         openid: that.data.openid,
         sort_status: that.data.sort_status,
@@ -76,6 +76,7 @@ Page({
       },
       method: 'GET',
       success: function (res) {
+        //console.log(res.data.data)
         that.setData({
           select: res.data.data
         })
@@ -128,7 +129,7 @@ Page({
     }
     //获取用户是否填写微信号
     wx.request({
-      url: 'https://www.uear.net/ajax4/get_mywxid.php',
+      url: '' + util.ajaxurl +'get_mywxid.php',
       data: {
         openid: this.data.openid,
       },
@@ -199,7 +200,7 @@ Page({
       return
     }
     wx.request({
-      url: 'https://www.uear.net/ajax4/change_wxid.php',
+      url: '' + util.ajaxurl +'change_wxid.php',
       data: {
         openid: this.data.openid,
         wxid: this.data.wxid_value
@@ -296,10 +297,11 @@ Page({
     }
     app.globalData.search = false
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_search.php',
+      url: '' + util.ajaxurl +'translator_search.php',
       data: data,
       method: 'GET',
       success: function (res) {
+        //console.log(res.data.data)
         if (res.data.data==''){
           that.setData({
             search_kong:true
@@ -361,7 +363,7 @@ Page({
             })
           } else {
             wx.request({
-              url: 'https://www.uear.net/ajax4/translator_status1.php',
+              url: '' + util.ajaxurl +'translator_status1.php',
               data: {
                 openid: that.data.openid
               },
@@ -383,7 +385,7 @@ Page({
                       mark: 1
                     }
                     wx.request({
-                      url: 'https://www.uear.net/ajax4/translator_flower_submit.php',
+                      url: '' + util.ajaxurl +'translator_flower_submit.php',
                       data: data,
                       method: 'GET',
                       success: function (res) {
@@ -481,7 +483,7 @@ Page({
       page: page
     })
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_search.php',
+      url: '' + util.ajaxurl +'translator_search.php',
       data: {
         openid: that.data.openid,
         sort_status: that.data.sort_status,

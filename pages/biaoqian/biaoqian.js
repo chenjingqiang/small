@@ -48,7 +48,7 @@ Page({
       names2: names2
     })
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_wxid.php',
+      url: '' + util.ajaxurl +'translator_wxid.php',
       data: {
         openid: this.data.openid
       },

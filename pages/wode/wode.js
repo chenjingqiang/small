@@ -51,7 +51,7 @@ Page({
     //翻译官认证状态
     wx.request({
       //判断
-      url: 'https://www.uear.net/ajax4/translator_status.php',
+      url: '' + util.ajaxurl +'translator_status.php',
       data: {
         openid:this.data.openid
       },
@@ -105,6 +105,11 @@ Page({
       url: '/pages/change_wx/change_wx',
     })
   },
+  biaozhun:function(){
+    wx.navigateTo({
+      url: '/pages/xieyi/xieyi',
+    })
+  },
 
   //底部导航
   fabu: function() {
@@ -144,7 +149,7 @@ Page({
           })
         } else {
           wx.request({
-            url: 'https://www.uear.net/ajax4/translator_status1.php',
+            url: '' + util.ajaxurl +'translator_status1.php',
             data: {
               openid: that.data.openid
             },
@@ -166,7 +171,7 @@ Page({
                     mark: 1
                   }
                   wx.request({
-                    url: 'https://www.uear.net/ajax4/translator_flower_submit.php',
+                    url: '' + util.ajaxurl +'translator_flower_submit.php',
                     data: data,
                     method: 'GET',
                     success: function (res) {

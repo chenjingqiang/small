@@ -18,8 +18,8 @@
     </view>
   </view>
   <view class="con clearfix">
-    <input placeholder="请输入房间号"></input>
-    <view class="sub">进入语音</view>
+    <input placeholder="请输入房间号" bindinput='bindRoomNo'></input>
+    <view class="sub" bindtap="joinRoom">进入语音</view>
   </view>
   <view class="sub2" bindtap="open_tanchuang">需求发布</view>
 
@@ -33,7 +33,7 @@
 
 <!-- 底部导航 -->
   <view class='footer clearfix'>
-    <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
+    <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>

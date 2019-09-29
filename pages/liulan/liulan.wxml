@@ -100,15 +100,12 @@
             </view>
             <image  src='../image/yuyan_more.png' wx-if="{{item.language.length==3}}"></image>
           </view>
+          <view class='peo'>
+            <image src='../image/peo.png'></image>
+            {{item.browse}}
+        </view>
         </view>
       </view>
-      <view class='peo'>
-          <image src='../image/peo.png'></image>
-          {{item.browse}}
-      </view>
-      <!-- <view class='list_sub'>
-        联系Ta
-      </view> -->
     </view>
   </view>
   
@@ -118,7 +115,7 @@
 
  <!-- 底部导航 -->
   <view class='footer clearfix'>
-    <button open-type="getUserInfo" id='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
+    <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>

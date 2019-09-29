@@ -101,13 +101,13 @@ Page({
       mask: true
     })
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_wxid.php',
+      url: '' + util.ajaxurl +'translator_wxid.php',
       data: {
         openid: this.data.openid
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res)
+        //console.log(res.data)
         that.setData({
           wxid: res.data.data.wxid,
           biaoqian_select: res.data.data.scene
@@ -116,12 +116,13 @@ Page({
       complete: function () {
         //获取翻译官详情
         wx.request({
-          url: 'https://www.uear.net/ajax4/trandlator_details.php',
+          url: '' + util.ajaxurl +'trandlator_details.php',
           data: {
             openid: that.data.openid,
           },
           method: 'GET',
           success: function (res) {
+            console.log(res.data.data)
             that.setData({
               code: res.data.code
             })
@@ -361,7 +362,7 @@ Page({
           if (image_arr[i].indexOf('https:')==-1){
 
             wx.uploadFile({
-              url: 'https://www.uear.net/ajax4/translator_upload_photo.php',
+              url: '' + util.ajaxurl +'translator_upload_photo.php',
               filePath: image_arr[i],
               header: {
                 'content-type': 'multipart/form-data'
@@ -396,14 +397,12 @@ Page({
   },
   //删除
   removeImage(e) {
-    const idx = e.target.dataset.idx
+    var idx = e.target.dataset.idx
     var image_arr = this.data.image_arr
-    var aub_images = this.data.aub_images
     image_arr.splice(idx, 1)
-    aub_images.splice(idx, 1)
     this.setData({
       image_arr: image_arr,
-      aub_images: aub_images
+      aub_images: image_arr
     })
   },
   //预览
@@ -688,12 +687,11 @@ Page({
     if (this.data.code == 0) {
       if (that.data.tempFilePath===''){
         wx.request({
-          url: 'https://www.uear.net/ajax4/translator.php',
+          url: '' + util.ajaxurl +'translator.php',
           data: data,
           method: 'GET',
           success: function (res) {
             var data=res.data
-            console.log(data)
             if (data.code == 1) {
               wx.showToast({
                 title: '提交成功',
@@ -726,7 +724,7 @@ Page({
         })
       }else{
         wx.uploadFile({
-          url: 'https://www.uear.net/ajax4/translator.php',
+          url: '' + util.ajaxurl +'translator.php',
           filePath: that.data.tempFilePath,
           name: 'file',
           header: {
@@ -770,7 +768,7 @@ Page({
     } else {
       if (that.data.tempFilePath === '') {
         wx.request({
-          url: 'https://www.uear.net/ajax4/translator_update.php',
+          url: '' + util.ajaxurl +'translator_update.php',
           data: data,
           method: 'GET',
           success: function (res) {
@@ -806,13 +804,14 @@ Page({
           }
         })
       }else{
+        console.log(that.data.tempFilePath)
         if (that.data.tempFilePath.indexOf('https') == -1) {
           var filePath = that.data.tempFilePath
         } else {
           var filePath = 'wxfile://' + that.data.tempFilePath.split('https://www.uear.net/mp3/')[1];
         }
         wx.uploadFile({
-          url: 'https://www.uear.net/ajax4/translator_update.php',
+          url: '' + util.ajaxurl +'translator_update.php',
           filePath: filePath,
           name: 'file',
           header: {
@@ -820,6 +819,7 @@ Page({
           },
           formData: data,
           success: function (res) {
+
             var data = JSON.parse(res.data)
             if (data.code == 1) {
               wx.showToast({

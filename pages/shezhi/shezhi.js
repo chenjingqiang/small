@@ -47,7 +47,7 @@ Page({
       mask: true
     })
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_flower.php',
+      url: '' + util.ajaxurl +'translator_flower.php',
       data: {
         openid: this.data.openid
       },
@@ -165,7 +165,7 @@ Page({
       mark: this.data.mark
     }
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_flower_submit.php',
+      url: '' + util.ajaxurl +'translator_flower_submit.php',
       data: data,
       method: 'GET',
       success: function (res) {

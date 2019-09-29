@@ -54,7 +54,8 @@ Page({
     day: 0, 
     plus_money:0,
     scroll:0,
-    start_time:0
+    start_time:0,
+    tapTime:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -91,42 +92,18 @@ Page({
   onShow: function () {
     var that = this
     util.get_title(that)
-    if (!that.data.userInfo) {
-      that.setData({
-        get_user: true
-      })
-    } else {
-      that.setData({
-        get_user: false
-      })
-      wx.request({
-        url:  'https://www.uear.net/ajax2/wx_information.php',
-        data: {
-          openid: that.data.openid,
-          nickName: that.data.userInfo.nickName,
-          avatarUrl: that.data.userInfo.avatarUrl,
-          city: that.data.userInfo.city,
-          gender: that.data.userInfo.gender,
-
-        },
-        method: 'GET',
-        success: function (res) {
-          //console.log(res)
-        }
-      })
-    }
     that.setData({
       arr_index: 0,
       arr_index2: 0
     })
-    
     //获取标签
     wx.request({
-      url: 'https://www.uear.net/ajax2/show_scene.php',
+      url: '' + util.ajaxurl +'show_scene.php',
       data: {
       },
       method: 'GET',
       success: function (res) {
+        //console.log(res.data)
         that.setData({
           biaoqian_select: res.data.data
         })
@@ -134,7 +111,7 @@ Page({
     })
     //获取最低价格
     wx.request({
-      url: 'https://www.uear.net/ajax2/check_order1.php',
+      url: '' + util.ajaxurl +'check_order1.php',
       data: {
       },
       method: 'GET',
@@ -145,27 +122,6 @@ Page({
         })
       }
     })
-    //获取求译状态
-    wx.request({
-      url: 'https://www.uear.net/ajax2/check_success.php',
-      data: {
-        openid: that.data.openid
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data)
-        if (res.data.code == 1) {
-          that.setData({
-            status_t_f: true,
-          })
-        } else {
-          that.setData({
-            status_t_f: false,
-          })
-        }
-      },
-    })
-    
   },
   //获取用户头像
   getUserInfo: function () {
@@ -349,6 +305,7 @@ Page({
   //提交确认
   sub: function () {
     var that=this
+   
     wx.setStorageSync('money', that.data.money)
     var query = wx.createSelectorQuery();
     if (this.data.arr_value == '') {
@@ -573,7 +530,7 @@ Page({
       mask: true
     })
     wx.request({
-      url: 'https://www.uear.net/ajax4/release2.php',
+      url: '' + util.ajaxurl +'release2.php',
       data: data,
       method: 'GET',
       success: function (res) {
@@ -582,6 +539,12 @@ Page({
           wx.showToast({
             title: '下单成功',
             icon: 'success',
+            mark: true
+          })
+        }else{
+          wx.showToast({
+            title: '下单失败',
+            icon: 'none',
             mark: true
           })
         }
@@ -672,7 +635,7 @@ Page({
           })
         } else {
           wx.request({
-            url: 'https://www.uear.net/ajax4/translator_status1.php',
+            url: '' + util.ajaxurl +'translator_status1.php',
             data: {
               openid: that.data.openid
             },
@@ -694,7 +657,7 @@ Page({
                     mark: 1
                   }
                   wx.request({
-                    url: 'https://www.uear.net/ajax4/translator_flower_submit.php',
+                    url: '' + util.ajaxurl +'translator_flower_submit.php',
                     data: data,
                     method: 'GET',
                     success: function (res) {

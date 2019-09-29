@@ -13,12 +13,13 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-var ajaxurl ='https://www.uear.net/ajax2/'
+//var ajaxurl ='https://www.uear.net/test/'
+var ajaxurl = 'https://www.uear.net/ajax4/'
 
 //获取分享标题
 const get_title=function(that){
   wx.request({
-    url: 'https://www.uear.net/ajax2/random_text.php',
+    url: ''+ajaxurl+'random_text.php',
     data: {
     },
     method: 'GET',

@@ -1,36 +1,32 @@
 {
   "pages": [
-    "pages/rob/rob",
-    "pages/detil/detil",
-    "pages/dingdan/dingdan",
-    "pages/release_kouyi/release_kouyi",
-    "pages/fly/fly",
-    "pages/liulan/liulan",
-    "pages/map/map",
     "pages/start/start",
+    "pages/rob/rob",
     "pages/release/release",
-    "pages/biaoqian/biaoqian",
+    "pages/map/map",
+    "pages/liulan/liulan",
+    "pages/fly/fly",
+    "pages/webrtc-room/room/room",
+    "pages/dingdan/dingdan",
     "pages/wode/wode",
     "pages/become/become",
-    "pages/shezhi/shezhi",
-    "pages/qianbao/qianbao",
-    "pages/mingxi/mingxi",
-    "pages/change_wx/change_wx",
-    "pages/success/success",
-    "pages/xieyi/xieyi",
-    "pages/pay/pay",
+    "pages/release_kouyi/release_kouyi",
     "pages/yijian/yijian",
-    "pages/status/status",
-    "pages/share/share",
-    "pages/nav/nav",
-    "pages/index/index",
-    "pages/button/button"
+    "pages/change_wx/change_wx",
+    "pages/biaoqian/biaoqian",
+    "pages/mingxi/mingxi",
+    "pages/qianbao/qianbao",
+    "pages/detil/detil",
+    "pages/shezhi/shezhi",
+    "pages/pay/pay",
+    "pages/xieyi/xieyi"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#799df1",
     "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": false
+    "enablePullDownRefresh": false,
+    "renderingMode": "seperated"
   },
   "permission": {
     "scope.userLocation": {

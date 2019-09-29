@@ -56,12 +56,13 @@ Page({
     util.get_title(that)
     wx.request({
       //判断
-      url: 'https://www.uear.net/ajax2/show_money.php',
+      url: '' + util.ajaxurl +'show_money.php',
       data: {
         openid: this.data.openid
       },
       method: 'GET',
       success: function (res) {
+        //console.log(res.data.data)
         that.setData({
           wxid: res.data.data.wxid,
           money: res.data.data.money,
@@ -89,7 +90,7 @@ Page({
       return
     }
     wx.request({
-      url: 'https://www.uear.net/ajax4/coupon_money.php',
+      url: '' + util.ajaxurl +'coupon_money.php',
       data: {
         openid: this.data.openid,
         coupon_number: this.data.input_value

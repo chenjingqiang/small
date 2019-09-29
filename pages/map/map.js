@@ -66,7 +66,7 @@ Page({
     })
      //获取翻译官状态
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_status.php',
+      url: '' + util.ajaxurl +'translator_status.php',
       data: {
         openid: this.data.openid
       },
@@ -98,7 +98,7 @@ Page({
     })
     //获取翻译官
     wx.request({
-      url: 'https://www.uear.net/ajax4/translator_map.php',
+      url: '' + util.ajaxurl +'translator_map.php',
       data: {
         openid: this.data.openid,
         latitude: this.data.latitude,
@@ -128,7 +128,7 @@ Page({
   },
   markersAction: function (e) {
     var markerId = e.markerId
-    //console.log(markerId)
+    console.log(markerId)
     wx.setStorageSync('detil_id', markerId)
     wx.navigateTo({
       url: '/pages/detil/detil',

@@ -41,7 +41,7 @@ Page({
     util.get_title(that)
     wx.request({
       //判断
-      url: 'https://www.uear.net/ajax4/show_details1.php',
+      url: '' + util.ajaxurl +'show_details1.php',
       data: {
         openid: this.data.openid
       },
