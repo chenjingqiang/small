@@ -1,5 +1,21 @@
 
 <view class='release'>
+  <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
+  <!-- 填写联系方式弹窗 -->
+  <view class='tanchuang_weixin' catchtouchmove='true' wx-if="{{!t_f2}}">
+    <image src='../image/guanbi.png' class='tanchuang_weixin_close' bindtap='tanchuang_weixin_close'></image>
+    <view class='tw_tit'>
+      使用本功能，需要您填写联系方式
+    </view>
+    <input placeholder='请输入您的联系方式' placeholder-class='txpl' bindinput='get_wxid'></input>
+    <view  class='tw_tit2'>
+      输入您的联系方式，则表示您同意与翻译官交换联系方式，接受服务。
+    </view>
+    <view class='sub' bindtap='wxid_sub'>
+      提交
+    </view>
+  </view>
+
   <view class='lange clearfix'>
       <image src='/pages/image/yiwen.jpg' class='yiwen fl'></image>
       <input placeholder='源语言' class='fl' bindinput='lange1_value'></input>

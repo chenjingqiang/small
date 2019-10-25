@@ -21,7 +21,7 @@
     <input placeholder="请输入房间号" bindinput='bindRoomNo'></input>
     <view class="sub" bindtap="joinRoom">进入语音</view>
   </view>
-  <view class="sub2" bindtap="open_tanchuang">需求发布</view>
+  <view class="sub2" bindtap="open_tanchuang">联系客服</view>
 
 
 
@@ -37,14 +37,14 @@
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>
-    <view  bindtap='map'>
-      <image src='{{bar[3]}}'></image>
+    <view  bindtap='xuqiu'>
+      <image src='{{bar[1]}}'></image>
     </view>
     <view bindtap='fly' class="footer_map">
       <image src='{{bar[4]}}'></image>
     </view>
-    <view bindtap='dingdan' class="footer_fadan">
-      <image src='{{bar[1]}}'></image>
+    <view bindtap='map' class="footer_fadan">
+      <image src='{{bar[3]}}'></image>
     </view>
     <view bindtap='wode'>
       <image src='{{bar[2]}}'></image>
