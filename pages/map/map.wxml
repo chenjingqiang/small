@@ -1,16 +1,16 @@
 <!--pages/map/map.wxml-->
 <view class="map">
   <cover-view  class="map_footer">
-    <cover-view class="fl v1 act" bindtap="map">
+    <cover-view class="fl v1 act">
       按图索译
       <cover-view class="text"></cover-view>
     </cover-view>
-    <cover-view class="fl" bindtap="liulan">
+     <cover-view class="fl" bindtap="liulan">
       译员列表
       <cover-view class="text"></cover-view>
     </cover-view>
   </cover-view>
-  <map  id="map" latitude='{{latitude}}' longitude='{{longitude}}' markers="{{markers}}" bindmarkertap='markersAction'>
+  <map  id="map" latitude='{{latitude}}' longitude='{{longitude}}' markers="{{markers}}"  bindmarkertap='markersAction'>
     <cover-image src="/pages/image/shezhi.png" class="shezhi" bindtap="shezhi" wx-if="{{shezhi_tf}}"></cover-image >
     <cover-image  src="/pages/image/qp.png" class="qp" bindtap="qp" wx-if="{{qp_tf==0}}"></cover-image >
     <!-- 底部导航 -->
@@ -20,11 +20,11 @@
         <cover-view bindtap='fabu' class="footer_fabu">
           <cover-image src='{{bar[0]}}'></cover-image>
         </cover-view>
-        <cover-view  bindtap='map'>
-          <cover-image src='{{bar[3]}}'></cover-image>
-        </cover-view>
-        <cover-view bindtap='dingdan' class="footer_fadan">
+        <cover-view  bindtap='xuqiu'>
           <cover-image src='{{bar[1]}}'></cover-image>
+        </cover-view>
+        <cover-view bindtap='map' class="footer_fadan">
+          <cover-image src='{{bar[3]}}'></cover-image>
         </cover-view>
         <cover-view bindtap='wode'>
           <cover-image src='{{bar[2]}}'></cover-image>

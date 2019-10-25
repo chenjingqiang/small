@@ -16,7 +16,13 @@ Page({
     var openid = wx.getStorageSync('openid') || ''
     if (openid==''){
       app.getToken().then((resArg) => {
-        if (options.detil_id){
+        if (options.wenzhang_src){
+          wx.setStorageSync('wenzhang_src', options.wenzhang_src)
+          wx.setStorageSync('share_wenzhang', true)
+          wx.navigateTo({
+            url: '/pages/wenzhang/wenzhang',
+          })
+        }else if (options.detil_id){
           wx.setStorageSync('detil_id', options.detil_id)
           wx.setStorageSync('share_detil', true)
           wx.navigateTo({
@@ -24,13 +30,19 @@ Page({
           })
         }else{
           wx.redirectTo({
-            url: '/pages/rob/rob',
+            url: '/pages/release/release',
           })
         }
         
       })
     }else{
-      if (options.detil_id) {
+      if (options.wenzhang_src) {
+        wx.setStorageSync('wenzhang_src', options.wenzhang_src)
+        wx.setStorageSync('share_wenzhang', true)
+        wx.navigateTo({
+          url: '/pages/wenzhang/wenzhang',
+        })
+      }else if (options.detil_id) {
         wx.setStorageSync('detil_id', options.detil_id)
         wx.setStorageSync('share_detil', true)
         wx.navigateTo({
@@ -38,7 +50,7 @@ Page({
         })
       } else {
         wx.redirectTo({
-          url: '/pages/rob/rob',
+          url: '/pages/release/release',
         })
       }
     }

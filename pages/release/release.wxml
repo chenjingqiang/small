@@ -1,12 +1,27 @@
 
 <view class='release'>
-
-<!-- <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" catchtouchmove='true' wx-if="{{get_user}}"></button> -->
-  <view class='title clearfix'>
-    <view bindtap='translate'>
+  <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
+  <!-- 填写联系方式弹窗 -->
+  <view class='tanchuang_weixin' catchtouchmove='true' wx-if="{{!t_f2}}">
+    <image src='../image/guanbi.png' class='tanchuang_weixin_close' bindtap='tanchuang_weixin_close'></image>
+    <view class='tw_tit'>
+      使用本功能，需要您填写联系方式
     </view>
+    <input placeholder='请输入您的联系方式' placeholder-class='txpl' bindinput='get_wxid'></input>
+    <view  class='tw_tit2'>
+      输入您的联系方式，则表示您同意与翻译官交换联系方式，接受服务。
+    </view>
+    <view class='sub' bindtap='wxid_sub'>
+      提交
+    </view>
+  </view>
+  <image src="../image/rod_qp.png" class="rob_qp" bindtap="change_rob_qp" wx-if="{{rob_qp_tf==0}}"></image>
+  <view class='title clearfix'>
     <view bindtap='release'>
     </view>
+    <view bindtap='translate'>
+    </view>
+    <button open-type="getUserInfo" class='show-author2' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
   </view>
   <view class='lange clearfix'>
       <image src='/pages/image/yiwen.jpg' class='yiwen fl'></image>
@@ -118,34 +133,20 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- 底部导航 -->
+ <!-- 底部导航 -->
   <view class='footer clearfix'>
     <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>
-    <view  bindtap='map'>
-      <image src='{{bar[3]}}'></image>
+    <view  bindtap='xuqiu'>
+      <image src='{{bar[1]}}'></image>
     </view>
     <view bindtap='fly' class="footer_map">
       <image src='{{bar[4]}}'></image>
     </view>
-    <view bindtap='dingdan' class="footer_fadan">
-      <image src='{{bar[1]}}'></image>
+    <view bindtap='map' class="footer_fadan">
+      <image src='{{bar[3]}}'></image>
     </view>
     <view bindtap='wode'>
       <image src='{{bar[2]}}'></image>

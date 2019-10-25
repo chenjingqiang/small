@@ -1,5 +1,6 @@
 // pages/fly/fly.js
-var util = require("../../utils/util.js")
+var app = getApp();
+var util = require("../../utils/util.js");
 Page({
 
   /**
@@ -15,7 +16,8 @@ Page({
     userID: '',
     tapTime: '',
     template: 'bigsmall',
-    tapTime:''
+    tapTime:'',
+    get_user:true
   },
   // 绑定输房间号入框
   bindRoomNo: function (e) {
@@ -110,10 +112,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var openid = wx.getStorageSync('openid')
-    this.setData({
-      openid: openid
+    var that=this
+    var openid = wx.getStorageSync('openid') || ''
+    var latitude = wx.getStorageSync('latitude') || ''
+    var longitude = wx.getStorageSync('longitude') || ''
+    that.setData({
+      openid: openid,
+      latitude: latitude,
+      longitude: longitude
     })
+    if (app.globalData.userInfo.nickName) {
+      //console.log(app.globalData.userInfo)
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        get_user: false
+      })
+    } else {
+      app.userInfoReadyCallback = res => {
+        //console.log('userInfoReadyCallback: ', res.userInfo);
+        //console.log('获取用户信息成功');
+        this.setData({
+          userInfo: res.userInfo,
+          get_user: false
+        })
+      }
+    }
   },
 
   /**
@@ -183,7 +206,8 @@ Page({
   //底部导航
   fabu: function () {
     wx.redirectTo({
-      url: '/pages/rob/rob',
+      //url: '/pages/rob/rob',
+      url: '/pages/release/release',
     })
   },
   liulan: function () {
@@ -264,9 +288,9 @@ Page({
       url: '/pages/fly/fly',
     })
   },
-  dingdan: function () {
+  xuqiu: function () {
     wx.redirectTo({
-      url: '/pages/dingdan/dingdan',
+      url: '/pages/xuqiu/xuqiu',
     })
   },
   wode: function () {

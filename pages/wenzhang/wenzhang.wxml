@@ -1,0 +1,2 @@
+<!--pages/wenzhang/wenzhang.wxml-->
+<web-view src="{{wenzhang_src}}"></web-view>

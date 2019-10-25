@@ -16,7 +16,6 @@ page{
 }
 .dingdan{
   overflow: hidden;
-  padding-bottom: 100rpx;
 }
 .wancheng{
   width: 169rpx;

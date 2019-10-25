@@ -6,7 +6,7 @@
     点击成为翻译官
   </view>
   <view class='wode_btn' wx-if="{{code==1}}" bindtap='go_become'>
-    编辑
+    修改认证信息
   </view>
   <view class='wode_btn' wx-if="{{code==2}}" bindtap='go_become'>
     修改认证信息
@@ -22,6 +22,11 @@
       <text>钱包</text>
       <image src='../image/fl.png' class="right" ></image>
     </view>
+    <view class='clearfix' bindtap='go_jilu'>
+      <image src='../image/jilu.png' ></image>
+      <text>发单记录</text>
+      <image src='../image/fl.png' class="right" ></image>
+    </view>
     <view class='clearfix' bindtap='go_xiugai'>
       <image src='../image/xiugai.png' ></image>
       <text>修改联系方式</text>
@@ -29,7 +34,7 @@
     </view>
     <view class='clearfix' bindtap='go_yijian'>
       <image src='../image/yijianfankui.png' ></image>
-      <text>意见反馈</text>
+      <text>联系客服</text>
       <image src='../image/fl.png' class="right" ></image>
     </view>
     <view class='clearfix' style='position: relative;'>
@@ -55,14 +60,14 @@
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>
     </view>
-    <view  bindtap='map'>
-      <image src='{{bar[3]}}'></image>
+    <view  bindtap='xuqiu'>
+      <image src='{{bar[1]}}'></image>
     </view>
     <view bindtap='fly' class="footer_map">
       <image src='{{bar[4]}}'></image>
     </view>
-    <view bindtap='dingdan' class="footer_fadan">
-      <image src='{{bar[1]}}'></image>
+    <view bindtap='map' class="footer_fadan">
+      <image src='{{bar[3]}}'></image>
     </view>
     <view bindtap='wode'>
       <image src='{{bar[2]}}'></image>

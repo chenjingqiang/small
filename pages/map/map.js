@@ -46,33 +46,19 @@ Page({
         })
       }
     }
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    var that=this
-    util.get_title(that)
     wx.showLoading({
       title: '加载中',
       mask: true
     })
-     //获取翻译官状态
+    //获取翻译官状态
     wx.request({
-      url: '' + util.ajaxurl +'translator_status.php',
+      url: '' + util.ajaxurl + 'translator_status.php',
       data: {
         openid: this.data.openid
       },
       method: 'GET',
       success: function (res) {
-        if (res.data.code==1){
+        if (res.data.code == 1) {
           that.setData({
             shezhi_tf: true
           })
@@ -88,7 +74,7 @@ Page({
               qp_tf: 1,
             })
           }
-        }else{
+        } else {
           that.setData({
             shezhi_tf: false,
             qp_tf: 1
@@ -98,7 +84,7 @@ Page({
     })
     //获取翻译官
     wx.request({
-      url: '' + util.ajaxurl +'translator_map.php',
+      url: '' + util.ajaxurl + 'translator_map.php',
       data: {
         openid: this.data.openid,
         latitude: this.data.latitude,
@@ -107,18 +93,35 @@ Page({
       method: 'GET',
       success: function (res) {
         var marker = res.data.data
-        for(var i=0;i<marker.length;i++){
+        for (var i = 0; i < marker.length; i++) {
           marker[i].width = '80rpx'
           marker[i].height = '80rpx'
         }
         that.setData({
-          markers:marker
+          markers: marker
         })
         wx.hideLoading()
       },
-      complete:function(){
+      complete: function () {
       }
     })
+    
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that=this
+    util.get_title(that)
+    
+    
   },
   qp:function(){
     wx.setStorageSync('qp_tf', 1)
@@ -128,7 +131,7 @@ Page({
   },
   markersAction: function (e) {
     var markerId = e.markerId
-    console.log(markerId)
+    //console.log(markerId)
     wx.setStorageSync('detil_id', markerId)
     wx.navigateTo({
       url: '/pages/detil/detil',
@@ -139,18 +142,21 @@ Page({
       url: '/pages/shezhi/shezhi',
     })
   },
+
   //底部导航
   fabu: function () {
     wx.redirectTo({
-      url: '/pages/rob/rob',
+      //url: '/pages/rob/rob',
+      url: '/pages/release/release',
     })
   },
   liulan: function () {
     wx.redirectTo({
-      url: '/pages/liulan/liulan',
+       url: '/pages/liulan/liulan',
     })
   },
   map: function () {
+    
    wx.redirectTo({
       url: '/pages/map/map',
     })
@@ -160,9 +166,9 @@ Page({
       url: '/pages/fly/fly',
     })
   },
-  dingdan: function () {
+  xuqiu: function () {
    wx.redirectTo({
-      url: '/pages/dingdan/dingdan',
+     url: '/pages/xuqiu/xuqiu',
     })
   },
   wode: function () {
@@ -195,7 +201,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**

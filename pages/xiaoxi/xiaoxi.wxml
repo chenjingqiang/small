@@ -1,0 +1,2 @@
+<!--pages/xiaoxi/xiaoxi.wxml-->
+<button bindtap="shouquan">aaaaa</button>

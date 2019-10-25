@@ -1,0 +1,70 @@
+<!--pages/xuqiu/xuqiu.wxml-->
+<view class="xuqiu">
+  <image src="../image/top.png" class="top_img"></image>
+  <view class="top"  bindtap="go_new2">
+    <image src="../image/new.png"></image>
+    <text>{{new_title}}</text>
+  </view>
+  <view class="list_fu">
+    <view class="list clearfix" wx:for="{{select}}" wx:key="index" data-index="{{index}}" bindtap="go_new" >
+      <image src="{{item.img}}" class="fl" mode="aspectFill"></image>
+      <view class="fr right">
+        <view class="title">
+         {{item.title}}
+        </view>
+        <view class="time">
+          {{item.date}}
+        </view>
+      </view>
+    </view>
+    
+    
+  </view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- 底部导航 -->
+  <view class='footer clearfix'>
+    <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
+    <view bindtap='fabu' class="footer_fabu">
+      <image src='{{bar[0]}}'></image>
+    </view>
+    <view  bindtap='xuqiu'>
+      <image src='{{bar[1]}}'></image>
+    </view>
+    <view bindtap='fly' class="footer_map">
+      <image src='{{bar[4]}}'></image>
+    </view>
+    <view bindtap='map' class="footer_fadan">
+      <image src='{{bar[3]}}'></image>
+    </view>
+    <view bindtap='wode'>
+      <image src='{{bar[2]}}'></image>
+    </view>
+  </view>
+</view>

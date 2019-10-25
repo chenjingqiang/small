@@ -1,27 +1,18 @@
-// pages/success/success.js
+// pages/xiaoxi/xiaoxi.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    oid:'',
-    weixin:'',
-    money:'',
-    fencheng:''
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '翻译官已接单'
-    })
-    var oid = wx.getStorageSync('oid') || ''
-    this.setData({
-      oid: oid
-    })
+
   },
 
   /**
@@ -35,33 +26,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that=this
-    //获取用户微信号
-    wx.request({
-      url: 'https://www.uear.net/ajax2/show_wxid.php',
-      data: {
-        oid: that.data.oid,
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data.data)
-        that.setData({
-          weixin: res.data.data.wxid,
-          money: res.data.data.money,
-          fencheng: res.data.data.fencheng
-        })
-      },
-    })
-  },
-  fuzhi: function (){
-    var that=this
-    wx.setClipboardData({
-      data: this.data.weixin,
-      success: function (res) {
-      }
-    })
     
   },
+  shouquan:function(){
+    wx.requestSubscribeMessage({
+      tmplIds: ['w2a-xkVxLCH_4FdDpkJjApGiw5659mofmL9BDx9sRsY'],
+      success: console.log,
+      fail: console.error
+    })
+  },
+
   /**
    * 生命周期函数--监听页面隐藏
    */

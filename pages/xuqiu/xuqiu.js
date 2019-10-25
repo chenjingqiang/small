@@ -1,6 +1,8 @@
-// pages/wode/wode.js
-var util = require("../../utils/util.js")
+// pages/xuqiu/xuqiu.js
+var app = getApp();
+var util = require("../../utils/util.js");
 Page({
+
   /**
    * 页面的初始数据
    */
@@ -8,21 +10,28 @@ Page({
     openid:'',
     latitude:'',
     longitude:'',
-    tit:'',
-    bar: ['../image/fabu2.png', '../image/dingdan2.png', '../image/wode.png', '../image/liulan2.png', '../image/map2.png'],
-    code:0,
-    wx_img: '../image/logo.png',
-    wx_name:'立等翻译官',
-    message:'',
-    latitude:'',
-    longitude:''
+    userInfo: {},
+    get_user: true,
+    bar: ['../image/fabu2.png', '../image/dingdan.png', '../image/wode2.png', '../image/liulan2.png', '../image/map2.png'],
+    new_title:'',
+    new_status: '',
+    new_href: '',
+    select:[],
+    page:1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this
+    var that = this
+    wx.setNavigationBarTitle({
+      title: '查需求'
+    })
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var openid = wx.getStorageSync('openid') || ''
     var latitude = wx.getStorageSync('latitude') || ''
     var longitude = wx.getStorageSync('longitude') || ''
@@ -31,8 +40,42 @@ Page({
       latitude: latitude,
       longitude: longitude
     })
-    
-    
+    if (app.globalData.userInfo.nickName) {
+      //console.log(app.globalData.userInfo)
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        get_user: false
+      })
+    } else {
+      app.userInfoReadyCallback = res => {
+        //console.log('userInfoReadyCallback: ', res.userInfo);
+        //console.log('获取用户信息成功');
+        this.setData({
+          userInfo: res.userInfo,
+          get_user: false
+        })
+      }
+    }
+    wx.request({
+      url: '' + util.ajaxurl + 'admin_notice.php',
+      data: {
+        page:1,
+      },
+      method: 'GET',
+      success: function (res) {
+        var data=res.data.data
+        console.log(data)
+        that.setData({
+          new_status:data.status,
+          new_title:data.title,
+          new_href: data.new_url,
+          select:data.lists
+        })
+      },
+      complete:function(){
+        wx.hideLoading()
+      }
+    })
   },
 
   /**
@@ -46,81 +89,37 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that=this
-    util.get_title(that)
-    //翻译官认证状态
-    wx.request({
-      //判断
-      url: '' + util.ajaxurl +'translator_status.php',
-      data: {
-        openid:this.data.openid
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data)
-        if (res.data.code==1){
-          that.setData({
-            code: res.data.code,
-            wx_img: res.data.data.wx_img,
-            wx_name: res.data.data.wx_name,
+
+  },
+  go_new:function(e){
+    var index = e.currentTarget.dataset.index
+    var select=this.data.select
+    if (select[index].status==1){
+      var wenzhang_src = select[index].new_url
+        wx.setStorageSync('wenzhang_src', wenzhang_src)
+          wx.navigateTo({
+            url: '/pages/wenzhang/wenzhang',
           })
-        } else if (res.data.code == 2){
-          that.setData({
-            code: res.data.code,
-            wx_img: '../image/logo.png',
-            wx_name: '立等翻译官',
-            message: res.data.data.reason
-          })
-        } else if (res.data.code == 3) {
-          that.setData({
-            code: res.data.code,
-            wx_img: res.data.data.wx_img,
-            wx_name: res.data.data.wx_name,
-          })
-        } else if (res.data.code == 0){
-          that.setData({
-            code: 0,
-            wx_img: '../image/logo.png',
-            wx_name: '立等翻译官',
-          })
-        }
-        
-      }
-    })
+    }
+  },
+  go_new2:function(){
+    if (this.data.new_status == 1) {
+      wx.setStorageSync('wenzhang_src', this.data.new_href)
+      wx.navigateTo({
+        url: '/pages/wenzhang/wenzhang',
+      })
+    }
     
   },
+  
 
-  go_qianbao: function () {
-    wx.navigateTo({
-      url: '/pages/qianbao/qianbao',
-    })
-  },
-  go_jilu: function () {
-    wx.navigateTo({
-      url: '/pages/dingdan/dingdan',
-    })
-  },
-  go_yijian: function () {
-    wx.navigateTo({
-      url: '/pages/yijian/yijian',
-    })
-  },
-  go_xiugai: function () {
-    wx.navigateTo({
-      url: '/pages/change_wx/change_wx',
-    })
-  },
-  biaozhun:function(){
-    wx.navigateTo({
-      url: '/pages/xieyi/xieyi',
-    })
-  },
 
   //底部导航
-  fabu: function() {
+  fabu: function () {
     wx.redirectTo({
       //url: '/pages/rob/rob',
       url: '/pages/release/release',
+
     })
   },
   liulan: function () {
@@ -155,7 +154,7 @@ Page({
           })
         } else {
           wx.request({
-            url: '' + util.ajaxurl +'translator_status1.php',
+            url: '' + util.ajaxurl + 'translator_status1.php',
             data: {
               openid: that.data.openid
             },
@@ -177,7 +176,7 @@ Page({
                     mark: 1
                   }
                   wx.request({
-                    url: '' + util.ajaxurl +'translator_flower_submit.php',
+                    url: '' + util.ajaxurl + 'translator_flower_submit.php',
                     data: data,
                     method: 'GET',
                     success: function (res) {
@@ -196,6 +195,7 @@ Page({
       }
     })
   },
+
   fly: function () {
     wx.redirectTo({
       url: '/pages/fly/fly',
@@ -211,12 +211,6 @@ Page({
       url: '/pages/wode/wode',
     })
   },
-  go_become:function(){
-    wx.navigateTo({
-      url: '/pages/become/become',
-    })
-  },
-
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -242,17 +236,49 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that=this
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    var page=that.data.page+1
+    that.setData({
+      page: page
+    })
+    wx.request({
+      url: '' + util.ajaxurl + 'admin_notice.php',
+      data: {
+        page: page,
+      },
+      method: 'GET',
+      success: function (res) {
+        var data = res.data.data
+        if (data.lists==''){
+          wx.showToast({
+            title: '没有更多了',
+            icon: 'none',
+            duration: 1000,
+            mask: true
+          })
+        }else{
+          that.setData({
+            new_status: data.status,
+            new_title: data.title,
+            new_href: data.new_url,
+            select: that.data.select.concat(data.lists)
+          })
+        }
+      },
+      complete: function () {
+        wx.hideLoading()
+      }
+    })
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
-    return {
-      title: this.data.tit,
-      imageUrl: "https://www.uear.net/img2/start.jpg",
-      path: '/pages/start/start',
-    }
-  },
+  onShareAppMessage: function () {
+    
+  }
 })

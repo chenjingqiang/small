@@ -31,6 +31,7 @@
           <cover-view class='img-box'>
             <cover-image class='img-view' src='/pages/Resources/{{muted ? "mic-dis" : "mic"}}.png' bindtap="changeMute"></cover-image>
           </cover-view>
+          
           <!-- <cover-view class='img-box'>
             <cover-image class='img-view' src='/pages/Resources/{{debug? "log" : "log2"}}.png' bindtap="showLog"></cover-image>
           </cover-view> -->

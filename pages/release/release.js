@@ -45,7 +45,6 @@ Page({
     value:'',
     value2:'请输入您的项目需求...',
     status_t_f:false,
-    get_user:false,
     userInfo:'',
     time_value:'',
     didian_value: '',
@@ -55,7 +54,11 @@ Page({
     plus_money:0,
     scroll:0,
     start_time:0,
-    tapTime:''
+    tapTime:'',
+    rob_qp_tf: 1,
+    wxid_true: false,
+    yinying:true,
+    t_f2:true
   },
   /**
    * 生命周期函数--监听页面加载
@@ -64,12 +67,20 @@ Page({
     var that=this
     var that = this
     var openid = wx.getStorageSync('openid') || ''
-    var latitude = wx.getStorageSync('latitude') || ''
-    var longitude = wx.getStorageSync('longitude') || ''
+    wx.getLocation({ // 请求位置信息
+      type: 'gcj02',
+      success(res) {
+        //console.log(res);
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        })
+        wx.setStorageSync('latitude', res.latitude)
+        wx.setStorageSync('longitude', res.longitude)
+      }
+    }) 
     that.setData({
-      openid: openid,
-      latitude: latitude,
-      longitude: longitude
+      openid: openid
     })
     if (app.globalData.userInfo.nickName) {
       //console.log(app.globalData.userInfo)
@@ -87,6 +98,29 @@ Page({
         })
       }
     }
+    const updateManager = wx.getUpdateManager()
+    updateManager.onCheckForUpdate(function (res) {
+      // 请求完新版本信息的回调
+      //console.log(res.hasUpdate)
+      if (res.hasUpdate) {
+        updateManager.onUpdateReady(function () {
+          wx.showModal({
+            title: '更新提示',
+            content: '新版本已经准备好，是否重启应用？',
+            success: function (res) {
+              updateManager.applyUpdate()
+            }
+          })
+        })
+        updateManager.onUpdateFailed(function () {
+          // 新的版本下载失败
+          wx.showModal({
+            title: '已经有新版本了哟~',
+            content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
+          })
+        })
+      }
+    })
    
   },
   onShow: function () {
@@ -94,7 +128,37 @@ Page({
     util.get_title(that)
     that.setData({
       arr_index: 0,
-      arr_index2: 0
+      arr_index2: 0, 
+      yinying: true,
+      t_f2: true,
+      t_f3: true,
+      wxid_true: false
+    })
+    var rob_qp_tf = wx.getStorageSync('rob_qp_tf') || 0
+    //0显示 1消失
+    if (rob_qp_tf == 0) {
+      that.setData({
+        rob_qp_tf: 0,
+      })
+    } else {
+      that.setData({
+        rob_qp_tf: 1,
+      })
+    }
+    //获取用户是否填写微信号
+    wx.request({
+      url: '' + util.ajaxurl + '/get_mywxid.php',
+      data: {
+        openid: this.data.openid,
+      },
+      method: 'GET',
+      success: function (res) {
+        //console.log(res.data)
+        that.setData({
+          wxid_true: res.data.data
+        })
+      }
+      //请求完成后执行的函数
     })
     //获取标签
     wx.request({
@@ -137,6 +201,21 @@ Page({
       }
     })
   },
+  //更改抢单气泡
+  change_rob_qp: function () {
+    wx.setStorageSync('rob_qp_tf', 1)
+    this.setData({
+      rob_qp_tf: 1
+    })
+  },
+  //获取用户微信id
+  get_wxid: function (e) {
+    var wxid_value = e.detail.value
+    this.setData({
+      wxid_value: wxid_value
+    })
+  },
+
   qiuyi: function () {
     wx.navigateTo({
       url: '/pages/status/status',
@@ -149,8 +228,8 @@ Page({
   },
   translate: function () {
     wx.redirectTo({
-      url: '/pages/rob/rob',
-    })
+        url: '/pages/rob/rob',
+      })
   },
  
   //
@@ -302,270 +381,324 @@ Page({
       arr_value2: e.detail.value
     })
   },
-  //提交确认
-  sub: function () {
-    var that=this
-   
-    wx.setStorageSync('money', that.data.money)
-    var query = wx.createSelectorQuery();
-    if (this.data.arr_value == '') {
-      this.setData({
-        sub_box_text: '源语言不能为空'
-      })
-      query.select('.sub_box').boundingClientRect(function (rect) {
-        var left = '-' + rect.width + 'rpx'
-        that.setData({
-          left: left
-        })
-        var animation = wx.createAnimation({
-          duration: 1000,
-        })
-        animation.opacity(0.7).step();
-        that.setData({
-          animation_sub: animation.export()
-        })
-        clearTimeout(timer)
-        var timer = setTimeout(function () {
-          var animation = wx.createAnimation({
-            duration: 1000,
-          })
-          animation.opacity(0).step();
-          that.setData({
-            animation_sub: animation.export()
-          })
-        }, 1000)
-      }).exec();
-      return;
-    }
-    if (this.data.arr_value2 == '') {
-      this.setData({
-        sub_box_text: '目标语言不能为空'
-      })
-      query.select('.sub_box').boundingClientRect(function (rect) {
-        var left = '-' + rect.width + 'rpx'
-        that.setData({
-          left: left
-        })
-        var animation = wx.createAnimation({
-          duration: 1000,
-        })
-        animation.opacity(0.7).step();
-        that.setData({
-          animation_sub: animation.export()
-        })
-        clearTimeout(timer)
-        var timer = setTimeout(function () {
-          var animation = wx.createAnimation({
-            duration: 1000,
-          })
-          animation.opacity(0).step();
-          that.setData({
-            animation_sub: animation.export()
-          })
-        }, 1000)
-      }).exec();
-      return;
-    }
-    if (this.data.time_value == '') {
-      this.setData({
-        sub_box_text: '项目时间不能为空'
-      })
-      query.select('.sub_box').boundingClientRect(function (rect) {
-        var left = '-' + rect.width + 'rpx'
-        that.setData({
-          left: left
-        })
-        var animation = wx.createAnimation({
-          duration: 1000,
-        })
-        animation.opacity(0.7).step();
-        that.setData({
-          animation_sub: animation.export()
-        })
-        clearTimeout(timer)
-        var timer = setTimeout(function () {
-          var animation = wx.createAnimation({
-            duration: 1000,
-          })
-          animation.opacity(0).step();
-          that.setData({
-            animation_sub: animation.export()
-          })
-        }, 1000)
-      }).exec();
-      return;
-    }
-    if (this.data.didian_value == '') {
-      this.setData({
-        sub_box_text: '项目地点不能为空'
-      })
-      query.select('.sub_box').boundingClientRect(function (rect) {
-        var left = '-' + rect.width + 'rpx'
-        that.setData({
-          left: left
-        })
-        var animation = wx.createAnimation({
-          duration: 1000,
-        })
-        animation.opacity(0.7).step();
-        that.setData({
-          animation_sub: animation.export()
-        })
-        clearTimeout(timer)
-        var timer = setTimeout(function () {
-          var animation = wx.createAnimation({
-            duration: 1000,
-          })
-          animation.opacity(0).step();
-          that.setData({
-            animation_sub: animation.export()
-          })
-        }, 1000)
-      }).exec();
-      return;
-    }
-    if (this.data.neirong_value == '') {
-      this.setData({
-        sub_box_text: '工作内容不能为空'
-      })
-      query.select('.sub_box').boundingClientRect(function (rect) {
-        var left = '-' + rect.width + 'rpx'
-        that.setData({
-          left: left
-        })
-        var animation = wx.createAnimation({
-          duration: 1000,
-        })
-        animation.opacity(0.7).step();
-        that.setData({
-          animation_sub: animation.export()
-        })
-        clearTimeout(timer)
-        var timer = setTimeout(function () {
-          var animation = wx.createAnimation({
-            duration: 1000,
-          })
-          animation.opacity(0).step();
-          that.setData({
-            animation_sub: animation.export()
-          })
-        }, 1000)
-      }).exec();
-      return;
-    }
-    if (this.data.yaoqiu_value == '') {
-      this.setData({
-        sub_box_text: '专业要求不能为空'
-      })
-      query.select('.sub_box').boundingClientRect(function (rect) {
-        var left = '-' + rect.width + 'rpx'
-        that.setData({
-          left: left
-        })
-        var animation = wx.createAnimation({
-          duration: 1000,
-        })
-        animation.opacity(0.7).step();
-        that.setData({
-          animation_sub: animation.export()
-        })
-        clearTimeout(timer)
-        var timer = setTimeout(function () {
-          var animation = wx.createAnimation({
-            duration: 1000,
-          })
-          animation.opacity(0).step();
-          that.setData({
-            animation_sub: animation.export()
-          })
-        }, 1000)
-      }).exec();
-      return;
-    }
-    // if (this.data.day == 0) {
-    //   this.setData({
-    //     sub_box_text: '请填写天数'
-    //   })
-    //   query.select('.sub_box').boundingClientRect(function (rect) {
-    //     var left = '-' + rect.width + 'rpx'
-    //     that.setData({
-    //       left: left
-    //     })
-    //     var animation = wx.createAnimation({
-    //       duration: 1000,
-    //     })
-    //     animation.opacity(0.7).step();
-    //     that.setData({
-    //       animation_sub: animation.export()
-    //     })
-    //     clearTimeout(timer)
-    //     var timer = setTimeout(function () {
-    //       var animation = wx.createAnimation({
-    //         duration: 1000,
-    //       })
-    //       animation.opacity(0).step();
-    //       that.setData({
-    //         animation_sub: animation.export()
-    //       })
-    //     }, 1000)
-    //   }).exec();
-    //   return;
-    // }
-    var data={
-      openid: that.data.openid,
-      language: that.data.arr_value,
-      language2: that.data.arr_value2,
-      project_time: that.data.time_value,
-      project_address: that.data.didian_value,
-      project_theme: that.data.neirong_value,
-      project_skill: that.data.yaoqiu_value,
-      money: 7,
-      plus_money: that.data.plus_money,
-      now_money: that.data.money,
-      scene: that.data.names2,
-      text: that.data.value
-    }
-    wx.showLoading({
-      title: '下单中',
-      mask: true
+  //关闭微信号弹窗
+  tanchuang_weixin_close: function () {
+    this.setData({
+      yinying: true,
+      t_f2: true
     })
+  },
+  //wxid提交
+  wxid_sub: function () {
+    var that = this
+    if (that.data.wxid_value == '') {
+      wx.showToast({
+        title: '联系方式不能为空',
+        icon: 'none',
+        duration: 1000,
+        mask: true
+      })
+      return
+    }
     wx.request({
-      url: '' + util.ajaxurl +'release2.php',
-      data: data,
+      url: '' + util.ajaxurl + '/change_wxid.php',
+      data: {
+        openid: this.data.openid,
+        wxid: this.data.wxid_value
+      },
       method: 'GET',
       success: function (res) {
-        wx.hideLoading()
+        //console.log(res)
         if (res.data.code == 1) {
           wx.showToast({
-            title: '下单成功',
-            icon: 'success',
-            mark: true
+            title: '提交成功',
+            icon: 'succes',
+            duration: 1000,
+            mask: true
           })
-        }else{
+          that.onShow()
+        } else {
           wx.showToast({
-            title: '下单失败',
+            title: '提交失败',
             icon: 'none',
-            mark: true
+            duration: 1000,
+            mask: true
           })
         }
       }
     })
-    // wx.request({
-    //   url: 'https://www.uear.net/ajax4/release1.php',
-    //   data: data,
-    //   method: 'GET',
-    //   success: function (res) {
-    //     var release_oid = res.data.data.oid
-    //     wx.setStorageSync('release_oid', release_oid)
-    //     if (res.data.code == 1) {
-    //       wx.navigateTo({
-    //         url: '/pages/pay/pay',
-    //       })
-    //     }
-    //   },complete:function(){
-    //     wx.hideLoading()
-    //   }
-    // })
+  },
+
+  //提交确认
+  sub: function () {
+    var that=this
+    if (this.data.wxid_true) {
+      wx.setStorageSync('money', that.data.money)
+      var query = wx.createSelectorQuery();
+      if (this.data.arr_value == '') {
+        this.setData({
+          sub_box_text: '源语言不能为空'
+        })
+        query.select('.sub_box').boundingClientRect(function (rect) {
+          var left = '-' + rect.width + 'rpx'
+          that.setData({
+            left: left
+          })
+          var animation = wx.createAnimation({
+            duration: 1000,
+          })
+          animation.opacity(0.7).step();
+          that.setData({
+            animation_sub: animation.export()
+          })
+          clearTimeout(timer)
+          var timer = setTimeout(function () {
+            var animation = wx.createAnimation({
+              duration: 1000,
+            })
+            animation.opacity(0).step();
+            that.setData({
+              animation_sub: animation.export()
+            })
+          }, 1000)
+        }).exec();
+        return;
+      }
+      if (this.data.arr_value2 == '') {
+        this.setData({
+          sub_box_text: '目标语言不能为空'
+        })
+        query.select('.sub_box').boundingClientRect(function (rect) {
+          var left = '-' + rect.width + 'rpx'
+          that.setData({
+            left: left
+          })
+          var animation = wx.createAnimation({
+            duration: 1000,
+          })
+          animation.opacity(0.7).step();
+          that.setData({
+            animation_sub: animation.export()
+          })
+          clearTimeout(timer)
+          var timer = setTimeout(function () {
+            var animation = wx.createAnimation({
+              duration: 1000,
+            })
+            animation.opacity(0).step();
+            that.setData({
+              animation_sub: animation.export()
+            })
+          }, 1000)
+        }).exec();
+        return;
+      }
+      if (this.data.time_value == '') {
+        this.setData({
+          sub_box_text: '项目时间不能为空'
+        })
+        query.select('.sub_box').boundingClientRect(function (rect) {
+          var left = '-' + rect.width + 'rpx'
+          that.setData({
+            left: left
+          })
+          var animation = wx.createAnimation({
+            duration: 1000,
+          })
+          animation.opacity(0.7).step();
+          that.setData({
+            animation_sub: animation.export()
+          })
+          clearTimeout(timer)
+          var timer = setTimeout(function () {
+            var animation = wx.createAnimation({
+              duration: 1000,
+            })
+            animation.opacity(0).step();
+            that.setData({
+              animation_sub: animation.export()
+            })
+          }, 1000)
+        }).exec();
+        return;
+      }
+      if (this.data.didian_value == '') {
+        this.setData({
+          sub_box_text: '项目地点不能为空'
+        })
+        query.select('.sub_box').boundingClientRect(function (rect) {
+          var left = '-' + rect.width + 'rpx'
+          that.setData({
+            left: left
+          })
+          var animation = wx.createAnimation({
+            duration: 1000,
+          })
+          animation.opacity(0.7).step();
+          that.setData({
+            animation_sub: animation.export()
+          })
+          clearTimeout(timer)
+          var timer = setTimeout(function () {
+            var animation = wx.createAnimation({
+              duration: 1000,
+            })
+            animation.opacity(0).step();
+            that.setData({
+              animation_sub: animation.export()
+            })
+          }, 1000)
+        }).exec();
+        return;
+      }
+      if (this.data.neirong_value == '') {
+        this.setData({
+          sub_box_text: '工作内容不能为空'
+        })
+        query.select('.sub_box').boundingClientRect(function (rect) {
+          var left = '-' + rect.width + 'rpx'
+          that.setData({
+            left: left
+          })
+          var animation = wx.createAnimation({
+            duration: 1000,
+          })
+          animation.opacity(0.7).step();
+          that.setData({
+            animation_sub: animation.export()
+          })
+          clearTimeout(timer)
+          var timer = setTimeout(function () {
+            var animation = wx.createAnimation({
+              duration: 1000,
+            })
+            animation.opacity(0).step();
+            that.setData({
+              animation_sub: animation.export()
+            })
+          }, 1000)
+        }).exec();
+        return;
+      }
+      if (this.data.yaoqiu_value == '') {
+        this.setData({
+          sub_box_text: '专业要求不能为空'
+        })
+        query.select('.sub_box').boundingClientRect(function (rect) {
+          var left = '-' + rect.width + 'rpx'
+          that.setData({
+            left: left
+          })
+          var animation = wx.createAnimation({
+            duration: 1000,
+          })
+          animation.opacity(0.7).step();
+          that.setData({
+            animation_sub: animation.export()
+          })
+          clearTimeout(timer)
+          var timer = setTimeout(function () {
+            var animation = wx.createAnimation({
+              duration: 1000,
+            })
+            animation.opacity(0).step();
+            that.setData({
+              animation_sub: animation.export()
+            })
+          }, 1000)
+        }).exec();
+        return;
+      }
+      // if (this.data.day == 0) {
+      //   this.setData({
+      //     sub_box_text: '请填写天数'
+      //   })
+      //   query.select('.sub_box').boundingClientRect(function (rect) {
+      //     var left = '-' + rect.width + 'rpx'
+      //     that.setData({
+      //       left: left
+      //     })
+      //     var animation = wx.createAnimation({
+      //       duration: 1000,
+      //     })
+      //     animation.opacity(0.7).step();
+      //     that.setData({
+      //       animation_sub: animation.export()
+      //     })
+      //     clearTimeout(timer)
+      //     var timer = setTimeout(function () {
+      //       var animation = wx.createAnimation({
+      //         duration: 1000,
+      //       })
+      //       animation.opacity(0).step();
+      //       that.setData({
+      //         animation_sub: animation.export()
+      //       })
+      //     }, 1000)
+      //   }).exec();
+      //   return;
+      // }
+      var data={
+        openid: that.data.openid,
+        language: that.data.arr_value,
+        language2: that.data.arr_value2,
+        project_time: that.data.time_value,
+        project_address: that.data.didian_value,
+        project_theme: that.data.neirong_value,
+        project_skill: that.data.yaoqiu_value,
+        money: 7,
+        plus_money: that.data.plus_money,
+        now_money: that.data.money,
+        scene: that.data.names2,
+        text: that.data.value
+      }
+      wx.showLoading({
+        title: '下单中',
+        mask: true
+      })
+      wx.request({
+        url: '' + util.ajaxurl +'release2.php',
+        data: data,
+        method: 'GET',
+        success: function (res) {
+          wx.hideLoading()
+          if (res.data.code == 1) {
+            wx.showToast({
+              title: '下单成功',
+              icon: 'success',
+              mark: true
+            })
+          }else{
+            wx.showToast({
+              title: '下单失败',
+              icon: 'none',
+              mark: true
+            })
+          }
+        }
+      })
+      // wx.request({
+      //   url: 'https://www.uear.net/ajax4/release1.php',
+      //   data: data,
+      //   method: 'GET',
+      //   success: function (res) {
+      //     var release_oid = res.data.data.oid
+      //     wx.setStorageSync('release_oid', release_oid)
+      //     if (res.data.code == 1) {
+      //       wx.navigateTo({
+      //         url: '/pages/pay/pay',
+      //       })
+      //     }
+      //   },complete:function(){
+      //     wx.hideLoading()
+      //   }
+      // })
+    } else {
+      this.setData({
+        yinying: false,
+        t_f2: false
+      })
+    }
   },
   onPageScroll: function (e) {
     if (e.scrollTop>50){
@@ -600,7 +733,8 @@ Page({
   //底部导航
   fabu: function () {
     wx.redirectTo({
-      url: '/pages/rob/rob',
+      //url: '/pages/rob/rob',
+      url: '/pages/release/release',
     })
   },
   liulan: function () {
@@ -608,6 +742,7 @@ Page({
       url: '/pages/liulan/liulan',
     })
   },
+
   map: function () {
     var that = this
     wx.getSetting({
@@ -634,13 +769,15 @@ Page({
             }
           })
         } else {
+          //判断翻译官是否有花
           wx.request({
-            url: '' + util.ajaxurl +'translator_status1.php',
+            url: '' + util.ajaxurl + 'translator_status1.php',
             data: {
               openid: that.data.openid
             },
             method: 'GET',
             success: function (res) {
+              //console.log(res)
               if (res.data.code == 0) {
                 if (that.data.longitude == '' || that.data.latitude == '') {
                   wx.showToast({
@@ -657,7 +794,7 @@ Page({
                     mark: 1
                   }
                   wx.request({
-                    url: '' + util.ajaxurl +'translator_flower_submit.php',
+                    url: '' + util.ajaxurl + 'translator_flower_submit.php',
                     data: data,
                     method: 'GET',
                     success: function (res) {
@@ -676,14 +813,17 @@ Page({
       }
     })
   },
+  
   fly: function () {
     wx.redirectTo({
       url: '/pages/fly/fly',
     })
+   
+
   },
-  dingdan: function () {
+  xuqiu: function () {
     wx.redirectTo({
-      url: '/pages/dingdan/dingdan',
+      url: '/pages/xuqiu/xuqiu',
     })
   },
   wode: function () {
@@ -708,6 +848,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    wxid_true: false
   },
 
   /**

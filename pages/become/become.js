@@ -60,6 +60,7 @@ Page({
     this.setData({
       openid:openid
     })
+    
     if (app.globalData.userInfo.nickName) {
       //console.log(app.globalData.userInfo)
       this.setData({
@@ -69,6 +70,7 @@ Page({
       app.userInfoReadyCallback = res => {
         //console.log('userInfoReadyCallback: ', res.userInfo);
         //console.log('获取用户信息成功');
+        console.log(res.userInfo)
         that.setData({
           userInfo: res.userInfo
         })
@@ -122,7 +124,7 @@ Page({
           },
           method: 'GET',
           success: function (res) {
-            console.log(res.data.data)
+            //console.log(res.data.data)
             that.setData({
               code: res.data.code
             })
@@ -137,8 +139,6 @@ Page({
                   }
                 }
               }
-              //console.log(major_scene)
-              //console.log(biaoqian_select)
               that.setData({
                 nan_nv: data.wx_sex,
                 name: data.wx_name,
@@ -370,6 +370,7 @@ Page({
               name: 'file',
               success: function (res) {
                 var data = JSON.parse(res.data)
+                console.log(data)
                 var aub_images = that.data.aub_images
                 aub_images.push(data.data.photoUrl)
                 var arr = aub_images
@@ -414,16 +415,6 @@ Page({
       urls: image_arr,  //所有要预览的图片
     })
   },
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   nan:function(){
     this.setData({
@@ -655,14 +646,16 @@ Page({
     var major_scene = this.data.names2.join(',')
     var major_certificate = this.data.yuyan2_arr.join(',')
     var aub_images = this.data.aub_images.join(',')
+    //console.log(this.data.userInfo.avatarUrl)
     var imageUrl = this.data.userInfo.avatarUrl.split('/');        //把头像的路径切成数组
-
+    //console.log(imageUrl)
     //把大小数值为 46 || 64 || 96 || 132 的转换为0
     if (imageUrl[imageUrl.length - 1] && (imageUrl[imageUrl.length - 1] == 46 || imageUrl[imageUrl.length - 1] == 64 || imageUrl  [imageUrl.length - 1] == 96 || imageUrl[imageUrl.length - 1] == 132)) {
       imageUrl[imageUrl.length - 1] = 0;
     }
 
     imageUrl = imageUrl.join('/');   //重新拼接为字符串
+    //console.log(imageUrl)
     var data = {
       openid: this.data.openid,
       wx_sex: this.data.nan_nv,
@@ -685,6 +678,7 @@ Page({
       photoUrl:aub_images
     }
     if (this.data.code == 0) {
+      console.log(0)
       if (that.data.tempFilePath===''){
         wx.request({
           url: '' + util.ajaxurl +'translator.php',
@@ -766,6 +760,7 @@ Page({
         })
       }
     } else {
+      console.log(1)
       if (that.data.tempFilePath === '') {
         wx.request({
           url: '' + util.ajaxurl +'translator_update.php',
@@ -810,6 +805,7 @@ Page({
         } else {
           var filePath = 'wxfile://' + that.data.tempFilePath.split('https://www.uear.net/mp3/')[1];
         }
+        console.log(filePath)
         wx.uploadFile({
           url: '' + util.ajaxurl +'translator_update.php',
           filePath: filePath,

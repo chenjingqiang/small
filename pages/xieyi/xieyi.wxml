@@ -1,2 +1,2 @@
 <!--pages/xieyi/xieyi.wxml-->
-<web-view src="https://www.uear.net/text.html"/>
+<web-view src="https://www.uear.net/text.html"></web-view>

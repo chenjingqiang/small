@@ -1,0 +1,56 @@
+/* pages/xuqiu/xuqiu.wxss */
+.xuqiu{}
+.top_img{
+   display: block;
+   width: 670rpx;
+   height: 150rpx;
+   margin: 40rpx auto;
+}
+.top{
+  position: absolute;
+  top: 40rpx;
+  left: 50%;
+  width: 670rpx;
+  height: 150rpx;
+  margin: 0 auto;
+  margin-left: -335rpx;
+  font-size: 36rpx;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+}
+.top image{
+  width: 72rpx;
+  height: 34rpx;
+  margin-left: 26rpx;
+  margin-right: 18rpx;
+}
+.list_fu{
+  width: 670rpx;
+  margin: 0 auto;
+  padding-bottom: 106rpx;
+}
+.list{
+  margin-bottom: 50rpx;
+}
+.list image{
+  width: 170rpx;
+  height: 170rpx;
+}
+.list .right{
+  width: 450rpx;
+  height: 170rpx;
+  position: relative;
+}
+.list .title{
+  font-size: 36rpx;
+  color: #333333;
+  text-align: justify;
+}
+.list .time{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 24rpx;
+  color: #989C9F;
+}

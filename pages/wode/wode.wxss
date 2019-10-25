@@ -9,7 +9,7 @@
   width: 132rpx;
   height: 132rpx;
   margin: 0 auto;
-  margin-top: 60rpx;
+  margin-top: 40rpx;
   border-radius: 50%;
   margin-bottom: 20rpx;
 }
@@ -30,7 +30,7 @@
   background: #799DF1;
   border-radius: 8rpx;
   margin: 0 auto;
-  margin-top: 40rpx;
+  margin-top: 30rpx;
 }
 .wode_btn3{
   width: 260rpx;
@@ -52,7 +52,7 @@
 }
 .list view{
   width: 670rpx;
-  height: 115rpx;
+  height: 106rpx;
   border-bottom: 1rpx solid #CCCCCC;
   margin: 0 auto;
 }
@@ -61,14 +61,14 @@
   width: 40rpx;
   height: 40rpx;
   margin-right: 34rpx;
-  margin-top: 42rpx;
+  margin-top: 35rpx;
 }
 .list text{
   float: left;
   font-size: 32rpx;
   color: #333333;
   letter-spacing: 1.67rpx;
-  margin-top: 40rpx;
+  margin-top: 30rpx;
 }
 .fenxiang{
   position: absolute;
@@ -82,7 +82,7 @@
 .shibai_tishi{
   font-size: 28rpx;
   color: #E2442D;
-  margin-top: 30rpx;
+  margin-top: 20rpx;
   line-height: 34rpx;
   display:flex;
   align-items: center;
@@ -107,6 +107,6 @@
   text-align: center;
   color: #799DF1;
   margin: 0 auto;
-  margin-top: 46rpx;
+  margin-top: 20rpx;
   text-decoration:underline;
 }

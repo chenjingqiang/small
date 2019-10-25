@@ -255,9 +255,8 @@ Page({
     if (share_detil){
       wx.setStorageSync('share_detil', false)
       wx.reLaunch({
-        url: '/pages/rob/rob',
+        url: '/pages/liulan/liulan',
       })
-
     }
   },
 

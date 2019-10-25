@@ -44,11 +44,12 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res.data.data.wxid)
-        that.setData({
-          place: res.data.data.wxid,
-          wxid:''
-        })
+        if (res.data.data.wxid){
+          that.setData({
+            place: res.data.data.wxid,
+            wxid: ''
+          })
+        }
       }
     })
   },

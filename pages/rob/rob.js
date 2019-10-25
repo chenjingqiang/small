@@ -43,20 +43,13 @@ Page({
   onLoad: function (options) {
     var that=this
     var openid = wx.getStorageSync('openid') || ''
-    wx.getLocation({ // 请求位置信息
-      type: 'gcj02',
-      success(res) {
-        //console.log(res);
-        that.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
-        })
-        wx.setStorageSync('latitude', res.latitude)
-        wx.setStorageSync('longitude', res.longitude)
-      }
-    }) 
-    that.setData({
+    var latitude = wx.getStorageSync('latitude') || ''
+    var longitude = wx.getStorageSync('longitude') || ''
+    //console.log(1)
+    this.setData({
       openid: openid,
+      longitude: longitude,
+      latitude: latitude
     })
     // console.log(openid)
     if (app.globalData.userInfo.nickName) {
@@ -75,29 +68,6 @@ Page({
         })
       }
     }
-    const updateManager = wx.getUpdateManager()
-    updateManager.onCheckForUpdate(function (res) {
-      // 请求完新版本信息的回调
-      //console.log(res.hasUpdate)
-      if (res.hasUpdate) {
-        updateManager.onUpdateReady(function () {
-          wx.showModal({
-            title: '更新提示',
-            content: '新版本已经准备好，是否重启应用？',
-            success: function (res) {
-              updateManager.applyUpdate()
-            }
-          })
-        })
-        updateManager.onUpdateFailed(function () {
-          // 新的版本下载失败
-          wx.showModal({
-            title: '已经有新版本了哟~',
-            content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
-          })
-        })
-      }
-    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -115,17 +85,7 @@ Page({
       mask:true
     })
     util.get_title(that)
-    var rob_qp_tf = wx.getStorageSync('rob_qp_tf') || 0
-    //0显示 1消失
-    if (rob_qp_tf==0 ) {
-      that.setData({
-        rob_qp_tf: 0,
-      })
-    } else {
-      that.setData({
-        rob_qp_tf: 1,
-      })
-    }
+    
     //初始动画
     var animation = wx.createAnimation({
       duration: 100,
@@ -165,21 +125,7 @@ Page({
         }
       },
     })
-    //获取用户是否填写微信号
-    wx.request({
-      url: '' + util.ajaxurl +'/get_mywxid.php',
-      data: {
-        openid: this.data.openid,
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data)
-        that.setData({
-          wxid_true: res.data.data
-        })
-      }
-      //请求完成后执行的函数
-    })
+    
     //在线人数
     wx.request({
       url: '' + util.ajaxurl +'/peo_num.php',
@@ -218,6 +164,12 @@ Page({
       complete: function () {
         wx.hideLoading()
       }
+    })
+  },
+  change_wxid: function () {
+    this.setData({
+      yinying: true,
+      t_f: true
     })
   },
   //下拉动画
@@ -266,13 +218,6 @@ Page({
       url: '/pages/become/become',
     })
   },
-  //更改抢单气泡
-  change_rob_qp:function(){
-    wx.setStorageSync('rob_qp_tf', 1)
-    this.setData({
-      rob_qp_tf:1
-    })
-  },
   getUserInfo: function () {
     var that = this
     wx.getUserInfo({
@@ -286,60 +231,7 @@ Page({
       }
     })
   },
-  //获取用户微信id
-  get_wxid:function(e){
-    var wxid_value = e.detail.value
-    this.setData({
-      wxid_value: wxid_value
-    })
-  },
-  //关闭微信号弹窗
-  tanchuang_weixin_close: function () {
-    this.setData({
-      yinying: true,
-      t_f2: true
-    })
-  },
-  //wxid提交
-  wxid_sub:function(){
-    var that=this
-    if (that.data.wxid_value==''){
-      wx.showToast({
-        title: '联系方式不能为空',
-        icon: 'none',
-        duration: 1000,
-        mask: true
-      })
-      return
-    }
-    wx.request({
-      url: '' + util.ajaxurl +'/change_wxid.php',
-      data: {
-        openid: this.data.openid,
-        wxid: this.data.wxid_value
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res)
-        if (res.data.code == 1) {
-          wx.showToast({
-            title: '提交成功',
-            icon: 'succes',
-            duration: 1000,
-            mask: true
-          })
-          that.onShow()
-        }else{
-          wx.showToast({
-            title: '提交失败',
-            icon: 'none',
-            duration: 1000,
-            mask: true
-          })
-        }
-      }
-    })
-  },
+  
   //刷新
   shuaxin:function(){
     this.onShow()
@@ -360,12 +252,6 @@ Page({
     }
     
   },
-  change_wxid:function(){
-    this.setData({
-      yinying: true,
-      t_f: true
-    })
-  },
   change_tanchuang3: function () {
     this.setData({
       yinying: true,
@@ -382,16 +268,10 @@ Page({
   },
   //跳转发布
   release: function () {
-    if (this.data.wxid_true) {
-      wx.redirectTo({
+    wx.redirectTo({
         url: '/pages/release/release',
       })
-    } else {
-      this.setData({
-        yinying: false,
-        t_f2: false
-      })
-    }
+   
   },
   //跳转列表
   translate: function () {
@@ -404,7 +284,8 @@ Page({
   //底部导航
   fabu: function () {
     wx.redirectTo({
-      url: '/pages/rob/rob',
+      //url: '/pages/rob/rob',
+      url: '/pages/release/release',
     })
   },
   liulan: function () {
@@ -414,118 +295,87 @@ Page({
   },
   map: function () {
     var that = this
-    if (this.data.wxid_true) {
-      wx.getSetting({
-        success(res) {// 查看所有权限
-          //console.log(res)
-          let status = res.authSetting['scope.userLocation']// 查看位置权限的状态，此处为初次请求，所以值为undefined
-          if (!status||that.data.longitude=='') {// 如果是首次授权(undefined)或者之前拒绝授权(false)
-            wx.openSetting({
-              success(data) {
-                if (data.authSetting["scope.userLocation"] == true) {
-                  wx.getLocation({ // 请求位置信息
-                    type: 'gcj02',
-                    success(res) {
-                      //console.log(res);
-                      that.setData({
-                        latitude: res.latitude,
-                        longitude: res.longitude
-                      })
-                      wx.setStorageSync('latitude', res.latitude)
-                      wx.setStorageSync('longitude', res.longitude)
-                    }
+    wx.getSetting({
+      success(res) {// 查看所有权限
+        //console.log(res)
+        let status = res.authSetting['scope.userLocation']// 查看位置权限的状态，此处为初次请求，所以值为undefined
+        if (!status || that.data.longitude == '') {// 如果是首次授权(undefined)或者之前拒绝授权(false)
+          wx.openSetting({
+            success(data) {
+              if (data.authSetting["scope.userLocation"] == true) {
+                wx.getLocation({ // 请求位置信息
+                  type: 'gcj02',
+                  success(res) {
+                    //console.log(res);
+                    that.setData({
+                      latitude: res.latitude,
+                      longitude: res.longitude
+                    })
+                    wx.setStorageSync('latitude', res.latitude)
+                    wx.setStorageSync('longitude', res.longitude)
+                  }
+                })
+              }
+            }
+          })
+        } else {
+          wx.request({
+            url: '' + util.ajaxurl + 'translator_status1.php',
+            data: {
+              openid: that.data.openid
+            },
+            method: 'GET',
+            success: function (res) {
+              if (res.data.code == 0) {
+                if (that.data.longitude == '' || that.data.latitude == '') {
+                  wx.showToast({
+                    title: '请开启手机定位',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                } else {
+                  var data = {
+                    openid: that.data.openid,
+                    flower_imgs: 0,
+                    longitude: that.data.longitude,
+                    latitude: that.data.latitude,
+                    mark: 1
+                  }
+                  wx.request({
+                    url: '' + util.ajaxurl + 'translator_flower_submit.php',
+                    data: data,
+                    method: 'GET',
+                    success: function (res) {
+                    },
                   })
                 }
               }
-            })
-          } else {
-            //判断翻译官是否有花
-            wx.request({
-              url: '' + util.ajaxurl +'translator_status1.php',
-              data: {
-                openid: that.data.openid
-              },
-              method: 'GET',
-              success: function (res) {
-                //console.log(res)
-                if (res.data.code == 0) {
-                  if (that.data.longitude == '' || that.data.latitude == '') {
-                    wx.showToast({
-                      title: '请开启手机定位',
-                      icon: 'none',
-                      duration: 2000
-                    })
-                  } else {
-                    var data = {
-                      openid: that.data.openid,
-                      flower_imgs: 0,
-                      longitude: that.data.longitude,
-                      latitude: that.data.latitude,
-                      mark: 1
-                    }
-                    wx.request({
-                      url: '' + util.ajaxurl +'translator_flower_submit.php',
-                      data: data,
-                      method: 'GET',
-                      success: function (res) {
-                      },
-                    })
-                  }
-                }
-              },
-              complete:function(){
-                wx.redirectTo({
-                  url: '/pages/map/map',
-                })
-              }
-            })
-          }
+            },
+            complete: function () {
+              wx.redirectTo({
+                url: '/pages/map/map',
+              })
+            }
+          })
         }
-      })
-    } else {
-      this.setData({
-        yinying: false,
-        t_f2: false
-      })
-    }
+      }
+    })
   },
   fly: function () {
-    if (this.data.wxid_true) {
-      wx.redirectTo({
-        url: '/pages/fly/fly',
-      })
-    } else {
-      this.setData({
-        yinying: false,
-        t_f2: false
-      })
-    }
-
+    wx.redirectTo({
+      url: '/pages/fly/fly',
+    })
+   
   },
-  dingdan: function () {
-    if(this.data.wxid_true){
-      wx.redirectTo({
-        url: '/pages/dingdan/dingdan',
-      })
-    }else{
-      this.setData({
-        yinying: false,
-        t_f2: false
-      })
-    }
-    
+  xuqiu: function () {
+    wx.redirectTo({
+      url: '/pages/xuqiu/xuqiu',
+    })
   },
   wode: function () {
-    if (this.data.wxid_true) {
-      wx.redirectTo({
-        url: '/pages/wode/wode',
-      })
-    } else {
-      this.setData({
-        yinying: false,
-        t_f2: false
-      })
-    }
+    wx.redirectTo({
+      url: '/pages/wode/wode',
+    })
   },
   
   /**
@@ -538,8 +388,7 @@ Page({
       kong: false,
       yinying: true,
       t_f2: true,
-      t_f3: true,
-      wxid_true: false
+      t_f3: true
     })
   },
 
