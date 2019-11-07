@@ -1,2 +1,38 @@
-<!--pages/xiaoxi/xiaoxi.wxml-->
-<button bindtap="shouquan">aaaaa</button>
+<view class="xiaoxi">
+  <image src="../image/pinglunkong.jpg" class="kong" wx-if="{{select==''}}"></image>
+  <view class="list_fu" wx-if="{{select!=''}}">
+    <view class="list clearfix" wx:for="{{select}}" wx:key="{{index}}" data-type="{{item.type}}" data-type_id="{{item.type_id}}" bindtap="go_xiangqing">
+      <image src="{{item.wx_img}}"  class="fl"></image>
+      <view class="fr right">
+        <view class="clearfix">
+          <view class="fl name">
+            {{item.wx_name}}
+          </view>
+          <view class="fr time">
+           {{item.datetime}}
+          </view>
+        </view>
+        <view class="tit" wx-if="{{item.type==1}}">
+          评论了您发布的订单：
+        </view>
+        <view class="tit" wx-if="{{item.type==3}}">
+          评论了您的翻译官主页：
+        </view>
+        <view class="con">
+         {{item.content}}
+        </view>
+        <view class="yaoqiu clearfix" wx-if="{{item.type==1}}">
+          <view class="left fl">
+            翻译要求:
+          </view>
+          <view class="right2 fl">
+            {{item.text_short}}
+          </view>
+        </view>
+      </view>
+
+    </view>
+    
+  
+  </view>
+</view>

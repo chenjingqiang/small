@@ -165,3 +165,12 @@ input{
   z-index: 6;
   opacity: 0;
 }
+.footer .red_d{
+  position: absolute;
+  background: #E2442D;
+  width: 18rpx;
+  height: 18rpx;
+  top:18rpx;
+  right: 48rpx;
+  border-radius: 50%;
+}

@@ -1,5 +1,12 @@
 
 <view class='wode_list' >
+  <view class="tongzhi" bindtap="go_xiaoxi">
+    <view wx-if="{{red_point}}">
+      {{status_num}}
+    </view>
+    <image src='../image/tongzhi.jpg'></image>
+  </view>
+  
   <image src='{{wx_img}}' class='logo'></image>
   <text class='logo_text'>{{wx_name}}</text>
   <view class='wode_btn' wx-if="{{code==0}}" bindtap='go_become'>
@@ -56,6 +63,7 @@
 
   <!-- 底部导航 -->
   <view class='footer clearfix'>
+    <view class="red_d" wx-if="{{red_point}}"></view>
     <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>

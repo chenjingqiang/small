@@ -47,7 +47,8 @@ Page({
    */
   onShow: function () {
     var that=this
-    util.get_title(that)
+    util.get_title(this)
+    util.get_red(this)
     //翻译官认证状态
     wx.request({
       //判断
@@ -89,7 +90,11 @@ Page({
     })
     
   },
-
+  go_xiaoxi: function () {
+    wx.navigateTo({
+      url: '/pages/xiaoxi/xiaoxi',
+    })
+  },
   go_qianbao: function () {
     wx.navigateTo({
       url: '/pages/qianbao/qianbao',

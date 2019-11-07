@@ -98,7 +98,8 @@ Page({
   onShow: function () {
     var that=this
     //console.log(2)
-    util.get_title(that)
+    util.get_title(this)
+    util.get_red(this)
     if (app.globalData.names2){
       var  names2 = app.globalData.names2.join(',')
     }else{

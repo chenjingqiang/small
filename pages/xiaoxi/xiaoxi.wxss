@@ -1,1 +1,65 @@
 /* pages/xiaoxi/xiaoxi.wxss */
+
+.kong{
+  display: block;
+  width: 670rpx;
+  height: 672rpx;
+  margin: 0 auto;
+}
+.list_fu{
+  background: #EBEBEB;
+}
+.list{
+  margin-bottom: 20rpx;
+  background: #fff;
+  padding: 0 40rpx;
+  padding-top: 40rpx;
+  padding-bottom: 30rpx;
+}
+.list image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.list .right{
+  width: 570rpx;
+}
+.list .name{
+  font-size: 32rpx;
+  color: #799DF1;
+  line-height: 44rpx;
+  font-weight: bold;
+}
+.list .time{
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 44rpx;
+}
+.list .tit{
+  font-size: 30rpx;
+  color: #333333;
+  margin-bottom: 6rpx;
+  margin-top: 14rpx;
+}
+.list .con{
+  font-size: 30rpx;
+  color: #333333;
+  margin-bottom: 20rpx;
+  text-align: justify;
+}
+
+.list .yaoqiu{
+  background: #F2F9FF;
+  font-size: 32rpx;
+  color: #666666;
+  padding: 30rpx 20rpx;
+
+}
+.list .yaoqiu .left{
+  font-size: 30rpx;
+  color: #666666;
+  margin-right: 10rpx;
+}
+.list .right2{
+  width: 369rpx;
+}

@@ -89,8 +89,19 @@
             <image  src='../image/yuyan_more.png' wx-if="{{item.language.length==3}}"></image>
           </view>
           <view class='peo'>
-            <image src='../image/peo.png'></image>
-            {{item.browse}}
+            <view class="fl">
+              <image src='../image/peo.png'></image>
+              {{item.browse}}
+            </view>
+            <view class="fr">
+              <image src='../image/peo_pinglun.png'></image>
+              {{item.comment_num}}
+            </view>
+            <view class="fr" style="margin-right:40rpx;">
+              <image src='../image/fenmi.png'></image>
+              {{item.wx_likes}}
+            </view>
+            
         </view>
         </view>
       </view>
@@ -103,6 +114,7 @@
 
  <!-- 底部导航 -->
   <view class='footer clearfix'>
+   <view class="red_d" wx-if="{{red_point}}"></view>
     <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>

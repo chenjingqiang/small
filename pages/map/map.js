@@ -118,10 +118,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that=this
-    util.get_title(that)
-    
-    
+    util.get_title(this)
+    util.get_red(this)
   },
   qp:function(){
     wx.setStorageSync('qp_tf', 1)

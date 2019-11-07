@@ -159,7 +159,8 @@ Page({
       yinying: true,
       t_f: true,
     })
-    util.get_title(that)
+    util.get_title(this)
+    util.get_red(this)
     wx.request({
       url: '' + util.ajaxurl + 'service_phone.php',
       data: {

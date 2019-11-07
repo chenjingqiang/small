@@ -16,24 +16,29 @@ Page({
     var openid = wx.getStorageSync('openid') || ''
     if (openid==''){
       app.getToken().then((resArg) => {
-        if (options.wenzhang_src){
+        if (options.wenzhang_src) {
           wx.setStorageSync('wenzhang_src', options.wenzhang_src)
           wx.setStorageSync('share_wenzhang', true)
           wx.navigateTo({
             url: '/pages/wenzhang/wenzhang',
           })
-        }else if (options.detil_id){
+        } else if (options.detil_id) {
           wx.setStorageSync('detil_id', options.detil_id)
           wx.setStorageSync('share_detil', true)
           wx.navigateTo({
             url: '/pages/detil/detil',
           })
-        }else{
+        } else if (options.rob_oid) {
+          wx.setStorageSync('rob_oid', options.rob_oid)
+          wx.setStorageSync('share_rob_detil_id', true)
+          wx.navigateTo({
+            url: '/pages/rob_detil/rob_detil',
+          })
+        } else {
           wx.redirectTo({
             url: '/pages/release/release',
           })
         }
-        
       })
     }else{
       if (options.wenzhang_src) {
@@ -42,11 +47,17 @@ Page({
         wx.navigateTo({
           url: '/pages/wenzhang/wenzhang',
         })
-      }else if (options.detil_id) {
+      } else if (options.detil_id) {
         wx.setStorageSync('detil_id', options.detil_id)
         wx.setStorageSync('share_detil', true)
         wx.navigateTo({
           url: '/pages/detil/detil',
+        })
+      } else if (options.rob_oid) {
+        wx.setStorageSync('rob_oid', options.rob_oid)
+        wx.setStorageSync('share_rob_detil_id', true)
+        wx.navigateTo({
+          url: '/pages/rob_detil/rob_detil',
         })
       } else {
         wx.redirectTo({
@@ -57,23 +68,7 @@ Page({
     
   },
   onShow: function () {
-    // var openid = wx.getStorageSync('openid') || ''
-    // // console.log(2)
-    // // console.log(openid)
-    // if (openid == '') {
-    //   app.getToken().then((resArg) => {
-    //     // console.log(resArg)
-    //     // console.log(1)
-    //     wx.redirectTo({
-    //       url: '/pages/rob/rob',
-    //     })
-    //   })
-    // } else {
-    //   //console.log(2)
-    //   wx.redirectTo({
-    //     url: '/pages/rob/rob',
-    //   })
-    // }
+    
     
   },
 

@@ -1,6 +1,17 @@
 /* pages/detil/detil.wxss */
 .detil{
-  padding-bottom: 180rpx;
+  padding-bottom: 105rpx;
+}
+
+#getUserInfo{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+
 }
 .yinying{
   position: fixed;
@@ -308,8 +319,6 @@
   font-size: 34rpx;
   color: #FFFFFF;
 }
-.foot_fix button{
-}
 .foot_fix image{
   width: 240rpx;
   height: 100rpx;
@@ -330,6 +339,14 @@
   margin-right: 50rpx;
   color: #4764bf;
 }
+.hua .share image{
+  display: block;
+  width: 130rpx;
+  height: 66rpx;
+  border-radius: 0%;
+  border: none;
+  margin-right: 0;
+}
 .mp3{
   width: 670rpx;
   height: 80rpx;
@@ -348,4 +365,135 @@
 .mp3 text{
   font-size: 30rpx;
   color: #FFFFFF;
+}
+
+
+.bor2{
+  width: 100%;
+  height: 20rpx;
+  background: #EEEEEE;
+  margin-top: 30rpx;
+}
+.con2{
+  width: 670rpx;
+  margin: 0 auto;
+}
+.con2_title{
+  height: 86rpx;
+  line-height: 86rpx;
+  margin-top: 10rpx;
+}
+.con2_title view{
+  font-size: 32rpx;
+  color: #999999;
+}
+.con2 .rob_kong{
+  width: 670rpx;
+  height: 540rpx;
+}
+.con2 .list_fu{
+  width: 670rpx;
+  margin: 0 auto;
+}
+.con2 .list2{
+  padding-top: 40rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 1px solid #ccc;
+} 
+.con2 .list2 .touxiang2{
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+.con2  .list2 .name{
+  font-size: 26rpx;
+  color: #799BEF;
+  font-weight: bold;
+}
+.con2 .list2 .neirong{
+  width: 560rpx;
+  font-size: 26rpx;
+  color: #333333;
+  margin-top: 15rpx;
+  text-align: justify;
+  margin-bottom: 8rpx;
+}
+.con2 .list2 .time{
+  font-size: 24rpx;
+  color: #777777;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+.con2 .list2 .shanchu{
+  width: 70rpx;
+  height: 70rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #799DF1;
+}
+.wei_shuru{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 200;
+  width: 100%;
+  height: 105rpx;
+  background: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer_wei{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 105rpx;
+  background: #fff;
+  box-shadow: 0 -1px 0 0 rgba(204,204,204,0.50);
+}
+.footer_wei view{
+  width: 220rpx;
+  height: 105rpx;
+  font-size: 30rpx;
+  color: #999999;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+.footer_wei image{
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 10rpx;
+}
+.footer_wei .chakan{
+  width: 306rpx;
+  height: 105rpx;
+  background: #73CC89;
+  font-size: 36rpx;
+  color: #FFFFFF;
+}
+.footer_wei .wei_bor{
+  width: 2rpx;
+  height: 82rpx;
+  background: #ccc;
+  margin-top: 12rpx;
+}
+.footer_wei .wei_zan{
+  color:#F98585;
 }

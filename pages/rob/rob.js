@@ -42,6 +42,10 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var openid = wx.getStorageSync('openid') || ''
     var latitude = wx.getStorageSync('latitude') || ''
     var longitude = wx.getStorageSync('longitude') || ''
@@ -49,7 +53,14 @@ Page({
     this.setData({
       openid: openid,
       longitude: longitude,
-      latitude: latitude
+      latitude: latitude,
+      kong: false,
+      yinying: true,
+      t_f2: true,
+      t_f3: true,
+      wxid_true: false,
+      select:[],
+      page:1,
     })
     // console.log(openid)
     if (app.globalData.userInfo.nickName) {
@@ -68,67 +79,10 @@ Page({
         })
       }
     }
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  },
-  
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    var that = this
-    wx.showLoading({
-      title: '加载中',
-      mask:true
-    })
-    util.get_title(that)
-    
-    //初始动画
-    var animation = wx.createAnimation({
-      duration: 100,
-      timingFunction: "linear",
-      delay: 0,
-    })
-    animation.height(0).step()
-    that.setData({
-      animationData: animation.export(),
-    })
-    that.setData({
-      page:1,
-      select:[],
-      kong:false,
-      yinying: true,
-      t_f2: true,
-      t_f3: true,
-      wxid_true:false
-    })
-    //获取翻译官状态
-    wx.request({
-      url: '' + util.ajaxurl +'translator_status.php',
-      data: {
-        openid: this.data.openid
-      },
-      method: 'GET',
-      success: function (res) {
-        //console.log(res.data)
-        if (res.data.code == 0) {
-          that.setData({
-            type: false,
-          })
-        } else {
-          that.setData({
-            type: true
-          })
-        }
-      },
-    })
     
     //在线人数
     wx.request({
-      url: '' + util.ajaxurl +'/peo_num.php',
+      url: '' + util.ajaxurl + '/peo_num.php',
       data: {
       },
       method: 'GET',
@@ -141,21 +95,21 @@ Page({
     })
     //求译列表
     wx.request({
-      url: '' + util.ajaxurl +'/show_order1.php',
+      url: '' + util.ajaxurl + '/show_order1.php',
       data: {
-        openid:this.data.openid,
-        orderby:this.data.paixu,
+        openid: this.data.openid,
+        orderby: this.data.paixu,
         order_status: this.data.order_status,
-        page:1
+        page: 1
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res.data)
-        if (res.data.data==''){
+        console.log(res.data.data)
+        if (res.data.data == '') {
           that.setData({
-            kong:true
+            kong: true
           })
-        }else{
+        } else {
           that.setData({
             select: res.data.data
           })
@@ -166,58 +120,31 @@ Page({
       }
     })
   },
-  change_wxid: function () {
-    this.setData({
-      yinying: true,
-      t_f: true
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  },
+  
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var that = this
+    util.get_title(this)
+    util.get_red(this)
+    //初始动画
+    var animation = wx.createAnimation({
+      duration: 100,
+      timingFunction: "linear",
+      delay: 0,
+    })
+    animation.height(0).step()
+    that.setData({
+      animationData: animation.export(),
     })
   },
-  //下拉动画
-  gettextHeight: function (e) {
-    if (this.data.type) {
-      if (e.currentTarget.dataset.text_mark) {
-        var that = this
-        var fu_id = e.currentTarget.dataset.oid
-        var index = e.currentTarget.dataset.index
-        var change_select = that.data.select
-        change_select[index].text_mark = false
-        change_select[index].text_short = ' '
-        that.setData({
-          fu_id: fu_id,
-          select: change_select
-        })
-        var zi_id = e.currentTarget.dataset.oid2
-        const query = wx.createSelectorQuery()
-        var iii = '#' + zi_id
-        query.select(iii).boundingClientRect()
-        query.exec(function (res) {
-          var animation = wx.createAnimation({
-            duration: 400,
-            timingFunction: "linear",
-            delay: 0,
-          })
-          animation.height(res[0].height).step()
-          that.setData({
-            animationData: animation.export(),
-          })
-        })
 
-      }
-    } else {
-      this.setData({
-        yinying: false,
-        t_f3:false
-      })
-    }
-    
-    
-  },
-  //去认证
-  go_renzheng:function(){
-    wx.navigateTo({
-      url: '/pages/become/become',
-    })
-  },
   getUserInfo: function () {
     var that = this
     wx.getUserInfo({
@@ -234,37 +161,7 @@ Page({
   
   //刷新
   shuaxin:function(){
-    this.onShow()
-  },
-  ckwxid:function(e){
-    var wx_id = e.currentTarget.dataset.wx_id
-    if(this.data.type){
-      this.setData({
-        yinying: false,
-        t_f: false,
-        weixin: wx_id
-      })
-    }else{
-      this.setData({
-        yinying: false,
-        t_f3: false
-      })
-    }
-    
-  },
-  change_tanchuang3: function () {
-    this.setData({
-      yinying: true,
-      t_f3: true
-    })
-  },
-  fuzhi: function () {
-    var that = this
-    wx.setClipboardData({
-      data: this.data.weixin,
-      success: function (res) {
-      }
-    })
+    this.onLoad()
   },
   //跳转发布
   release: function () {
@@ -280,6 +177,32 @@ Page({
     })
    
   },
+  //跳转rob详情
+  gp_rob_detil: function (e) {
+    var status=e.currentTarget.dataset.status
+    var rob_oid=e.currentTarget.dataset.rob_oid
+    
+    if (status==0){
+      wx.setStorageSync('rob_oid', rob_oid)
+      wx.navigateTo({
+        url: '/pages/rob_detil/rob_detil',
+      })
+    } else if (status == 1) {
+      wx.showToast({
+        title: '订单已完成',
+        icon: 'none'
+      })
+    } else if (status == 2) {
+      wx.showToast({
+        title: '订单已过期',
+        icon: 'none'
+      })
+    }
+  },
+  
+
+
+
 
   //底部导航
   fabu: function () {
@@ -383,8 +306,6 @@ Page({
    */
   onHide: function () {
     this.setData({
-      page: 1,
-      select: [],
       kong: false,
       yinying: true,
       t_f2: true,

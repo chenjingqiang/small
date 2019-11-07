@@ -1,0 +1,312 @@
+/* pages/rob_detil/rob_detil.wxss */
+.page , .rob_detil{
+  height: 100%;
+}
+.rob_detil{
+  padding-bottom: 105rpx;
+}
+#getUserInfo{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+
+}
+.yinying{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.60);
+  z-index: 10;
+}
+
+.tanchuang3{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  margin-left: -280rpx;
+  margin-top: -315rpx;
+  width: 560rpx;
+  height: 630rpx;
+  border-radius: 24rpx;
+  text-align: center;
+  background: url('https://www.uear.net/img3/background1.png') no-repeat center;
+  background-size: 100% 100%;
+}
+.tanchuang3 .x{
+  position: absolute;
+  top: 0rpx;
+  right: 0rpx;
+  z-index: 30;
+  width: 96rpx;
+  height: 96rpx;
+}
+.tanchuang3 .t1{
+  margin-top: 350rpx;
+}
+.tanchuang3 text{
+  display: block;
+  font-size: 32rpx;
+  color: #333333;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+.tanchuang3 view{
+  width: 400rpx;
+  height: 74rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  background: #7782F3;
+  border-radius: 35rpx;
+  margin: 0 auto;
+  margin-top: 35rpx;
+  line-height: 74rpx;
+}
+.tanchuang{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  margin-left: -271rpx;
+  margin-top: -182rpx;
+  width: 542rpx;
+  height: 364rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  text-align: center;
+}
+.tanchuang image{
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  margin-top: 40rpx;
+  margin-bottom:20rpx; 
+}
+.tanchuang .x{
+  position: absolute;
+  top: -30rpx;
+  right: 5rpx;
+  z-index: 30;
+  width: 80rpx;
+  height: 80rpx;
+}
+.tt_tit{
+  width: 464rpx;
+  font-size: 34rpx;
+  color: #333333;
+  font-weight: bold;
+  padding-top: 40rpx;
+  border-bottom: 1px solid #CCCCCC;
+  padding-bottom: 20rpx;
+  margin: 0 auto;
+  margin-bottom: 30rpx;
+}
+.tt_wx{
+  font-size: 28rpx;
+  color: #799DF1;
+  margin-bottom: 20rpx;
+}
+.tt_sub{
+  width: 300rpx;
+  height: 60rpx;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  background: #799DF1;
+  border-radius: 8px;
+  line-height: 60rpx;
+  margin: 0 auto;
+  margin-top: 40rpx;
+}
+
+
+
+
+.con{
+  width: 670rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+}
+.fu{
+  font-size: 30rpx;
+  height: 85rpx;
+  color: #333;
+  line-height: 85rpx;
+}
+.fu .tit_l{
+  float: left;
+  color: #666;
+}
+.fu .tit_r{
+  font-size: 32rpx;
+  float: right;
+}
+.zhuanhuan{
+  width: 30rpx;
+  height: 26rpx;
+  margin: 0 30rpx;
+}
+.yaoqiu{
+  font-size: 30rpx;
+  color: #666666;
+  margin-top: 20rpx;
+}
+.yaoqiu .text{
+  width: 100%;
+  text-align: justify;
+  font-size: 32rpx;
+  color: #333;
+  margin-top: 15rpx;
+  margin-bottom: 20rpx;
+}
+.liulan{
+  font-size: 24rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  color: #666;
+  background: #FFF6E2;
+  border-radius: 8rpx;
+  padding-right: 16rpx;
+  padding-left: 4rpx;
+  margin-bottom: 40rpx;
+}
+.liulan image{
+  width: 48rpx;
+  height: 48rpx;
+  float: left;
+  margin-right: 4rpx;
+}
+.bor{
+  width: 100%;
+  height: 20rpx;
+  background: #EEEEEE;
+}
+.con2{
+  width: 670rpx;
+  margin: 0 auto;
+}
+.con2_title{
+  height: 86rpx;
+  line-height: 86rpx;
+  margin-top: 10rpx;
+}
+.con2_title view{
+  font-size: 32rpx;
+  color: #999999;
+}
+.con2 .rob_kong{
+  width: 670rpx;
+  height: 540rpx;
+}
+.con2 .list_fu{
+  width: 670rpx;
+  margin: 0 auto;
+}
+.con2 .list{
+  padding-top: 40rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 1px solid #ccc;
+} 
+.list .touxiang{
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+.list .name{
+  font-size: 26rpx;
+  color: #799BEF;
+  font-weight: bold;
+}
+.list .neirong{
+  width: 560rpx;
+  font-size: 26rpx;
+  color: #333333;
+  margin-top: 15rpx;
+  text-align: justify;
+  margin-bottom: 8rpx;
+}
+.list .time{
+  font-size: 24rpx;
+  color: #777777;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+.list .shanchu{
+  width: 70rpx;
+  height: 70rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #799DF1;
+}
+.wei_shuru{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 200;
+  width: 100%;
+  height: 105rpx;
+  background: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer_wei{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 105rpx;
+  background: #fff;
+  box-shadow: 0 -1px 0 0 rgba(204,204,204,0.50);
+}
+.footer_wei view{
+  width: 220rpx;
+  height: 105rpx;
+  font-size: 30rpx;
+  color: #999999;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+.footer_wei image{
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 10rpx;
+}
+.footer_wei .chakan{
+  width: 306rpx;
+  height: 105rpx;
+  background: #799DF1;
+  font-size: 36rpx;
+  color: #FFFFFF;
+}
+.footer_wei .wei_bor{
+  width: 2rpx;
+  height: 82rpx;
+  background: #ccc;
+  margin-top: 12rpx;
+}
+.footer_wei .wei_zan{
+  color:#799DF1;
+}

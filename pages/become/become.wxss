@@ -20,6 +20,12 @@
 .con .fu{
   position: relative;
 }
+.geren{
+  font-size: 32rpx;
+  color: #333333;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+}
 .fu view{
   height: 86rpx;
   line-height: 86rpx;
@@ -83,7 +89,7 @@
 .yuyan_arr{
   width: 690rpx;
   margin-top: 10rpx;
-  margin-bottom: 40rpx;
+  margin-bottom: 20rpx;
 }
 .yuyan_arr .sss{
   float: left;

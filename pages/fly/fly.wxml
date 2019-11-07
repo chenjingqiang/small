@@ -33,6 +33,7 @@
 
 <!-- 底部导航 -->
   <view class='footer clearfix'>
+    <view class="red_d" wx-if="{{red_point}}"></view>
     <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>

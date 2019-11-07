@@ -64,7 +64,7 @@ Page({
       method: 'GET',
       success: function (res) {
         var data=res.data.data
-        console.log(data)
+        //console.log(data)
         that.setData({
           new_status:data.status,
           new_title:data.title,
@@ -89,7 +89,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    util.get_title(this)
+    util.get_red(this)
   },
   go_new:function(e){
     var index = e.currentTarget.dataset.index
@@ -111,7 +112,19 @@ Page({
     }
     
   },
-  
+  getUserInfo: function () {
+    var that = this
+    wx.getUserInfo({
+      success: function (res) {
+        //console.log(res.userInfo)
+        getApp().globalData.userInfo = res.userInfo
+        that.setData({
+          get_user: false,
+          userInfo: res.userInfo
+        })
+      }
+    })
+  },
 
 
   //底部导航
@@ -279,6 +292,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+    return {
+      title: this.data.tit,
+      imageUrl: "https://www.uear.net/img2/start.jpg",
+      path: '/pages/start/start',
+    }
   }
 })

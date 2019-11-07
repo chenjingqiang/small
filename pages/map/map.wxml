@@ -16,6 +16,7 @@
     <!-- 底部导航 -->
     <cover-view class="footer2">
       <cover-view class='footer clearfix'>
+        <cover-view class="red_d" wx-if="{{red_point}}"></cover-view>
         <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
         <cover-view bindtap='fabu' class="footer_fabu">
           <cover-image src='{{bar[0]}}'></cover-image>

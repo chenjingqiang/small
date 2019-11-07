@@ -1,39 +1,13 @@
 
 <view class='release'>
   <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
-  
-  <!-- 查看联系方式弹窗 -->
-  <view class='tanchuang' wx-if="{{!t_f}}" catchtouchmove='true'>
-    <image class='x' src='/pages/image/guanbi2.png' bindtap='change_wxid'></image>
-    <view class='tt_tit'>
-      查看联系方式
-    </view>
-    <view class='tt_wx'>
-      求译者联系方式：
-    </view>
-    <view class='tt_wx'>{{weixin}}
-    </view>
-    <view class='tt_sub' bindtap='fuzhi'>
-      复制联系方式
-    </view>
-  </view>
-  <!-- 认证翻译官弹窗 -->
-  <view class='tanchuang3' wx-if="{{!t_f3}}" catchtouchmove='true'>
-    <image class='x' src='/pages/image/guanbi3.png' bindtap='change_tanchuang3'></image>
-    <text class="t1">使用此功能</text>
-    <text>您需认证成为翻译官</text>
-    <button open-type="getUserInfo" id='show-author2' bindgetuserinfo="getUserInfo"  wx-if="{{get_user}}" ></button>
-    <view bindtap="go_renzheng">
-      前往认证翻译官
-    </view>
-  </view>
-
   <image class='shuaxin' src='../image/shuaxin.png' bindtap='shuaxin'></image>
   <view class='title clearfix'>
     <view bindtap='release'>
     </view>
     <view bindtap='translate'>
     </view>
+    <button open-type="getUserInfo" class='show-author2' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
   </view>
   <view class='zaixian'>
     <image src='../image/zaixian.png'></image>
@@ -47,7 +21,9 @@
       <image src='../image/zhiding.jpg'></image>
     </view>
     <view class='list_fu'>
-      <view class='dd_list' wx:for="{{select}}"  wx:key="key">
+      <view class='dd_list' wx:for="{{select}}"  wx:key="key" data-status="{{item.status}}" data-rob_oid="{{item.oid}}" bindtap="gp_rob_detil">
+        <image src='../image/rob_wancheng.png' class="zhuangtai" wx-if="{{item.status==1}}"></image>
+        <image src='../image/rob_shixiao.png' class="zhuangtai"  wx-if="{{item.status==2}}"></image>
         <view class='fu clearfix'>
           <view class='tit_l '>
             服务语言：
@@ -74,70 +50,21 @@
             {{item.project_address}}
           </view>
         </view>
-        <view class='fu clearfix' wx-if="{{item.project_theme}}">
-          <view class='tit_l '>
-            服务内容：
-          </view>
-          <view class='tit_r'>
-            {{item.project_theme}}
-          </view>
-        </view>
-        <view class='fu clearfix' wx-if="{{item.project_skill}}">
-          <view class='tit_l '>
-            服务要求：
-          </view>
-          <view class='tit_r'>
-            {{item.project_skill}}
-          </view>
-        </view>
-        
-        <view class='fu clearfix' wx-if="{{item.scene}}">
-          <view class='tit_l '>
-            服务标签：
-          </view>
-          <view class='tit_r'>
-            {{item.scene}}
-          </view>
-        </view>
-        <view class='fu clearfix' wx-if="{{item.voice_mark}}">
-          <view class='tit_l ' style='line-height:60rpx;'>
-            语音求译：
-          </view>
-          <view class='tit_r'>
-            <view class='yuyin' bindtap='play' data-index="{{index}}"  data-mp3="{{item.voice}}">
-                {{item.voice_second}} ``
-                <image src='/pages/image/mp3.png' class='yuyin_img' wx-if="{{!item.dong}}"></image>
-                <image src='/pages/image/laba.gif' class='yuyin_img' wx-if="{{item.dong}}"></image>
-            </view>
-          </view>
-        </view>
-        <view class='fu clearfix' wx-if='{{item.text_short}}'>
-          <view class='tit_l '>
-            翻译要求：
-          </view>
-          <view class='tit_r yaoqiu' data-oid="{{item.oid}}" data-oid2="{{item.oid2}}" data-index="{{index}}" data-text_mark="{{item.text_mark}}"  bindtap='gettextHeight' >
-            <view>{{item.text_short}}</view> 
-            <view class='zhankai' wx-if="{{item.text_mark}}">
-              更多
-            </view>
-            <!-- <image src='/pages/image/jiantou.jpg' class='jiantou' wx-if="{{item.text_mark}}"></image> -->
-          </view>
-        </view>
-        <view id="{{item.oid}}" class='dong' animation="{{item.oid==fu_id ? animationData : '' }}" >
-          <view  id="{{item.oid2}}" class='dong_zi'>
-            {{item.text}}
-          </view>
-        </view>
         <view class='bor'>
         </view>
-        <view class='sub3' bindtap='ckwxid' data-wx_id='{{item.wxid}}' wx-if='{{item.status == 0}}'>
-          查看联系方式
-        </view>
-        <view class='sub4'  wx-if='{{item.status == 1}}'>
-          已完成
-        </view>
-        <view class='sub4'  wx-if='{{item.status == 2}}'>
-          已失效
+        <view class="wei clearfix">
+          <view class="liulan fl">
+            <image src='/pages/image/rob_liulan.png'></image>
+            浏览{{item.order_browse}}次
+          </view>
+          <view class="pinglun fr">
+            <image src='/pages/image/pinglun.png'></image>
+            {{item.comment_num}}
+          </view>
+          <view class="zan fr">
+            <image src='/pages/image/zan.png'></image>
+            {{item.order_likes}}
+          </view>
         </view>
       </view>
   </view>
@@ -148,6 +75,7 @@
 
   <!-- 底部导航 -->
   <view class='footer clearfix'>
+   <view class="red_d" wx-if="{{red_point}}"></view>
     <button open-type="getUserInfo" class='show-author' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
     <view bindtap='fabu' class="footer_fabu">
       <image src='{{bar[0]}}'></image>

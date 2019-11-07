@@ -125,7 +125,8 @@ Page({
   },
   onShow: function () {
     var that = this
-    util.get_title(that)
+    util.get_title(this)
+    util.get_red(this)
     that.setData({
       arr_index: 0,
       arr_index2: 0, 
@@ -583,6 +584,35 @@ Page({
       if (this.data.yaoqiu_value == '') {
         this.setData({
           sub_box_text: '专业要求不能为空'
+        })
+        query.select('.sub_box').boundingClientRect(function (rect) {
+          var left = '-' + rect.width + 'rpx'
+          that.setData({
+            left: left
+          })
+          var animation = wx.createAnimation({
+            duration: 1000,
+          })
+          animation.opacity(0.7).step();
+          that.setData({
+            animation_sub: animation.export()
+          })
+          clearTimeout(timer)
+          var timer = setTimeout(function () {
+            var animation = wx.createAnimation({
+              duration: 1000,
+            })
+            animation.opacity(0).step();
+            that.setData({
+              animation_sub: animation.export()
+            })
+          }, 1000)
+        }).exec();
+        return;
+      }
+      if (this.data.value == '') {
+        this.setData({
+          sub_box_text: '项目需求不能为空'
         })
         query.select('.sub_box').boundingClientRect(function (rect) {
           var left = '-' + rect.width + 'rpx'

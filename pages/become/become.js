@@ -24,9 +24,12 @@ Page({
     yuyan_arr:[],
     yuyan_arr_length:0,
     yuyan_value:'',
+    beizhu:'',
     yuyan2_arr: [],
     yuyan2_arr_length: 0,
     yuyan2_value: '',
+    kouyi_money:'',
+    biyi_money:'',
     beijing:'',
     nianxian:'',
     jingli:'',
@@ -163,7 +166,10 @@ Page({
                 miao: data.voice_second,
                 miao2: data.voice_second,
                 image_arr: data.photoUrl,
-                aub_images: data.photoUrl
+                aub_images: data.photoUrl,
+                biyi_money: data.written_money,
+                kouyi_money:data.oral_money,
+                beizhu:data.other,
               })
               if (data.voice) {
                 that.setData({
@@ -468,6 +474,18 @@ Page({
     })
     
   },
+  //口译价格
+  kouyi_value: function (e) {
+    this.setData({
+      kouyi_money: e.detail.value
+    })
+  },
+  //笔译价格
+  biyi_value: function (e) {
+    this.setData({
+      biyi_money: e.detail.value
+    })
+  },
   //添加语言标签
   add_yuyan:function(){
     if (this.data.yuyan_value == '') {
@@ -550,6 +568,11 @@ Page({
       jingli: e.detail.value
     })
   },
+  beizhu_value: function(e) {
+    this.setData({
+      beizhu: e.detail.value
+    })
+  },
   //标签
   biaoqian_click: function (e) {
     var that = this
@@ -557,7 +580,6 @@ Page({
     var mark = e.currentTarget.dataset.mark
     var index = e.currentTarget.dataset.index
     var names2 = that.data.names2
-    
     if (mark) {
       //console.log('未选中')
       if (that.data.names2.length < 8) {
@@ -638,6 +660,20 @@ Page({
       })
       return
     }
+    if (this.data.biyi_money == '') {
+      wx.showToast({
+        title: '请填写笔译费用',
+        icon: 'none'
+      })
+      return
+    }
+    if (this.data.kouyi_money == '') {
+      wx.showToast({
+        title: '请填写口译费用',
+        icon: 'none'
+      })
+      return
+    }
     wx.showLoading({
       title: '提交中',
       mask: true
@@ -675,7 +711,10 @@ Page({
       source: this.data.source,
       file:this.data.tempFilePath,
       second: this.data.miao,
-      photoUrl:aub_images
+      photoUrl:aub_images,
+      written_money: this.data.biyi_money,
+      oral_money: this.data.kouyi_money,
+      other: this.data.beizhu
     }
     if (this.data.code == 0) {
       console.log(0)

@@ -1,4 +1,5 @@
 // pages/detil/detil.js
+var app = getApp();
 var util = require("../../utils/util.js")
 const innerAudioContext = wx.createInnerAudioContext()
 Page({
@@ -35,7 +36,11 @@ Page({
     grade_num:'',
     grade_name:'',
     dj_top:'',
-    photoUrl:[]
+    photoUrl:[],
+    page:1,
+    select:[],
+    zan_tf:false,
+    get_user:true,
   },
 
   /**
@@ -54,9 +59,26 @@ Page({
     var longitude = wx.getStorageSync('longitude') || ''
     this.setData({
       openid: openid,
+      detil_id: detil_id,
       longitude: longitude,
       latitude: latitude
     })
+    if (app.globalData.userInfo.nickName) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        get_user: false
+      })
+
+    } else {
+      app.userInfoReadyCallback = res => {
+        //console.log('userInfoReadyCallback: ', res.userInfo);
+        //console.log('获取用户信息成功');
+        that.setData({
+          userInfo: res.userInfo,
+          get_user: false
+        })
+      }
+    }
     var share_detil = wx.getStorageSync('share_detil') || ''
     if (share_detil){
       wx.getLocation({ // 请求位置信息
@@ -85,19 +107,8 @@ Page({
         show_dong: true
       })
     })
-    //分享标题
-    wx.request({
-      //判断
-      url: '' + util.ajaxurl +'random_text.php',
-      data: {
-      },
-      method: 'GET',
-      success: function (res) {
-        that.setData({
-          tit: res.data.data
-        })
-      }
-    })
+    
+    //增加浏览量
     wx.request({
       url: '' + util.ajaxurl +'browse_plus.php',
       data: {
@@ -107,6 +118,7 @@ Page({
       success: function (res) {
       }
     })
+    //获取翻译官详情
     wx.request({
       url: '' + util.ajaxurl +'trandlator_details.php',
       data: {
@@ -125,6 +137,11 @@ Page({
             aaa = yuyan2_arr[i] + '、'
           }
           yuyan2.push(aaa)
+        }
+        if(data.wx_likes==1){
+          that.setData({
+            zan_tf:true
+          })
         }
         var percentage = data.percentage.split('%')[0]/100
         var dj_top = (160 * percentage)+'rpx'
@@ -153,7 +170,28 @@ Page({
           grade_num: data.grade_num,
           grade_name: data.grade_name,
           dj_top: dj_top,
-          photoUrl: data.photoUrl
+          photoUrl: data.photoUrl,
+          comment_num: data.comment_num,
+          wx_likes: data.wx_likes
+        })
+      },
+      complete: function () {
+        wx.hideLoading()
+      }
+    })
+    //评论列表
+    wx.request({
+      url: '' + util.ajaxurl + 'lists_comment.php',
+      data: {
+        type: 2,
+        type_id: detil_id,
+        openid1: that.data.openid,
+        page: 1,
+      },
+      method: 'GET',
+      success: function (res) {
+        that.setData({
+          select: res.data.data
         })
       },
       complete: function () {
@@ -173,7 +211,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var that=this
+    util.get_title(that)
+  },
+  //拉起授权
+  getUserInfo: function () {
+    var that = this
+    wx.getUserInfo({
+      success: function (res) {
+        //console.log(res.userInfo)
+        getApp().globalData.userInfo = res.userInfo
+        that.setData({
+          get_user: false,
+          userInfo: res.userInfo
+        })
+      }
+    })
   },
   ckwxid: function (e) {
     this.setData({
@@ -240,6 +293,102 @@ Page({
       complete: function (res) { },
     })
   },
+  //调起输入框
+  change_wei_shuru_tf:function(){
+    this.setData({
+      wei_shuru_tf:true,
+    })
+  },
+  
+  //获取评论
+  get_pinglun:function(e){
+    this.setData({
+      wei_shuru_tf: false,
+      shuru_value : e.detail.value
+  })
+  },
+  //发送评论
+  send_pinglun: function (e) {
+    var that=this
+    if (e.detail.value==''){
+      return
+    }
+    wx.request({
+      url: '' + util.ajaxurl + 'get_comments.php',
+      data: {
+        type: 3,
+        type_id: that.data.detil_id,
+        openid1: that.data.openid,
+        content: e.detail.value,
+        wx_name: that.data.userInfo.nickName,
+        wx_img: that.data.userInfo.avatarUrl,
+      },
+      method: 'GET',
+      success: function (res) {
+        wx.showToast({
+          title: res.data.message,
+          icon: 'none'
+        })
+        if (res.data.code==1){
+          that.onLoad()
+        }
+      }
+    })
+    
+   
+
+  },
+  //点赞
+  click_zan: function () {
+    var that = this
+    if (that.data.zan_tf) {
+      return
+    }
+    wx.request({
+      url: '' + util.ajaxurl + 'get_likes.php',
+      data: {
+        type: 3,
+        type_id: that.data.detil_id,
+        openid1: that.data.openid,
+        wx_name: that.data.userInfo.nickName,
+        wx_img: that.data.userInfo.avatarUrl,
+      },
+      method: 'GET',
+      success: function (res) {
+        wx.showToast({
+          title: res.data.message,
+          icon: 'none'
+        })
+        if (res.data.code == 1) {
+          that.onLoad()
+        }
+
+
+      }
+    })
+  },
+  //删除评论
+  shanchu_pinglun: function (e) {
+    var that = this
+    var shanchu_id = e.currentTarget.dataset.shanchu_id
+    wx.request({
+      url: '' + util.ajaxurl + 'order_de_ct.php',
+      data: {
+        id: shanchu_id
+      },
+      method: 'GET',
+      success: function (res) {
+        //console.log(res.data.code)
+        wx.showToast({
+          title: res.data.message,
+          icon: 'none'
+        })
+        if (res.data.code == 1) {
+          that.onLoad()
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -271,7 +420,41 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    var that = this
+    var page = that.data.page + 1
+    that.setData({
+      page: page
+    })
+    //评论列表
+    wx.request({
+      url: '' + util.ajaxurl + 'lists_comment.php',
+      data: {
+        type: 2,
+        type_id: that.data.detil_id,
+        openid1: that.data.openid,
+        page: page,
+      },
+      method: 'GET',
+      success: function (res) {
+        if (res.data.data == '') {
+          wx.showToast({
+            title: '已经到底了',
+            icon: 'none'
+          })
+          return
+        }
+        that.setData({
+          select: res.data.data.concat(res.data.data)
+        })
+      },
+      complete: function () {
+        wx.hideLoading()
+      }
+    })
   },
 
   /**

@@ -53,6 +53,36 @@
         <text>x</text>
       </view>
     </view>
+    <view class='geren'>
+        个人报价
+    </view>
+    <view class='fu clearfix'>
+      <view class='fl'>
+        笔译费用
+      </view>
+      <input class='fl' style="width:368rpx; margin-left:30rpx; text-align: center;"  bindinput='biyi_value' placeholder-class='place' value="{{biyi_money}}" placeholder="请填写笔译费用"></input>
+      <view class='fr'>
+        元/千字
+      </view>
+    </view>
+    <view class='fu clearfix'>
+      <view class='fl'>
+        口译费用
+      </view>
+      <input class='fl' style="width:368rpx; margin-left:30rpx;text-align: center;"   bindinput='kouyi_value' placeholder-class='place' value="{{kouyi_money}}" placeholder="请填写口译费用"></input>
+      <view class='fr'>
+        元/小时
+      </view>
+    </view>
+    <view class='fu clearfix'>
+      <view>
+        其他备注（选填）
+      </view>
+      <textarea placeholder='请填写您的其他备注' bindinput='beizhu_value' value='{{beizhu}}' wx-if="{{textarea_tf}}"></textarea>
+      <view class="textarea" wx-if="{{!textarea_tf}}">
+        {{beizhu}}
+      </view>
+    </view>
     <image src='/pages/image/border.png' class='border'></image>
     <view class='caiyi'>
       <view class='clearfix caiyi_fu'>

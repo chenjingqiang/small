@@ -1,0 +1,5 @@
+<!--pages/fapiao/fapiao.wxml-->
+<text>pages/fapiao/fapiao.wxml</text>
+<button bindtap="kaiqi">
+  aaa
+</button>

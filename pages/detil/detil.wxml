@@ -1,5 +1,7 @@
 <!--pages/detil/detil.wxml-->
 <view class='detil'>
+ <button open-type="getUserInfo" id='getUserInfo' bindgetuserinfo="getUserInfo" catchtouchmove='true'  wx-if="{{get_user}}" ></button>
+  
     <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
     <view class='tanchuang' wx-if="{{!t_f}}" catchtouchmove='true'>
     <image class='x' src='/pages/image/guanbi2.png' bindtap='change_wxid'></image>
@@ -77,6 +79,9 @@
               <image src="{{item.img}}" class="fl"></image>
               <text class="fl">{{item.name}}</text>
             </view>
+            <button open-type="share" class="share fr" >
+              <image src="../image/zhuanfa.jpg"></image>
+            </button>
           </view>
         </view>
       </view>
@@ -136,19 +141,61 @@
         {{jingli}}
       </view>
     </view>
-    <view class="foot_fix">
-      <view class='list_sub fl' bindtap='ckwxid'>
-          查看联系方式
-      </view>
-      <button open-type="share" >
-        <image src="../image/zhuanfa.png"></image>
-      </button>
-      
-      <!-- <button>
-        转发
-      </button> -->
-      
+
+    <!-- 评论 -->
+    <view class="bor2">
     </view>
+    <view class="con2">
+      <view class="con2_title">
+        <view class="fl" style="color:#333;">
+          评论 {{comment_num}}
+        </view>
+        <view class="fr">
+          粉蜜 {{wx_likes}}
+        </view>
+      </view>
+      <view class="list_fu" wx-if="{{select!=''}}">
+        <view class="list2 clearfix" wx:for="{{select}}" wx:key="{{index}}">
+          <image src="{{item.wx_img}}"  class="touxiang2 fl" ></image>
+          <view class="fl">
+            <view class="name">{{item.wx_name}}</view>
+            <view class="neirong">
+              {{item.content}}
+            </view>
+            <view class="time clearfix">
+              {{item.datetime}}
+              <view class="fr shanchu" data-shanchu_id="{{item.id}}" bindtap="shanchu_pinglun" wx-if="{{item.comts_status==1}}">删除</view>
+              
+            </view>
+          </view>
+        </view>
+      
+      </view>
+      <image src='/pages/image/rob_kong.jpg' class="rob_kong" wx-if="{{select==''}}"></image>
+
+
+    </view>
+    <input class="wei_shuru" type='text' wx-if="{{wei_shuru_tf}}" focus="{{wei_shuru_tf}}" bindblur="get_pinglun" bindconfirm="send_pinglun" confirm-type="send" adjust-position="false" value="{{shuru_value}}">
+    
+    </input>
+    <!-- 尾部定位 -->
+    <view class="footer_wei clearfix">
+      <view class="fl wei_pinglun" bindtap="change_wei_shuru_tf">
+        <image src='/pages/image/pinglun.png'></image>
+        评论
+      </view>
+      <view class="fl wei_bor">
+
+      </view>
+      <view class="{{zan_tf ? 'fl wei_zan':'fl'}}" bindtap="click_zan">
+        <image src="{{zan_tf ? '/pages/image/hudie2.png':'/pages/image/hudie.png'}}"></image>
+        粉蜜
+      </view>
+      <view class="fr chakan" bindtap="ckwxid">
+        查看联系方式
+      </view>
+    </view>
+    
     
 
 </view>

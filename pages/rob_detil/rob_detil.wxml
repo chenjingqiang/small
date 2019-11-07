@@ -1,0 +1,157 @@
+<view class="rob_detil">
+  <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
+  <button open-type="getUserInfo" id='getUserInfo' bindgetuserinfo="getUserInfo" catchtouchmove='true'  wx-if="{{get_user}}" ></button>
+  
+  <!-- 查看联系方式弹窗 -->
+  <view class='tanchuang' wx-if="{{!t_f}}" catchtouchmove='true'>
+    <image class='x' src='/pages/image/guanbi2.png' bindtap='change_wxid'></image>
+    <view class='tt_tit'>
+      查看联系方式
+    </view>
+    <view class='tt_wx'>
+      求译者联系方式：
+    </view>
+    <view class='tt_wx'>{{data.wxid}}
+    </view>
+    <view class='tt_sub' bindtap='fuzhi'>
+      复制联系方式
+    </view>
+  </view>
+
+
+  <!-- 认证翻译官弹窗 -->
+  <view class='tanchuang3' wx-if="{{!t_f3}}" catchtouchmove='true'>
+    <image class='x' src='/pages/image/guanbi3.png' bindtap='change_tanchuang3'></image>
+    <text class="t1">使用此功能</text>
+    <text>您需认证成为翻译官</text>
+    <button open-type="getUserInfo" id='show-author2' bindgetuserinfo="getUserInfo"  wx-if="{{get_user}}" ></button>
+    <view bindtap="go_renzheng">
+      前往认证翻译官
+    </view>
+  </view>
+
+
+
+
+  <view class="con">
+    <view class='fu clearfix'>
+      <view class='tit_l'>
+        服务语言：
+      </view>
+      <view class='tit_r'>
+        {{data.language3}}
+        <image src='/pages/image/zhuanhuan.jpg' class='zhuanhuan'></image>
+        {{data.language4}}
+      </view>
+    </view>
+    <view class='fu clearfix'>
+      <view class='tit_l'>
+        项目时间：
+      </view>
+      <view class='tit_r'>
+        {{data.project_time}}
+      </view>
+    </view>
+    <view class='fu clearfix'>
+      <view class='tit_l '>
+        服务地点：
+      </view>
+      <view class='tit_r'>
+        {{data.project_address}}
+      </view>
+    </view>
+    <view class='fu clearfix'>
+      <view class='tit_l '>
+        服务内容：
+      </view>
+      <view class='tit_r'>
+        {{data.project_theme}}
+      </view>
+    </view>
+    <view class='fu clearfix'>
+      <view class='tit_l '>
+        服务要求：
+      </view>
+      <view class='tit_r'>
+        {{data.project_skill}}
+      </view>
+    </view>
+    
+    <view class='fu clearfix'  wx-if="{{data.scene}}">
+      <view class='tit_l '>
+        服务标签：
+      </view>
+      <view class='tit_r'>
+        {{data.scene}}
+      </view>
+    </view>
+    <view class='yaoqiu' wx-if="{{data.text}}">
+      <view >
+        翻译要求：
+      </view>
+      <view class="text" >{{data.text}}</view> 
+    </view>
+    <view class="clearfix">
+      <view class="liulan fl">
+        <image src='/pages/image/rob_liulan.png'  class="fl"></image>
+        浏览{{data.order_browse}}次
+      </view>
+    </view>
+    
+  </view>
+  <view class="bor">
+  </view>
+  <view class="con2">
+    <view class="con2_title">
+      <view class="fl" style="color:#333;">
+        提问 {{data.comment_num}}
+      </view>
+      <view class="fr">
+        赞 {{data.order_likes}}
+      </view>
+    </view>
+    <view class="list_fu" wx-if="{{select!=''}}">
+      <view class="list clearfix" wx:for="{{select}}" wx:key="{{index}}">
+        <image src="{{item.wx_img}}"  class="touxiang fl" ></image>
+        <view class="fl">
+          <view class="name">{{item.wx_name}}</view>
+          <view class="neirong">
+             {{item.content}}
+          </view>
+          <view class="time clearfix">
+            {{item.datetime}}
+            <view class="fr shanchu" data-shanchu_id="{{item.id}}" bindtap="shanchu_pinglun" wx-if="{{item.comts_status==1}}">删除</view>
+            
+          </view>
+        </view>
+      </view>
+    
+    </view>
+    <image src='/pages/image/rob_kong.jpg' class="rob_kong" wx-if="{{select==''}}"></image>
+
+
+  </view>
+  <input class="wei_shuru" type='text' wx-if="{{wei_shuru_tf}}" focus="{{wei_shuru_tf}}" bindblur="get_pinglun" bindconfirm="send_pinglun" confirm-type="send" adjust-position="false" value="{{shuru_value}}">
+  
+  </input>
+  <!-- 尾部定位 -->
+  <view class="footer_wei clearfix">
+    <view class="fl wei_pinglun" bindtap="change_wei_shuru_tf">
+       <image src='/pages/image/pinglun.png'></image>
+      提问
+    </view>
+    <view class="fl wei_bor">
+
+    </view>
+    <view class="{{zan_tf ? 'fl wei_zan':'fl'}}" bindtap="click_zan">
+     <image src="{{zan_tf ? '/pages/image/zan2.png':'/pages/image/zan.png'}}"></image>
+      赞
+    </view>
+    <view class="fr chakan" bindtap="ckwxid">
+      查看联系方式
+    </view>
+  </view>
+
+
+
+</view>
