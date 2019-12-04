@@ -1,20 +1,7 @@
 
 <view class='release'>
   <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
-  <!-- 填写联系方式弹窗 -->
-  <view class='tanchuang_weixin' catchtouchmove='true' wx-if="{{!t_f2}}">
-    <image src='../image/guanbi.png' class='tanchuang_weixin_close' bindtap='tanchuang_weixin_close'></image>
-    <view class='tw_tit'>
-      使用本功能，需要您填写联系方式
-    </view>
-    <input placeholder='请输入您的联系方式' placeholder-class='txpl' bindinput='get_wxid'></input>
-    <view  class='tw_tit2'>
-      输入您的联系方式，则表示您同意与翻译官交换联系方式，接受服务。
-    </view>
-    <view class='sub' bindtap='wxid_sub'>
-      提交
-    </view>
-  </view>
+  
   <image src="../image/rod_qp.png" class="rob_qp" bindtap="change_rob_qp" wx-if="{{rob_qp_tf==0}}"></image>
   <view class='title clearfix'>
     <view bindtap='release'>
@@ -47,11 +34,23 @@
     </view>
     <input placeholder='请输入所需项目，如：展会、谈判' maxlength='15' bindinput='get_neirong'></input>
   </view>
-  <view class='fus clearfix' style='border:none;'>
+  <view class='fus clearfix'>
     <view class='type_zi'>
       专业要求
     </view>
     <input placeholder='请输入专业需求，如：医学、时尚' maxlength='15' bindinput='get_yaoqiu'></input>
+  </view>
+  <view class='fus clearfix'>
+    <view class='type_zi'>
+      微信号
+    </view>
+    <input placeholder='请填写您的微信号' bindinput='get_wxid'></input>
+  </view>
+  <view class='fus clearfix'  style='border:none;'>
+    <view class='type_zi'>
+      费用预算
+    </view>
+    <input placeholder='请输入费用预算' bindinput='get_yusuan'></input>
   </view>
   <view class='bor2' style='margin-top:0;'></view>
   <!-- 标签选择 -->
@@ -92,7 +91,7 @@
   </view>
   
   <view class='bor'></view>
-  <!-- 
+  
   <view class='fus clearfix' style="padding-top:0;">
     <view class='type_zi'>
       发布时长
@@ -102,20 +101,20 @@
       <view>天</view>
     </view>
   </view>
-  <view class='shangjin clearfix'>
+  <view class='shangjin clearfix' wx-if="{{dynamic_show==1}}">
     <view class='type_zi'>
-      翻译赏金 <text style='font-weight: normal;'>（选填）</text>
+      排序赏金 <text style='font-weight: normal;'>（选填）</text>
     </view>
     <view class='type_r fr'>
       <input placeholder='输入赏金' bindinput='get_money'  type="number"></input>
       <view>元</view>
     </view>
   </view>
-  <view class='shangjin_tishi clearfix'>
+  <view class='shangjin_tishi clearfix' wx-if="{{dynamic_show==1}}">
     <text class='l'>赏金越高订单排名越靠前</text>
   </view> 
-  <view class='bor'></view>
-  -->
+  <view class='bor' wx-if="{{dynamic_show==1}}"></view>
+ 
   <view class='sub_fu clearfix'>
     <view class='l'>
       平台费用：<text>{{money}}元</text> 

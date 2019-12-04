@@ -71,15 +71,12 @@
   margin-top: 30rpx;
 }
 .textarea{
-  position: relative;
-  z-index: 1;
   width: 670rpx;
   height: 168rpx;
   margin: 0 auto;
   font-size: 26rpx;
   color: #333;
   line-height: 38rpx;
-  overflow: hidden;
 }
 .number{
   font-size: 26rpx;

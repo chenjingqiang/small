@@ -1,0 +1,5 @@
+
+<view class="zizhi">
+  <image wx:for="{{mas}}" wx:key="{{index}}" src="{{item}}" mode="widthFix" data-index="{{index}}" bindtap="handleImagePreview" bindload="load"></image>
+</view>
+

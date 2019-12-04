@@ -1,0 +1,199 @@
+/* pages/vip/vip.wxss */
+page,.vip{
+  height: 100%;
+}
+.vip{
+  background: url('https://www.uear.net/img/vipbj.jpg') no-repeat center;
+  background-size:100% 100%; 
+  overflow: hidden;
+}
+.con{
+  background: url(' https://www.uear.net/img/vipyy.png') no-repeat center;
+  background-size:100% 100%; 
+  position: fixed;
+  width: 636rpx;
+  height: 742rpx;
+  left: 50%;
+  top: 50%;
+  margin-left: -317rpx;
+  margin-top: -425rpx;
+}
+.huang{
+  position: absolute;
+  width: 130rpx;
+  height: 130rpx;
+  top: -50rpx;
+  left: 50%;
+  margin-left: -65rpx;
+}
+.quanyi{
+  display: block;
+  width: 369rpx;
+  height: 203rpx;
+  margin: 0 auto;
+  margin-top: 120rpx;
+}
+.list{
+  margin-left: 60rpx;
+  margin-top: 88rpx;
+}
+.list image{
+  display: block;
+  width: 134rpx;
+  height: 134rpx;
+  margin: 0 auto;
+}
+.list view{
+  width: 134rpx;
+  margin-right: 55rpx;
+}
+.list text{
+  display: block;
+  width: 134rpx;
+  text-align: center;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #303245;
+  letter-spacing: 0.82rpx;
+}
+.but{
+  position: fixed;
+  left: 0;
+  bottom:0;
+  width: 100%;
+  height: 108rpx;
+  background: #E4C174;
+  font-size: 36rpx;
+  color: #303245;
+  letter-spacing: 1.06rpx;
+  text-align: center;
+  line-height: 108rpx;
+}
+.but2{
+  background: #CCCCCC;
+  color: #FFFFFF;
+}
+.shezhi{
+  width: 542rpx;
+  height: 260rpx;
+  position: fixed;
+  margin-left: -271rpx;
+  margin-top: -130rpx;
+  left: 50%;
+  top: 50%;
+  z-index: 11;
+  background: #fff;
+  
+}
+.shezhi .title{
+  height: 90rpx;
+  background: #F9E3C3;
+  font-size: 34rpx;
+  color: #9F6533;
+  letter-spacing: 1.78rpx;
+  line-height: 90rpx;
+  text-align: center;
+}
+.shezhi input{
+  width: 100%;
+  height: 90rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #333333;
+}
+.anniu {
+  width: 100%;
+  border-top: 1px solid #ccc;
+}
+.anniu view{
+  width: 50%;
+  text-align: center;
+  font-size: 32rpx;
+  color: #686868;
+  letter-spacing: 1.67rpx;
+  line-height: 80rpx;
+  height: 80rpx;
+}
+.anniu .sub{
+  color: #9E6331;
+  box-sizing: border-box;
+  border-left:1rpx solid #ccc; 
+}
+.success{
+  width: 542rpx;
+  height: 598rpx;
+  position: fixed;
+  margin-left: -271rpx;
+  margin-top: -299rpx;
+  left: 50%;
+  top: 50%;
+  z-index: 11;
+  background: #fff;
+  text-align: center;
+  border-radius: 24rpx;
+}
+.success .title{
+  font-size: 36rpx;
+  color: #9F6533;
+  letter-spacing: 1.88rpx;
+  margin-top: 60rpx;
+}
+.success .tishi{
+  font-size: 30rpx;
+  color: #666666;
+  letter-spacing: 1.57rp
+}
+.success .close{
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  width: 80rpx;
+  height: 80rpx;
+}
+.success .succ_bj{
+  width: 334rpx;
+  height: 201rpx;
+  margin-top: 30rpx;
+  margin-bottom: 40rpx;
+}
+.success button{
+  width: 307rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #F9E3C3;
+  font-size: 32rpx;
+  color: #9E6331;
+  letter-spacing: 1.67rpx;
+  border-radius: 35rpx;
+  margin-top: 33rpx;
+  box-shadow: 0 4rpx 11rpx 0 rgba(176,125,79,0.40);
+}
+.ding{
+  width: 100%;
+  position:fixed;
+  bottom: 148rpx;
+  left: 0;
+}
+.shibai_tishi{
+  font-size: 28rpx;
+  color: #E2442D;
+  margin-top: 20rpx;
+  line-height: 34rpx;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.shibai_tishi image{
+  width: 34rpx;
+  height: 34rpx;
+  margin-right: 20rpx;
+}
+.tishi{
+  width: 100%;
+  position: absolute;
+  bottom: 180rpx;
+  font-size: 32rpx;
+  color: #CDA031;
+  letter-spacing: 0.94rpx;
+  text-align: center;
+}

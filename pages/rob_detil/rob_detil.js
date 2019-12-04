@@ -14,7 +14,6 @@ Page({
     type:0,
     yinying:true,
     t_f: true,
-    weixin:'',
     t_f3: true,
     wei_shuru_tf:false,
     shuru_value:'',
@@ -159,7 +158,7 @@ Page({
       }
     })
   },
-  //查看联系方式
+  //查看微信号
   ckwxid: function (e) {
     if (this.data.type) {
       this.setData({
@@ -183,7 +182,7 @@ Page({
   fuzhi: function () {
     var that = this
     wx.setClipboardData({
-      data: this.data.weixin,
+      data: this.data.data.or_phone,
       success: function (res) {
       }
     })

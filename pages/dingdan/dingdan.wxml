@@ -122,7 +122,7 @@
       
       <view class='fu clearfix'>
         <view class='tit_l '>
-          联系方式：
+          微信号：
         </view>
         <view class='tit_r'>
           {{item.mywxid}}

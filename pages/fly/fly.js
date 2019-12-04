@@ -175,6 +175,16 @@ Page({
       }
     })
   },
+  go_zizhi: function () {
+    wx.navigateTo({
+      url: '/pages/zizhi/zizhi',
+    })
+  },
+  go_shuoming:function(){
+    wx.navigateTo({
+      url: '/pages/shuoming/shuoming',
+    })
+  },
   go_kouyi:function(){
     wx.navigateTo({
       url: '/pages/release_kouyi/release_kouyi',

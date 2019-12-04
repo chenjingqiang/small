@@ -1,20 +1,5 @@
 
 <view class='release'>
-  <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
-  <!-- 填写联系方式弹窗 -->
-  <view class='tanchuang_weixin' catchtouchmove='true' wx-if="{{!t_f2}}">
-    <image src='../image/guanbi.png' class='tanchuang_weixin_close' bindtap='tanchuang_weixin_close'></image>
-    <view class='tw_tit'>
-      使用本功能，需要您填写联系方式
-    </view>
-    <input placeholder='请输入您的联系方式' placeholder-class='txpl' bindinput='get_wxid'></input>
-    <view  class='tw_tit2'>
-      输入您的联系方式，则表示您同意与翻译官交换联系方式，接受服务。
-    </view>
-    <view class='sub' bindtap='wxid_sub'>
-      提交
-    </view>
-  </view>
 
   <view class='lange clearfix'>
       <image src='/pages/image/yiwen.jpg' class='yiwen fl'></image>
@@ -28,6 +13,12 @@
     </view>
     <input placeholder='请输入项目时间' maxlength='15' bindinput='get_time'></input>
   </view>
+  <view class='fus clearfix'>
+    <view class='type_zi'>
+      微信号
+    </view>
+    <input placeholder='请输入微信号' bindinput='get_phone'></input>
+  </view>
   <view class='fus clearfix' style='border:none;'>
     <view class='type_zi'>
       专业要求
@@ -40,7 +31,7 @@
     <textarea class='textarea' placeholder='请输入您的项目需求...' maxlength="-1"  bindinput="inputs" value='{{value}}'></textarea>
   </view>
   <view class='bor'></view>
-  <view class='fus clearfix' style="padding-top:0; border:none; margin-top:300rpx;">
+  <view class='fus clearfix ding'>
     <view class='type_zi'>
       口译赏金
     </view>

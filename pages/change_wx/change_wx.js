@@ -17,7 +17,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '修改联系方式'
+      title: '修改微信号'
     })
     var openid = wx.getStorageSync('openid') || ''
     this.setData({
@@ -47,6 +47,11 @@ Page({
         if (res.data.data.wxid){
           that.setData({
             place: res.data.data.wxid,
+            wxid: ''
+          })
+        }else{
+          that.setData({
+            place: '请输入您的微信号',
             wxid: ''
           })
         }

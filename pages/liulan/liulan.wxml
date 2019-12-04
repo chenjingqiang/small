@@ -36,7 +36,11 @@
        </view>
       <view class='clearfix'>
         <view class='fl'>
-          <image src='{{item.wx_img}}' class='touxiang'></image>
+          <view class="touxiang_fu">
+            <image src='{{item.wx_img}}' class='touxiang'></image>
+            <image src='../image/touxiangbor.png' wx-if="{{item.member_status==1}}" class="touxiang2"></image>
+          </view>
+          
           <view class='sex'  wx-if="{{item.wx_sex=='女'}}">
             <image src='../image/nv_m.png'></image>
             {{item.wx_age}}岁
@@ -58,8 +62,10 @@
         </view>
         <view class='fl list_r'>
           <view class='name clearfix'>
+            <image src="../image/zuanshi2.png" class="zuanshi fl"  wx-if="{{item.member_status==1}}" ></image>
             <view class="fl">
-              <text wx:for="{{item.wx_name}}"  wx:for-item="name_list" wx:key="{{index}}" class="{{name_list.status==1? 'red': ''}}">{{name_list.name}}</text>
+              <text wx:for="{{item.wx_name}}"  wx:for-item="name_list" wx:key="{{index}}" class="{{name_list.status==1? 'red': ''}}" wx-if="{{item.member_status==0}}">{{name_list.name}}</text>
+              <text wx:for="{{item.wx_name}}"  wx:for-item="name_list" wx:key="{{index}}" class="vip" wx-if="{{item.member_status==1}}">{{name_list.name}}</text>
             </view>
             <view class="fl hua" wx-if="{{item.flower_imgs}}" >
               <image src="{{list}}" class="fl" wx:for="{{item.flower_imgs}}"   wx:for-item="list" wx:key="{{index}}"></image>

@@ -15,7 +15,9 @@ Page({
     wx_name:'立等翻译官',
     message:'',
     latitude:'',
-    longitude:''
+    longitude:'',
+    member_status:0,
+    resume_status:0
   },
 
   /**
@@ -58,12 +60,14 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res.data)
+        //console.log(res)
         if (res.data.code==1){
           that.setData({
             code: res.data.code,
             wx_img: res.data.data.wx_img,
             wx_name: res.data.data.wx_name,
+            member_status: res.data.data.member_status,
+            resume_status: res.data.data.resume_status
           })
         } else if (res.data.code == 2){
           that.setData({
@@ -89,6 +93,11 @@ Page({
       }
     })
     
+  },
+  go_vip: function () {
+    wx.navigateTo({
+      url: '/pages/vip/vip',
+    })
   },
   go_xiaoxi: function () {
     wx.navigateTo({
@@ -120,6 +129,53 @@ Page({
       url: '/pages/xieyi/xieyi',
     })
   },
+  //上传简历
+  jianli:function(){
+    var that=this
+    wx.chooseMessageFile({
+      count: 1,
+      type: 'file',
+      success(res) {
+        wx.showLoading({
+          title: '上传中',
+          mask:true
+        })
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths= res.tempFiles[0].path
+        //console.log(tempFilePaths)
+        var data={
+          openid:that.data.openid
+        }
+        wx.uploadFile({
+          url: '' + util.ajaxurl + 'translator_resume.php',
+          filePath: tempFilePaths,
+          header: {
+            'content-type': 'multipart/form-data'
+          },
+          name: 'file',
+          formData: data,
+          success: function (res) {
+            var data=JSON.parse(res.data)
+            wx.hideLoading()
+            wx.showToast({
+              title: data.message
+            })
+            that.onShow()
+          },
+          fail:function(){
+            wx.hideLoading()
+            wx.showToast({
+              title: '上传失败',
+              icon:'none'
+            })
+          }
+        })
+        
+      }
+    })
+  },
+
+
 
   //底部导航
   fabu: function() {

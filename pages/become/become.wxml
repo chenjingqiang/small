@@ -25,9 +25,9 @@
     </view>
     <view class='fu clearfix'>
       <view class='fl'>
-        联系方式
+        微信号
       </view>
-      <input class='fr'  bindinput='phone_value' placeholder-class='place' value="{{wxid}}" placeholder="请填写联系方式"></input>
+      <input class='fr'  bindinput='phone_value' placeholder-class='place' value="{{wxid}}" placeholder="请填写微信号"></input>
     </view>
     <view class='fu clearfix'>
       <image src='/pages/image/right.png' class='right'></image>
@@ -78,7 +78,7 @@
       <view>
         其他备注（选填）
       </view>
-      <textarea placeholder='请填写您的其他备注' bindinput='beizhu_value' value='{{beizhu}}' wx-if="{{textarea_tf}}"></textarea>
+      <textarea placeholder='请填写您的其他备注' bindinput='beizhu_value' value='{{beizhu}}' wx-if="{{textarea_tf}}" maxlength="-1"></textarea>
       <view class="textarea" wx-if="{{!textarea_tf}}">
         {{beizhu}}
       </view>
@@ -135,7 +135,7 @@
       <view>
         工作经历
       </view>
-      <textarea placeholder='请填写您的工作经历' bindinput='jingli_value' value='{{jingli}}' wx-if="{{textarea_tf}}"></textarea>
+      <textarea placeholder='请填写您的工作经历' bindinput='jingli_value' value='{{jingli}}' wx-if="{{textarea_tf}}" maxlength="-1"></textarea>
       <view class="textarea" wx-if="{{!textarea_tf}}">
         {{jingli}}
       </view>

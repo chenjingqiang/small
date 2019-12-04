@@ -1,0 +1,61 @@
+<!--pages/vip/vip.wxml-->
+<view class="vip">
+  <view class="yinying" wx-if="{{yinying}}"></view>
+  <!-- 金额弹窗 -->
+  <view class="shezhi" wx-if="{{money_box}}">
+    <view class="title">
+      请设置联系方式收费金额
+    </view>
+    <input type="number" placeholder="请输入金额" bindinput="money"></input>
+    <view class="clearfix anniu">
+      <view class="fl" bindtap="quxiao">取消</view>
+      <view class="fl sub" bindtap="sub">完成</view>
+    </view>
+  </view>
+  <view class="con">
+    <image class="huang" src="../image/huang.png"></image>
+    <image class="quanyi" src="../image/quanyi.png"></image>
+    <view class="clearfix list">
+      <view class="fl">
+        <image src="{{code==1? '../image/lianxi.png' : '../image/lianxif.png'}}"></image>
+        <text>联系方式 \n 加密</text>
+      </view>
+      <view class="fl">
+        <image  src="{{code==1? '../image/ziliao.png' : '../image/ziliaof.png'}}"></image>
+        <text>资料信息 \n 优先展示</text>
+      </view>
+      <view class="fl">
+        <image  src="{{code==1? '../image/gaoxiao.png' : '../image/gaoxiaof.png'}}"></image>
+        <text>高效接单</text>
+      </view>
+    </view>
+  </view>
+  <view class="tishi" wx-if="{{code==1}}">
+    联系方式收费金额：{{charge_money}}元
+  </view>
+  <view class="tishi" wx-if="{{code==201}}">
+    成为VIP所得收益将由平台抽取30%
+  </view>
+  <view class="ding">
+    <view class='shibai_tishi' wx-if="{{code==2}}">
+      <image src='../image/tishi.png'></image>
+      {{message}}
+    </view>
+  </view>
+  <!-- 第一次申请 -->
+  <view class="but"  bindtap="but" wx-if="{{code=='201'}}">
+      立即申请成为VIP
+  </view>
+  <!-- 重新申请 -->
+  <view class="but"  bindtap="but" wx-if="{{code=='2'}}">
+      重新申请
+  </view>
+   <!-- 修改金额 -->
+  <view class="but"  bindtap="but" wx-if="{{code=='1'}}">
+      修改联系方式收费金额
+  </view>
+   <!-- 审核中 -->
+  <view class="but but2"   wx-if="{{code=='0'}}">
+      审核中...
+  </view>
+</view>

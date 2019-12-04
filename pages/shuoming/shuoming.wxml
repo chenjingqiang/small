@@ -1,0 +1,2 @@
+<!--pages/shuoming/shuoming.wxml-->
+<image src="https://www.uear.net/kongzc.jpg" mode="widthFix" bindload="imageLoad" class="{{load ? 'bai':'ling'}}" ></image>

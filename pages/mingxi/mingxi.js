@@ -38,6 +38,10 @@ Page({
    */
   onShow: function () {
     var that=this
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
     util.get_title(that)
     wx.request({
       //判断
@@ -55,6 +59,9 @@ Page({
           })
         }
         
+      },
+      complete:function(){
+        wx.hideLoading()
       }
     })
   },

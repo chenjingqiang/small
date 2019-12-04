@@ -1,0 +1,7 @@
+/* pages/shuoming/shuoming.wxss */
+.bai{
+  width: 100%;
+}
+.ling{
+  width: 0;
+}

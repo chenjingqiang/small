@@ -1,0 +1,15 @@
+/* pages/zizhi/zizhi.wxss */
+page,.zizhi{
+  height: 100%;
+  overflow: hidden;
+}
+.zizhi{
+  background: url('https://www.uear.net/img/zz_bj.jpg') no-repeat center;
+  background-size:100% 100%; 
+}
+image{
+  display: block;
+  width: 526rpx;
+  margin: 0 auto;
+  margin-top: 60rpx;
+}

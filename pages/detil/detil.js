@@ -13,6 +13,8 @@ Page({
     latitude:'',
     yinying: true,
     t_f: true,
+    t_f2: true,
+    t_f3: true,
     nan_nv:'',
     name: '',
     age: '',
@@ -41,6 +43,12 @@ Page({
     select:[],
     zan_tf:false,
     get_user:true,
+    baojia:'',
+    member_status:'',
+    charge_money:'',
+    resume_money:'',
+    resume_status:'',
+    resume_url:''
   },
 
   /**
@@ -52,7 +60,6 @@ Page({
       title: '加载中',
       mask: true
     })
-    
     var openid = wx.getStorageSync('openid') || ''
     var detil_id = wx.getStorageSync('detil_id');
     var latitude = wx.getStorageSync('latitude') || ''
@@ -68,7 +75,6 @@ Page({
         userInfo: app.globalData.userInfo,
         get_user: false
       })
-
     } else {
       app.userInfoReadyCallback = res => {
         //console.log('userInfoReadyCallback: ', res.userInfo);
@@ -123,11 +129,13 @@ Page({
       url: '' + util.ajaxurl +'trandlator_details.php',
       data: {
         openid: detil_id,
+        openid1: this.data.openid,
         longitude: this.data.longitude,
         latitude: this.data.latitude
       },
       method: 'GET',
       success: function (res) {
+        //console.log(res.data.data)
         var data = res.data.data
         var yuyan2_arr = data.major_certificate
         var yuyan2 = []
@@ -138,13 +146,19 @@ Page({
           }
           yuyan2.push(aaa)
         }
-        if(data.wx_likes==1){
+        if (data.like_status==1){
           that.setData({
             zan_tf:true
           })
         }
         var percentage = data.percentage.split('%')[0]/100
         var dj_top = (160 * percentage)+'rpx'
+        if (data.other==''){
+          var baojia = '笔译费用：' + data.written_money + '元/千字 、口译费用：' + data.oral_money + '元/小时。'
+        }else{
+          var baojia = '笔译费用：' + data.written_money + '元/千字 、口译费用：' + data.oral_money + '元/小时，' + data.other
+        }
+       
         that.setData({
           nan_nv: data.wx_sex,
           name: data.wx_name,
@@ -172,7 +186,14 @@ Page({
           dj_top: dj_top,
           photoUrl: data.photoUrl,
           comment_num: data.comment_num,
-          wx_likes: data.wx_likes
+          wx_likes: data.wx_likes,
+          written_money: data.written_money,
+          baojia:baojia,
+          member_status: data.member_status,
+          charge_money: data.charge_money,
+          resume_status: data.resume_status,
+          resume_url: data.resume_url,
+          resume_money: data.resume_money
         })
       },
       complete: function () {
@@ -214,6 +235,71 @@ Page({
     var that=this
     util.get_title(that)
   },
+  //跳转简历
+  go_jianli:function(){
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
+    var that=this
+    var data_type = that.data.resume_url.split('.')[3]
+    wx.downloadFile({
+      url: that.data.resume_url, // 可以是后台返回的地址。这里写的是死的
+      success: function (res) {
+        //console.log(res)
+        var filePath = res.tempFilePath; // 小程序中文件的临时文件
+        wx.openDocument({
+          filePath: filePath,
+          fileType: data_type,
+          success: function (res) {
+            wx.hideLoading()
+            that.setData({
+              yinying: true,
+              t_f3: true,
+            })
+          },
+          fail: (e) => {
+            console.log(e);
+            wx.hideLoading()
+            wx.showToast({
+              title: '打开简历失败,请从新尝试',
+              icon:'none'
+            })
+          }
+        })
+      },
+      fail: (e) => {
+        console.log(e);
+        wx.hideLoading()
+        wx.showToast({
+          title: '下载简历失败',
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //更改简历状态
+  change_jianli:function(){
+    var that = this
+    wx.request({
+      url: '' + util.ajaxurl + 'ju_pay_re.php',
+      data: {
+        v_openid: that.data.detil_id,
+        u_openid: that.data.openid
+      },
+      method: 'GET',
+      success: function (res) {
+        if (res.data.code == 1 || res.data.code == 2){
+          that.go_jianli()
+        } else if (res.data.code == 3 ){
+          that.setData({
+            yinying: false,
+            t_f3: false,
+          })
+        }
+      }
+    })
+  },
   //拉起授权
   getUserInfo: function () {
     var that = this
@@ -228,11 +314,144 @@ Page({
       }
     })
   },
+  zhifu:function(e){
+    var that=this
+    if (e.currentTarget.dataset.money_type =='charge'){
+      wx.request({
+        url: '' + util.ajaxurl + 'pay.php',
+        data: {
+          openid: that.data.openid,
+          total_fee: that.data.charge_money
+        },
+        method: 'GET',
+        success: function (res) {
+          //console.log(res.data.data)
+          var data = res.data.data
+          wx.requestPayment({
+            timeStamp: data.timeStamp + '',//时间戳
+            nonceStr: data.nonceStr, //随机字符串长度
+            package: data.package,  //统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
+            signType: 'MD5', //签名算法
+            paySign: data.paySign,     //签名
+            success(res) {
+              wx.request({
+                url: '' + util.ajaxurl + 'member_success.php',
+                data: {
+                  v_openid: that.data.detil_id,
+                  u_openid: that.data.openid,
+                  money: that.data.charge_money
+                },
+                method: 'GET',
+                success: function (res) {
+                  if (res.data.code == 1) {
+                    that.setData({
+                      yinying: false,
+                      t_f: false,
+                      t_f2: true,
+                    })
+                  }
+                }
+              })
+            },
+            fail(res) { }
+          })
+
+        }
+      })
+    } else if (e.currentTarget.dataset.money_type == 'resume'){
+      wx.request({
+        url: '' + util.ajaxurl + 'pay_resume.php',
+        data: {
+          openid: that.data.openid,
+          total_fee: that.data.resume_money
+        },
+        method: 'GET',
+        success: function (res) {
+          //console.log(res.data.data)
+          var data = res.data.data
+          wx.requestPayment({
+            timeStamp: data.timeStamp + '',//时间戳
+            nonceStr: data.nonceStr, //随机字符串长度
+            package: data.package,  //统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
+            signType: 'MD5', //签名算法
+            paySign: data.paySign,     //签名
+            success(res) {
+              wx.request({
+                url: '' + util.ajaxurl + 'resume_success.php',
+                data: {
+                  v_openid: that.data.detil_id,
+                  u_openid: that.data.openid,
+                  money: that.data.resume_money
+                },
+                method: 'GET',
+                success: function (res) {
+                  if (res.data.code == 1) {
+                    that.go_jianli()
+                  }
+                }
+              })
+            },
+            fail(res) { }
+          })
+
+        }
+      })
+    }
+    
+  },
   ckwxid: function (e) {
-    this.setData({
-      yinying: false,
-      t_f: false,
-    })
+    var that=this
+    if (that.data.charge_money==0){
+      this.setData({
+        yinying: false,
+        t_f: false,
+      })
+      return
+    }
+    if (this.data.member_status == 1) {
+      wx.request({
+        url: '' + util.ajaxurl + 'ju_pay_m.php',
+        data: {
+          v_openid:that.data.detil_id,
+          u_openid: that.data.openid,
+        },
+        method: 'GET',
+        success: function (res) {
+          //console.log(res.data)
+          if (res.data.code == 1 || res.data.code == 2){
+            that.setData({
+              yinying: false,
+              t_f: false,
+            })
+          } else if (res.data.code == 3){
+            that.setData({
+              yinying: false,
+              t_f2: false,
+            })
+          }
+        }
+      })
+    }else{
+      //console.log('非会员')
+      this.setData({
+        yinying: false,
+        t_f: false,
+      })
+    }
+  },
+  close:function(e){
+    if (e.currentTarget.dataset.money_type == 'charge') {
+      this.setData({
+        yinying: true,
+        t_f2: true
+      })
+    }else{
+      this.setData({
+        yinying: true,
+        t_f3: true
+      })
+    }
+    
   },
   change_wxid: function () {
     this.setData({
@@ -280,7 +499,6 @@ Page({
       complete: function (res) { },
     })
   },
-  //
   //查看大图
   previewImg2: function (e) {
     var index=e.currentTarget.dataset.imgindex
@@ -305,7 +523,7 @@ Page({
     this.setData({
       wei_shuru_tf: false,
       shuru_value : e.detail.value
-  })
+    })
   },
   //发送评论
   send_pinglun: function (e) {
@@ -342,6 +560,10 @@ Page({
   click_zan: function () {
     var that = this
     if (that.data.zan_tf) {
+      wx.showToast({
+        title: '已经粉蜜过了',
+        icon:'none'
+      })
       return
     }
     wx.request({

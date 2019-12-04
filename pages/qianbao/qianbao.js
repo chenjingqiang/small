@@ -55,14 +55,13 @@ Page({
     })
     util.get_title(that)
     wx.request({
-      //判断
       url: '' + util.ajaxurl +'show_money.php',
       data: {
         openid: this.data.openid
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res.data.data)
+        console.log(res.data.data)
         that.setData({
           wxid: res.data.data.wxid,
           money: res.data.data.money,
@@ -117,6 +116,11 @@ Page({
     })
      
     
+  },
+  go_tixian:function(){
+    wx.navigateTo({
+      url: '../tixian/tixian',
+    })
   },
   /**
    * 生命周期函数--监听页面隐藏

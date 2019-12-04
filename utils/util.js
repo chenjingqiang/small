@@ -14,8 +14,8 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-var ajaxurl ='https://www.uear.net/test/'
-//var ajaxurl = 'https://www.uear.net/ajax4/'
+//var ajaxurl ='https://www.uear.net/test/'
+var ajaxurl = 'https://www.uear.net/ajax4/'
 
 //获取分享标题
 const get_title=function(that){

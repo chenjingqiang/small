@@ -10,6 +10,7 @@
   z-index: 100;
   opacity: 0;
 }
+
 .fus{
   width: 670rpx;
   padding: 30rpx 0;
@@ -495,5 +496,11 @@
   opacity: 0;
   line-height: 68rpx;
 }
-
+.ding{
+  width: 670rpx;
+  position: fixed;
+  left: 40rpx;
+  bottom: 100rpx;
+  border: none;
+}
 

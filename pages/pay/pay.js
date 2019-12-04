@@ -110,8 +110,6 @@ Page({
     }
   },
   pay:function(){
-    //console.log(this.data.money_zhifu)
-    //console.log(this.data.release_oid)
     var that = this
       //混合支付
     if (that.data.wx_kong_dian == false && that.data.kong_dian == false) {
@@ -183,7 +181,7 @@ Page({
             paySign: data.paySign,     //签名
             success(res) {
               wx.request({
-                url: '' + util.ajaxurl +'release_success1_oral.php',
+                url: '' + util.ajaxurl +'release_success2.php',
                 data: {
                   openid: that.data.openid,
                   oid: that.data.release_oid,
@@ -222,8 +220,9 @@ Page({
         },
         method: 'GET',
         success: function (res) {
+          console.log(res)
           wx.request({
-            url: '' + util.ajaxurl +'release_success1_oral.php',
+            url: '' + util.ajaxurl +'release_success2.php',
             data: {
               openid: that.data.openid,
               oid: that.data.release_oid,
@@ -231,12 +230,13 @@ Page({
             },
             method: 'GET',
             success: function (res) {
-              //console.log(res)
+              console.log(res)
               if (res.data.code == 1) {
                 wx.showModal({
                   title: '提示',
                   content: '支付成功',
                   success: function (res) {
+                    console.log(res)
                     wx.navigateBack({
                       delta: 1
                     })

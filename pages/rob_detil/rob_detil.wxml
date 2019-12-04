@@ -2,19 +2,19 @@
   <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
   <button open-type="getUserInfo" id='getUserInfo' bindgetuserinfo="getUserInfo" catchtouchmove='true'  wx-if="{{get_user}}" ></button>
   
-  <!-- 查看联系方式弹窗 -->
+  <!-- 查看微信号弹窗 -->
   <view class='tanchuang' wx-if="{{!t_f}}" catchtouchmove='true'>
     <image class='x' src='/pages/image/guanbi2.png' bindtap='change_wxid'></image>
     <view class='tt_tit'>
-      查看联系方式
+      查看微信号
     </view>
     <view class='tt_wx'>
-      求译者联系方式：
+      求译者微信号：
     </view>
-    <view class='tt_wx'>{{data.wxid}}
+    <view class='tt_wx'>{{data.or_phone}}
     </view>
     <view class='tt_sub' bindtap='fuzhi'>
-      复制联系方式
+      复制微信号
     </view>
   </view>
 
@@ -76,7 +76,14 @@
         {{data.project_skill}}
       </view>
     </view>
-    
+    <view class='fu clearfix' wx-if="{{data.or_offer!=''}}">
+      <view class='tit_l '>
+        费用预算：
+      </view>
+      <view class='tit_r'>
+        {{data.or_offer}}
+      </view>
+    </view>
     <view class='fu clearfix'  wx-if="{{data.scene}}">
       <view class='tit_l '>
         服务标签：
@@ -95,6 +102,9 @@
       <view class="liulan fl">
         <image src='/pages/image/rob_liulan.png'  class="fl"></image>
         浏览{{data.order_browse}}次
+      </view>
+      <view class="fabu_time fr">
+        {{data.r_datetime}}
       </view>
     </view>
     
@@ -148,7 +158,7 @@
       赞
     </view>
     <view class="fr chakan" bindtap="ckwxid">
-      查看联系方式
+      查看微信号
     </view>
   </view>
 

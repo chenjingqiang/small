@@ -1,0 +1,62 @@
+/* pages/tixian/tixian.wxss */
+.tit{
+  width: 670rpx;
+  margin: 0 auto;
+  height: 111rpx;
+  line-height: 111rpx;
+  font-size: 36rpx;
+  color: #333333;
+  letter-spacing: 0.16rpx;
+  border-bottom: 1px solid #ccc;
+  margin-top: 30rpx;
+  margin-bottom: 24rpx;
+}
+.input_f{
+  width: 670rpx;
+  margin: 0 auto;
+  height: 125rpx;
+  line-height: 125rpx;
+  font-size: 44rpx;
+  color: #333333;
+  border-bottom: 1px solid #ccc;
+}
+.quanbu{
+  font-size: 32rpx;
+  color: #799DF1;
+  letter-spacing: 0.58rpx;
+}
+.input_f input{
+  width: 500rpx;
+  height: 70rpx;
+  font-size: 30rpx;
+  letter-spacing: 0.54rpx;
+  margin-top: 27rpx;
+  margin-left: 20rpx;
+}
+.biaozhu{
+  font-size: 24rpx;
+  color: #999999;
+  letter-spacing: 0.43rpx;
+  padding: 20rpx 40rpx;
+}
+.biaozhu image{
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 30rpx;
+  margin-top: 4rpx;
+}
+.sub{
+  position: absolute;
+  top: 650rpx;
+  left: 50%;
+  width: 600rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  letter-spacing: 0.15rpx;
+  text-align: center;
+  line-height: 80rpx;
+  background: #799DF1;
+  border-radius: 8rpx;
+  margin-left: -305rpx;
+}

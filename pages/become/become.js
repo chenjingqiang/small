@@ -375,6 +375,8 @@ Page({
               },
               name: 'file',
               success: function (res) {
+                console.log('123')
+                console.log(res)
                 var data = JSON.parse(res.data)
                 console.log(data)
                 var aub_images = that.data.aub_images
@@ -641,7 +643,7 @@ Page({
     }
     if (this.data.wxid == '') {
       wx.showToast({
-        title: '请填写联系方式',
+        title: '请填写微信号',
         icon: 'none'
       })
       return
@@ -660,14 +662,14 @@ Page({
       })
       return
     }
-    if (this.data.biyi_money == '') {
+    if (this.data.biyi_money == '' || this.data.biyi_money == 0) {
       wx.showToast({
         title: '请填写笔译费用',
         icon: 'none'
       })
       return
     }
-    if (this.data.kouyi_money == '') {
+    if (this.data.kouyi_money == '' || this.data.kouyi_money == 0) {
       wx.showToast({
         title: '请填写口译费用',
         icon: 'none'
@@ -717,7 +719,6 @@ Page({
       other: this.data.beizhu
     }
     if (this.data.code == 0) {
-      console.log(0)
       if (that.data.tempFilePath===''){
         wx.request({
           url: '' + util.ajaxurl +'translator.php',
@@ -748,7 +749,7 @@ Page({
               })
             } else {
               wx.showToast({
-                title: '提交失败',
+                title: data.message,
                 icon: 'none',
                 mark: true
               })
@@ -790,7 +791,7 @@ Page({
               })
             } else {
               wx.showToast({
-                title: '提交失败',
+                title: data.message,
                 icon: 'none',
                 mark: true
               })
@@ -799,7 +800,6 @@ Page({
         })
       }
     } else {
-      console.log(1)
       if (that.data.tempFilePath === '') {
         wx.request({
           url: '' + util.ajaxurl +'translator_update.php',
@@ -830,7 +830,7 @@ Page({
               })
             } else {
               wx.showToast({
-                title: '提交失败',
+                title: data.message,
                 icon: 'none',
                 mark: true
               })
@@ -838,7 +838,6 @@ Page({
           }
         })
       }else{
-        console.log(that.data.tempFilePath)
         if (that.data.tempFilePath.indexOf('https') == -1) {
           var filePath = that.data.tempFilePath
         } else {
@@ -879,7 +878,7 @@ Page({
               })
             } else {
               wx.showToast({
-                title: '提交失败',
+                title: data.message,
                 icon: 'none',
                 mark: true
               })

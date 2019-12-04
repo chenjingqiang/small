@@ -1,0 +1,25 @@
+<!--pages/tixian/tixian.wxml-->
+<view>
+  <view class="tit">
+    提现
+  </view>
+  <view class="input_f clearfix">
+    <view class="fl">
+      ￥
+    </view>
+    <input class="fl" type="digit"  placeholder="当前可提现{{data.sure_money}}元" bindinput="get_money" value="{{money}}"></input>
+    <view class="fr quanbu" bindtap="quanbu">
+      全部
+    </view>
+  </view>
+  <view class="clearfix biaozhu">
+    <view class="fl">有{{data.no_money}}元不可提现</view>
+    <image src="../image/tiwen.png" class="fl"></image>
+    <view class="fr">腾讯公司扣除手续费{{data.service_charge}}</view>
+  </view>
+  <button class="sub" bindtap="sub">
+    确认提现
+  </button>
+  <view class="">
+  </view>
+</view>

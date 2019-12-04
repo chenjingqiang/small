@@ -50,6 +50,14 @@
             {{item.project_address}}
           </view>
         </view>
+        <view class='fu clearfix' wx-if="{{item.or_offer!=''}}">
+          <view class='tit_l '>
+            费用预算：
+          </view>
+          <view class='tit_r'>
+            {{item.or_offer}}
+          </view>
+        </view>
         <view class='bor'>
         </view>
         <view class="wei clearfix">

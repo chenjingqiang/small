@@ -1,4 +1,23 @@
 /* pages/wode/wode.wxss */
+
+.jianli{
+  position: absolute;
+  width: 198rpx;
+  height: 67rpx;
+  top: 16rpx;
+  left: 30rpx;
+  font-size: 28rpx;
+  color: #799DF1;
+  letter-spacing: 1.46rpx;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.jianli image{
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 16rpx;
+}
 .tongzhi{
   position: absolute;
   top: 10rpx;
@@ -36,12 +55,40 @@
   border-radius: 50%;
   margin-bottom: 20rpx;
 }
+.vip_d{
+  position: absolute;
+  width: 140rpx;
+  height: 151rpx;
+  top: 36rpx;
+  left: 50%;
+  margin-left: -70rpx;
+}
 .logo_text{
   display: block;
   text-align: center;
   font-size: 32rpx;
   color: #333333;
   letter-spacing: 1.67rpx;
+}
+.vip{
+  height: 105rpx;
+  font-size: 32rpx;
+  color: #9F6533;
+  line-height: 105rpx;
+}
+.vip .zuanshi{
+  width: 40rpx;
+  height: 36rpx;
+  margin-left: 40rpx;
+  margin-right: 34rpx;
+  margin-top: 35rpx;
+}
+.vip .right{
+  width: 27rpx;
+  height: 27rpx;
+  float: right;
+  margin-top: 40rpx;
+  margin-right: 40rpx;
 }
 .wode_btn{
   width: 260rpx;
@@ -132,4 +179,5 @@
   margin: 0 auto;
   margin-top: 20rpx;
   text-decoration:underline;
+  margin-bottom: 180rpx;
 }

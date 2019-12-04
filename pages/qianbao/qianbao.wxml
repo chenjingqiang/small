@@ -9,15 +9,18 @@
           交易明细
       </view>
     </view>
-    <view class='money'>
-      {{money}}
+    <view class='money' bindtap="go_tixian">
+      ￥{{money}}
+    </view>
+    <view class="tixian" bindtap="go_tixian">
+      提现
+      <image src="../image/fl2.png"></image>
     </view>
   </view>
   <view class='duihuan'>
     <image src='../image/duihuan.png'></image>
     <view class='tit'>兑换码</view>
     <input placeholder='请输入您的兑换码' placeholder-class='pl' bindinput='input_value'></input>
-    <view class='tishi'>兑换码不能为空</view>
     <view class='sub' bindtap='sub'>
       确认兑换
     </view>

@@ -1,5 +1,13 @@
 
 <view class='wode_list' >
+  <view class="jianli" bindtap="jianli" wx-if="{{code==1&&resume_status==0}}">
+    <image src="../image/jianli.png"></image>
+    简历上传
+  </view>
+  <view class="jianli" bindtap="jianli" wx-if="{{code==1&&resume_status==1}}">
+    <image src="../image/jianli.png"></image>
+    重新上传
+  </view>
   <view class="tongzhi" bindtap="go_xiaoxi">
     <view wx-if="{{red_point}}">
       {{status_num}}
@@ -8,6 +16,7 @@
   </view>
   
   <image src='{{wx_img}}' class='logo'></image>
+  <image src="{{member_status==1 ?  '../image/vip_t.png' : '../image/vip_f.png'}}" class='vip_d'></image>
   <text class='logo_text'>{{wx_name}}</text>
   <view class='wode_btn' wx-if="{{code==0}}" bindtap='go_become'>
     点击成为翻译官
@@ -21,8 +30,19 @@
   <view class='wode_btn3' wx-if="{{code==3}}">
     认证中
   </view>
-  <!-- <button bindtap='aaa'>123</button> -->
+  <view class='shibai_tishi' wx-if="{{code==2}}">
+    <image src='../image/tishi.png'></image>
+    {{message}}
+  </view>
+  
   <view class='wode_bor'></view>
+  <view class="vip clearfix" bindtap="go_vip"  wx-if="{{code==1}}">
+    <image src='../image/zuanshi.png' class="zuanshi fl" ></image>
+    <text class="fl" wx-if="{{member_status==0}}">申请成为VIP</text>
+    <text class="fl" wx-if="{{member_status==1}}">VIP用户</text>
+    <image src='../image/fl.png' class="right" ></image>
+  </view>
+  <view class='wode_bor' style="margin:0;" wx-if="{{code==1}}"></view>
   <view class='list'>
     <view class='clearfix' bindtap='go_qianbao'>
       <image src='../image/qianbao.png' ></image>
@@ -36,7 +56,7 @@
     </view>
     <view class='clearfix' bindtap='go_xiugai'>
       <image src='../image/xiugai.png' ></image>
-      <text>修改联系方式</text>
+      <text>修改微信号</text>
       <image src='../image/fl.png' class="right" ></image>
     </view>
     <view class='clearfix' bindtap='go_yijian'>
@@ -55,11 +75,7 @@
     《服务标准及违约责任约定》
   </view>
   
-  <view class='shibai_tishi' wx-if="{{code==2}}">
-    <image src='../image/tishi.png'></image>
-    <text>aaaaaa</text>
-    {{message}}
-  </view>
+  
 
   <!-- 底部导航 -->
   <view class='footer clearfix'>

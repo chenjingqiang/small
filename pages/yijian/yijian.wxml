@@ -1,13 +1,13 @@
 <!--pages/yijian/yijian.wxml-->
 <view class='yijian'>
-  <textarea placeholder='您可以写下具体的反馈内容，我们非常重视您给我们提出的宝贵建议，谢谢！' bindinput='bind_te' >
+  <textarea placeholder='您可以写下具体的反馈内容，我们非常重视您给我们提出的宝贵建议，谢谢！' bindinput='bind_te' maxlength="-1" >
   
   </textarea>
   <input placeholder='微信/邮箱/手机号' bindinput='bind_input'>
 
   </input>
   <view class='text'>
-    请填写您的联系方式，以便我们给您回复
+    请填写您的微信号，以便我们给您回复
   </view>
   <button class="{{sub_tf == true ? 'but2' : 'but'}}" bindtap='sub'>
     提交

@@ -110,3 +110,17 @@
   position: relative;
   z-index: 2;
 }
+.tixian{
+  font-size: 30rpx;
+  color: #FFFFFF;
+  letter-spacing: 0.13rpx;
+  text-align: right;
+  padding-right: 40rpx;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+}
+.tixian image{
+  width: 27rpx;
+  height: 27rpx;
+  margin-top: 2rpx;
+}
