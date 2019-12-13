@@ -64,12 +64,17 @@
       <text>联系客服</text>
       <image src='../image/fl.png' class="right" ></image>
     </view>
-    <view class='clearfix' style='position: relative;'>
+    <view class='clearfix' bindtap='go_qiyue_list'>
+      <image src='../image/qiyue_list.png' ></image>
+      <text>全部契约</text>
+      <image src='../image/fl.png' class="right" ></image>
+    </view>
+    <!-- <view class='clearfix' style='position: relative;'>
       <image src='../image/haoyou.png'></image>
       <text>分享给好友</text>
       <button open-type='share' class='fenxiang'></button>
       <image src='../image/fl.png' class="right" ></image>
-    </view>
+    </view> -->
   </view>
   <view class="biaozhun" bindtap="biaozhun">
     《服务标准及违约责任约定》

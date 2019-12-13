@@ -47,8 +47,7 @@ Page({
     miao: 1,
     miao2: 1,
     timer: '',
-    tempFilePath: '',
-    tempFilePath2: '',
+    voiceurl: '',
     show_dong: true,
     image_arr: [],
     aub_images: []
@@ -83,8 +82,22 @@ Page({
     recorderManager.onStop((res) => {
       if (that.data.close_luyin_tf) {
         clearInterval(this.data.timer)
-        this.data.tempFilePath = res.tempFilePath;
-        //console.log('停止录音', res.tempFilePath)
+        wx.uploadFile({
+          url: '' + util.ajaxurl + 'translator_upload_voice.php',
+          filePath: res.tempFilePath,
+          name: 'file',
+          header: {
+            "Content-Type": "multipart/form-data"
+          },
+          success: function (res) {
+            console.log(res)
+            var res=JSON.parse(res.data)
+            console.log(res.data.voiceUrl)
+            that.setData({
+              voiceurl: res.data.voiceUrl
+            })
+          }
+        })
       }
     })
     //停止播放
@@ -127,12 +140,13 @@ Page({
           },
           method: 'GET',
           success: function (res) {
-            //console.log(res.data.data)
+            console.log(res.data.data)
             that.setData({
               code: res.data.code
             })
             if (res.data.code == 1) {
               var data = res.data.data
+              console.log(data)
               var major_scene = res.data.data.major_scene
               var biaoqian_select = that.data.biaoqian_select
               for (var i = 0; i < biaoqian_select.length; i++) {
@@ -161,8 +175,7 @@ Page({
                 biaoqian_select_length: data.major_scene.length,
                 source: data.source,
                 biaoqian_select: biaoqian_select,
-                tempFilePath: data.voice,
-                tempFilePath2: data.voice,
+                voiceurl: data.voice,
                 miao: data.voice_second,
                 miao2: data.voice_second,
                 image_arr: data.photoUrl,
@@ -222,7 +235,7 @@ Page({
       success(res) {// 查看所有权限
         //console.log(res)
         let status = res.authSetting['scope.record']// 查看位置权限的状态，此处为初次请求，所以值为undefined
-        if (status === false) {// 如果是首次授权(undefined)或者之前拒绝授权(false)
+        if (status == false) {// 如果是首次授权(undefined)或者之前拒绝授权(false)
           wx.openSetting({
             success(data) {
               recorderManager.start((res) => {
@@ -261,6 +274,7 @@ Page({
       //console.log(res);
     })
   },
+  //点X关闭
   close_luyin_ing: function () {
     var that = this
     that.setData({
@@ -268,7 +282,6 @@ Page({
       yin_box: false,
       miao: that.data.miao2,
       close_luyin_tf: false,
-      tempFilePath: that.data.tempFilePath2,
       textarea_tf: true
     })
     clearInterval(that.data.timer)
@@ -288,14 +301,14 @@ Page({
   },
   //播放录音
   play: function () {
-    if (this.data.tempFilePath == '') {
+    if (this.data.voiceurl == '') {
       return
     }
     this.setData({
       show_dong: false
     })
-    innerAudioContext.src = this.data.tempFilePath,
-      innerAudioContext.autoplay = true
+    innerAudioContext.src = this.data.voiceurl,
+    innerAudioContext.autoplay = true
     innerAudioContext.play()
     innerAudioContext.onPlay(() => {
       //console.log('开始播放')
@@ -364,9 +377,11 @@ Page({
         wx.showLoading({
           title: '等待',
         })
+        //console.log(image_arr)
         for (var i = 0; i < image_arr.length; i++) {
-          if (image_arr[i].indexOf('https:')==-1){
-
+          //旧照片不用上传
+          if (image_arr[i].indexOf('uear')==-1){
+            console.log(image_arr[i])
             wx.uploadFile({
               url: '' + util.ajaxurl +'translator_upload_photo.php',
               filePath: image_arr[i],
@@ -375,8 +390,6 @@ Page({
               },
               name: 'file',
               success: function (res) {
-                console.log('123')
-                console.log(res)
                 var data = JSON.parse(res.data)
                 console.log(data)
                 var aub_images = that.data.aub_images
@@ -397,10 +410,7 @@ Page({
               }
             })
           }
-
         }
-
-
       }
     })
   },
@@ -423,7 +433,6 @@ Page({
       urls: image_arr,  //所有要预览的图片
     })
   },
-  
   nan:function(){
     this.setData({
       nan_nv:'男'
@@ -711,7 +720,7 @@ Page({
       major_certificate: major_certificate,
       major_scene: major_scene,
       source: this.data.source,
-      file:this.data.tempFilePath,
+      voice: this.data.voiceurl,
       second: this.data.miao,
       photoUrl:aub_images,
       written_money: this.data.biyi_money,
@@ -719,173 +728,56 @@ Page({
       other: this.data.beizhu
     }
     if (this.data.code == 0) {
-      if (that.data.tempFilePath===''){
-        wx.request({
-          url: '' + util.ajaxurl +'translator.php',
-          data: data,
-          method: 'GET',
-          success: function (res) {
-            var data=res.data
-            if (data.code == 1) {
-              wx.showToast({
-                title: '提交成功',
-                icon: 'success',
-                mark: true
-              })
-              wx.reLaunch({
-                url: '/pages/wode/wode',
-              })
-            } else if (data.code == 0) {
-              wx.showToast({
-                title: '名字重复',
-                icon: 'none',
-                mark: true
-              })
-            } else if (data.code == 3) {
-              wx.showToast({
-                title: '名字超过字数',
-                icon: 'none',
-                mark: true
-              })
-            } else {
-              wx.showToast({
-                title: data.message,
-                icon: 'none',
-                mark: true
-              })
-            }
+      wx.request({
+        url: '' + util.ajaxurl +'translator.php',
+        data: data,
+        method: 'GET',
+        success: function (res) {
+          var data=res.data
+          console.log(data)
+          if (data.code == 1) {
+            wx.showToast({
+              title: data.message,
+              icon: 'success',
+              mark: true
+            })
+            wx.reLaunch({
+              url: '/pages/wode/wode',
+            })
+          } else  {
+            wx.showToast({
+              title: data.message,
+              icon: 'none',
+              mark: true
+            })
           }
-        })
-      }else{
-        wx.uploadFile({
-          url: '' + util.ajaxurl +'translator.php',
-          filePath: that.data.tempFilePath,
-          name: 'file',
-          header: {
-            "Content-Type": "multipart/form-data"
-          },
-          formData: data,
-          success: function (res) {
-            var data = JSON.parse(res.data)
-            console.log(data)
-            if (data.code == 1) {
-              wx.showToast({
-                title: '提交成功',
-                icon: 'success',
-                mark: true
-              })
-              wx.reLaunch({
-                url: '/pages/wode/wode',
-              })
-            } else if (data.code == 0) {
-              wx.showToast({
-                title: '名字重复',
-                icon: 'none',
-                mark: true
-              })
-            } else if (data.code == 3) {
-              wx.showToast({
-                title: '名字超过字数',
-                icon: 'none',
-                mark: true
-              })
-            } else {
-              wx.showToast({
-                title: data.message,
-                icon: 'none',
-                mark: true
-              })
-            }
-          }
-        })
-      }
-    } else {
-      if (that.data.tempFilePath === '') {
-        wx.request({
-          url: '' + util.ajaxurl +'translator_update.php',
-          data: data,
-          method: 'GET',
-          success: function (res) {
-            var data = res.data
-            if (data.code == 1) {
-              wx.showToast({
-                title: '提交成功',
-                icon: 'success',
-                mark: true
-              })
-              wx.reLaunch({
-                url: '/pages/wode/wode',
-              })
-            } else if (data.code == 0) {
-              wx.showToast({
-                title: '名字重复',
-                icon: 'none',
-                mark: true
-              })
-            } else if (data.code == 3) {
-              wx.showToast({
-                title: '名字超过字数',
-                icon: 'none',
-                mark: true
-              })
-            } else {
-              wx.showToast({
-                title: data.message,
-                icon: 'none',
-                mark: true
-              })
-            }
-          }
-        })
-      }else{
-        if (that.data.tempFilePath.indexOf('https') == -1) {
-          var filePath = that.data.tempFilePath
-        } else {
-          var filePath = 'wxfile://' + that.data.tempFilePath.split('https://www.uear.net/mp3/')[1];
         }
-        console.log(filePath)
-        wx.uploadFile({
-          url: '' + util.ajaxurl +'translator_update.php',
-          filePath: filePath,
-          name: 'file',
-          header: {
-            "Content-Type": "multipart/form-data"
-          },
-          formData: data,
-          success: function (res) {
-
-            var data = JSON.parse(res.data)
-            if (data.code == 1) {
-              wx.showToast({
-                title: '提交成功',
-                icon: 'success',
-                mark: true
-              })
-              wx.reLaunch({
-                url: '/pages/wode/wode',
-              })
-            } else if (data.code == 0) {
-              wx.showToast({
-                title: '名字重复',
-                icon: 'none',
-                mark: true
-              })
-            } else if (data.code == 3) {
-              wx.showToast({
-                title: '名字超过字数',
-                icon: 'none',
-                mark: true
-              })
-            } else {
-              wx.showToast({
-                title: data.message,
-                icon: 'none',
-                mark: true
-              })
-            }
+      })
+    } else {
+     wx.request({
+        url: '' + util.ajaxurl +'translator_update.php',
+        data: data,
+        method: 'GET',
+        success: function (res) {
+          var data = res.data
+          if (data.code == 1) {
+            wx.showToast({
+              title: data.message,
+              icon: 'success',
+              mark: true
+            })
+            wx.reLaunch({
+              url: '/pages/wode/wode',
+            })
+          } else {
+            wx.showToast({
+              title: data.message,
+              icon: 'none',
+              mark: true
+            })
           }
-        })
-      }
+        }
+     })
     }
     
     

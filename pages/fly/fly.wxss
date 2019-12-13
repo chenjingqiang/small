@@ -11,19 +11,20 @@ page{
   background: rgba(0,0,0,0.60);
   z-index: 10;
 }
-.shuoming{
-  position: fixed;
-  width: 74rpx;
+.icons{
+  width: 100%;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 23rpx;
   height: 74rpx;
-  top: 20rpx;
-  right:20rpx; 
+  display: flex;
+  justify-content:space-between;
+  padding: 0 20rpx;
 }
-.zizhi{
-  position: fixed;
+.icons image{
   width: 74rpx;
   height: 74rpx;
-  top: 20rpx;
-  left:20rpx; 
 }
 .tanchuang{
   width: 542rpx;

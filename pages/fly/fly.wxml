@@ -1,7 +1,10 @@
 <!--pages/fly/fly.wxml-->
 <view class="fly">
-  <image src="../image/zizhi.png" class="zizhi" bindtap="go_zizhi"></image>
-  <image src="../image/shuoming.png" class="shuoming" bindtap="go_shuoming"></image>
+  <view class="icons">
+    <image src="../image/zizhi.png" class="" bindtap="go_zizhi"></image>
+    <image src="../image/qiyuesuo.png" class="" bindtap="go_qiyue"></image>
+    <image src="../image/shuoming.png" class="" bindtap="go_shuoming"></image>
+  </view>
   <view class="box" wx-if="{{!yinying}}" catchtouchmove='true'></view>
   <view class='tanchuang' wx-if="{{!t_f}}" catchtouchmove='true'>
     <image class='x' src='/pages/image/jiao_x.png' bindtap='close_tanchuang'></image>

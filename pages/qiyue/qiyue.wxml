@@ -1,0 +1,79 @@
+<!--pages/qiyue/qiyue.wxml-->
+<view>
+  <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
+    <!-- 支付成功弹窗 -->
+  <view class='tanchuang' wx-if="{{!t_f}}" catchtouchmove='true'>
+    <view class="zhifu_tit">
+      支付成功
+    </view>
+    <image src="../image/bitmap.jpg"></image>
+    <view class="tishi">
+    快去分享给好友签订协议吧～
+    </view>
+    <view class="clearfix zhifu_fu">
+      <view bindtap="close" data-money_type="resume">
+        我再想想
+      </view>
+      <button open-type='share' class='fenxiang'>
+        分享
+      </button>
+    </view>
+    
+  </view>
+
+  <view class="title">契约锁</view>
+  <view class="list clearfix">
+    <view>
+      甲方：
+    </view>
+    <input disabled="{{jia_type}}" bindinput="get_jia_name" placeholder="请填写甲方姓名" value="{{jia_name}}"></input>
+  </view>
+  <view class="list clearfix">
+    <view>
+      乙方：
+    </view>
+    <input disabled="{{yi_type}}" bindinput="get_yi_name" placeholder="请填写乙方姓名" value="{{yi_name}}"></input>
+  </view>
+  <view class="list clearfix">
+    <view>
+      金额：
+    </view>
+    <view class="money_fu fl">
+      <view class="fl">
+        ￥
+      </view>
+      <input disabled="{{jia_type}}" type="number" bindinput="get_money" placeholder="请输入预算金额" value="{{money}}"></input>
+    </view>
+    
+  </view>
+  <view class="list clearfix tf">
+    <view class="{{detail ? 'ios' :'anzhuo'}} ">
+      备注：
+    </view>
+    <textarea wx-if="{{beizhu_box}}" disabled="{{jia_type}}" bindinput="get_beizhu" placeholder="请填写备注" value="{{beizhu}}"></textarea>
+    <view class="textarea" wx-if="{{!beizhu_box}}">
+      {{beizhu}}
+    </view>
+  </view>
+  <view class="xieyi">
+    <image src="{{xieyi ? '../image/xieyi.jpg' :'../image/xieyi2.jpg'}}" bindtap="change_xieyi"></image>
+    <view>
+      我已阅读并同意<text bindtap="go_xieyi">《立等翻译官服务协议》</text>
+    </view>
+  </view>
+  <view class="{{zhifu ? 'xieyi_footer clearfix t' : 'xieyi_footer clearfix f'}}" wx-if="{{status==0}}">
+    <view class="fl" wx-if="{{money}}">预计支付：¥{{money}}</view>
+    <view class="fl"  wx-if="{{!money}}">预计支付：¥0</view>
+    <button class="fr" bindtap="sub">支付</button>
+  </view>
+  <view class="xieyi_footer clearfix wait" wx-if="{{status==1}}">
+    等待乙方签约
+  </view>
+  <view class="{{zhifu ? 'xieyi_footer clearfix t' : 'xieyi_footer clearfix f'}}" wx-if="{{status==2}}">
+    <view class="fl">契约金额：¥{{money}}</view>
+    <button class="fr" bindtap="sub2">同意</button>
+  </view>
+  <view class="xieyi_footer clearfix success" wx-if="{{status==3}}">
+    已签约
+  </view>
+</view>

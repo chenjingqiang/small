@@ -1,0 +1,46 @@
+<!--pages/qiyue_list/qiyue_list.wxml-->
+<view class="qiyue_list">
+  <view class="title">
+    <view class="{{act ? 'act' : ' '}}" bindtap="change_act">
+      我发起的契约
+      <view></view>
+    </view>
+    <view class="{{act ? ' ' : 'act'}}" bindtap="change_act2">
+      我接受的契约
+       <view></view>
+    </view>
+  </view>
+  <!-- <view class="title2">如有疑问联系客服 16600221126</view> -->
+  <image src="../image/qiyue_kong.png" class="qiyue_kong" wx-if="{{select==''}}"></image>
+  <view class="list_fu" wx-if="{{select}}">
+    <view class="list" wx:for="{{select}}" wx:key="{{index}}">
+      <view class="tit clearfix">
+        <view class="fl">订单金额：¥{{item.money}}</view>
+        <view class="fr tit_r">{{item.show_status}}</view>
+      </view>
+      <view class="con">
+        契约编号：{{item.cid}}
+      </view>
+      <view class="con">
+        备注：{{item.remark}}
+      </view>
+      <view class="name">
+        甲方：{{item.nail_name}}
+      </view>
+      <view class="name">
+        乙方：{{item.b_name}}
+      </view>
+      <view class="time">
+        {{item.datetime}}
+        <view class="fr button" bindtap="sub" data-index="{{index}}" wx-if="{{item.status=='4'&&item.identity_status=='1'}}">
+          确认完成
+        </view>
+        <view class="fr button" bindtap="sub2" data-index="{{index}}" wx-if="{{item.status=='2'&&item.identity_status=='2'}}">
+          完成翻译
+        </view>
+      </view>
+    </view>
+    
+  </view>
+
+</view>

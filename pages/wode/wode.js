@@ -52,6 +52,7 @@ Page({
     util.get_title(this)
     util.get_red(this)
     //翻译官认证状态
+    console.log(1)
     wx.request({
       //判断
       url: '' + util.ajaxurl +'translator_status.php',
@@ -60,7 +61,6 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        //console.log(res)
         if (res.data.code==1){
           that.setData({
             code: res.data.code,
@@ -124,6 +124,11 @@ Page({
       url: '/pages/change_wx/change_wx',
     })
   },
+  go_qiyue_list:function(){
+    wx.navigateTo({
+      url: '/pages/qiyue_list/qiyue_list',
+    })
+  },
   biaozhun:function(){
     wx.navigateTo({
       url: '/pages/xieyi/xieyi',
@@ -174,6 +179,9 @@ Page({
       }
     })
   },
+
+
+
 
 
 

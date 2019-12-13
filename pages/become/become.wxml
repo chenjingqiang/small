@@ -60,7 +60,7 @@
       <view class='fl'>
         笔译费用
       </view>
-      <input class='fl' style="width:368rpx; margin-left:30rpx; text-align: center;"  bindinput='biyi_value' placeholder-class='place' value="{{biyi_money}}" placeholder="请填写笔译费用"></input>
+      <input class='fl' style="width:368rpx; margin-left:30rpx; text-align: center;" type="number"  bindinput='biyi_value' placeholder-class='place' value="{{biyi_money}}" placeholder="请填写笔译费用"></input>
       <view class='fr'>
         元/千字
       </view>
@@ -69,7 +69,7 @@
       <view class='fl'>
         口译费用
       </view>
-      <input class='fl' style="width:368rpx; margin-left:30rpx;text-align: center;"   bindinput='kouyi_value' placeholder-class='place' value="{{kouyi_money}}" placeholder="请填写口译费用"></input>
+      <input class='fl' style="width:368rpx; margin-left:30rpx;text-align: center;"  type="number"  bindinput='kouyi_value' placeholder-class='place' value="{{kouyi_money}}" placeholder="请填写口译费用"></input>
       <view class='fr'>
         元/小时
       </view>

@@ -16,7 +16,6 @@ Page({
     userID: '',
     tapTime: '',
     template: 'bigsmall',
-    tapTime:'',
     get_user:true
   },
   // 绑定输房间号入框
@@ -178,6 +177,11 @@ Page({
   go_zizhi: function () {
     wx.navigateTo({
       url: '/pages/zizhi/zizhi',
+    })
+  },
+  go_qiyue: function () {
+    wx.navigateTo({
+      url: '/pages/qiyue/qiyue',
     })
   },
   go_shuoming:function(){

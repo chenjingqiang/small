@@ -1,0 +1,101 @@
+/* pages/qiyue_list/qiyue_list.wxss */
+.title{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  background: #799DF1;
+}
+.title2{
+  position: fixed;
+  top: 80;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  
+}
+.title view{
+  width: 50%;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  position: relative;
+}
+.title .act view{
+  width: 64rpx;
+  height: 6rpx;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -32rpx;
+}
+.list_fu{
+  margin-top: 100rpx;
+  background: #EBEBEB;
+}
+.list{
+  padding: 0 40rpx;
+  margin-bottom: 20rpx;
+  background: #fff;
+}
+.list .tit{
+  height: 85rpx;
+  line-height: 85rpx;
+  font-size: 34rpx;
+  color: #333333;
+  letter-spacing: 0.15rpx;
+  margin-bottom: 30rpx;
+  border-bottom: 1px solid #ccc;
+}
+.list .tit_r{
+  font-size: 30rpx;
+  color: #E87B30;
+}
+.list .con{
+  font-size: 30rpx;
+  color: #333333;
+  letter-spacing: 0.13rpx;
+  margin-bottom: 20rpx;
+  text-align: justify;
+}
+.list .name{
+  font-size: 26rpx;
+  color: #666666;
+  letter-spacing: 0.12rpx;
+  margin-bottom: 20rpx;
+}
+.list .time{
+  height: 85rpx;
+  line-height: 85rpx;
+  border-top: 1px solid #ccc;
+  margin-bottom: 30rpx;
+  font-size: 26rpx;
+  color: #666666;
+  letter-spacing: 0.12rpx;
+}
+.button{
+  width: 150rpx;
+  height: 56rpx;
+  background: #71C987;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  letter-spacing: 0.12rpx;
+  text-align: center;
+  line-height: 56rpx;
+  margin-top: 15rpx;
+}
+.qiyue_kong{
+  position: absolute;
+  width: 300rpx;
+  height: 314rpx;
+  left: 50%;
+  top: 50%;
+  margin-left:-150rpx;
+  margin-top:-107rpx;
+}
