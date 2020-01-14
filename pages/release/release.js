@@ -61,7 +61,9 @@ Page({
     rob_qp_tf: 1,
     yinying:true,
     scrollTop:0,
-    dynamic_show:'0'
+    dynamic_show:'0',
+    box_height:0,
+    textarea_top:0
   },
   /**
    * 生命周期函数--监听页面加载
@@ -70,20 +72,12 @@ Page({
     var that=this
     var that = this
     var openid = wx.getStorageSync('openid') || ''
-    wx.getLocation({ // 请求位置信息
-      type: 'gcj02',
-      success(res) {
-        //console.log(res);
-        that.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
-        })
-        wx.setStorageSync('latitude', res.latitude)
-        wx.setStorageSync('longitude', res.longitude)
-      }
-    }) 
+    var latitude = wx.getStorageSync('latitude') || ''
+    var longitude = wx.getStorageSync('longitude') || ''
     that.setData({
-      openid: openid
+      openid: openid,
+      latitude: latitude,
+      longitude: longitude
     })
     if (app.globalData.userInfo.nickName) {
       //console.log(app.globalData.userInfo)
@@ -101,30 +95,6 @@ Page({
         })
       }
     }
-    const updateManager = wx.getUpdateManager()
-    updateManager.onCheckForUpdate(function (res) {
-      // 请求完新版本信息的回调
-      //console.log(res.hasUpdate)
-      if (res.hasUpdate) {
-        updateManager.onUpdateReady(function () {
-          wx.showModal({
-            title: '更新提示',
-            content: '新版本已经准备好，是否重启应用？',
-            success: function (res) {
-              updateManager.applyUpdate()
-            }
-          })
-        })
-        updateManager.onUpdateFailed(function () {
-          // 新的版本下载失败
-          wx.showModal({
-            title: '已经有新版本了哟~',
-            content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
-          })
-        })
-      }
-    })
-   
   },
   onShow: function () {
     var that = this
@@ -173,6 +143,24 @@ Page({
         })
       }
     })
+    that.setData({
+      box_height: wx.getSystemInfoSync().windowHeight
+    })
+    wx.createSelectorQuery().select('#textarea').boundingClientRect(function (rect) {
+      var top = rect.top + 168
+      if (top > that.data.box_height){
+        //隐藏输入框 避免渗透
+        that.setData({
+          textarea_tf:false,
+          textarea_top:top
+        })
+      }else{
+        that.setData({
+          textarea_tf: true,
+          textarea_top: top
+        })
+      }
+    }).exec()
   },
   //获取用户头像
   getUserInfo: function () {
@@ -195,7 +183,6 @@ Page({
       rob_qp_tf: 1
     })
   },
-
   qiuyi: function () {
     wx.navigateTo({
       url: '/pages/status/status',
@@ -278,10 +265,10 @@ Page({
   },
   //关闭标签
   close_biaoqian:function(){
-    if (this.data.scrollTop > 160) {
-      var textarea_tf = true
+    if (this.data.scrollTop > this.data.textarea_top) {
+     var textarea_tf=true
     } else {
-      var textarea_tf = false
+     var textarea_tf = false
     }
     var biaoqian_select = this.data.biaoqian_select
     for (var i = 0; i < biaoqian_select.length ; i++){
@@ -336,10 +323,10 @@ Page({
   },
   //确认标签
   sub_biaoqian:function(){
-    if (this.data.scrollTop>160){
+    if (this.data.scrollTop > this.data.textarea_top) {
       var textarea_tf=true
-    }else{
-      var textarea_tf =false
+    } else {
+      var textarea_tf = false
     }
     if (this.data.names2 != '') {
       this.setData({
@@ -517,15 +504,16 @@ Page({
     
   },
   onPageScroll: function (e) {
-    if (e.scrollTop>160){
+    var height = e.scrollTop+this.data.box_height
+    if (height > this.data.textarea_top){
       this.setData({
         textarea_tf: true,
-        scrollTop: e.scrollTop
+        scrollTop: height
       })
     }else{
       this.setData({
         textarea_tf: false,
-        scrollTop: e.scrollTop
+        scrollTop: height
       })
     }
   },
@@ -536,23 +524,11 @@ Page({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   //底部导航
   fabu: function () {
     wx.redirectTo({
-      //url: '/pages/rob/rob',
-      url: '/pages/release/release',
+      url: '/pages/rob/rob',
+      //url: '/pages/release/release',
     })
   },
   liulan: function () {

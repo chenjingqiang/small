@@ -25,14 +25,14 @@
   
   </view>
   <view class="map_footer">
-    <view wx:for="{{header}}" wx:key="{{index}}" class="{{item.cla ? 'act' :''}}" bindtap="header_act" data-index="{{index}}">
+    <view wx:for="{{header}}" wx:key="index" class="{{item.cla ? 'act' :''}}" bindtap="header_act" data-index="{{index}}">
       {{item.tet}}
       <text wx-if="{{item.cla}}"></text>
     </view>
    
   </view>
   <view class='list_fu'>
-    <view class='dd_list' wx:for="{{select}}"  wx:key="{{index}}">
+    <view class='dd_list' wx:for="{{select}}"  wx:key="index">
       <image src='/pages/image/wancheng.png' class='wancheng' wx-if="{{item.status==1}}"></image>
       <image src='/pages/image/shixiao.png' class='wancheng' wx-if="{{item.status==2}}"></image>
       <image src='/pages/image/jinxing.png' class='wancheng' wx-if="{{item.status==0}}"></image>

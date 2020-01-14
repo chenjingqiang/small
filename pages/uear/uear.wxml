@@ -1,0 +1,47 @@
+<!--pages/uear/uear.wxml-->
+
+<!-- <view class="yuyinWrap">
+ 
+  <view class=''>
+    <button class="yuyinBtn {{recordState == true ? 'yuyinBtnBg':''}}" bindtouchstart="touchStart" bindtouchend="touchEnd">
+      <text wx:if="{{recordState == false}}">按住 说话</text>
+      <text wx:else>松开 结束</text>
+    </button>
+  </view>
+  <cover-view class="startYuyinImage" wx:if="{{recordState == true}}">
+    <cover-image src="../image/chonglu.png"></cover-image>
+    <cover-view>开始语音</cover-view>
+  </cover-view>
+</view> -->
+<view class="shanyi">
+  <view class="box" wx-if="{{recordState}}">
+    
+    <scroll-view  scroll-y='ture' class="tit" scroll-with-animation="true" scroll-top="{{scrollTop}}">{{content}}</scroll-view>
+    
+    <image src="../image/qingting.png"></image>
+    <view >倾听中</view>
+  </view>
+  <view class="list_fu" wx-if="{{!kong}}" id="j_page">
+    <view class="clearfix" wx:for="{{select}}" wx:key="index">
+      <view class="{{item.float=='left' ? 'list fl2' : 'list fr2'}}">
+        <view class="top">{{item.top}}</view>
+        <view class="bottom" bindtap="play" data-src="{{item.src}}">
+         {{item.bottom}}
+         <image src="../image/yinliang.png" class="yinliang"></image>
+        </view>
+       
+      </view>
+    </view>
+  </view>
+  <image src="../image/shan_kong.png" class="kong" wx-if="{{select==''}}"></image>
+  <view class="fixed">
+    <view class=" fu">
+      <view data-en_ch="en" bindtouchstart="touchStart" bindtouchend="touchEnd">English</view>
+      <view class="china" data-en_ch="ch" bindtouchstart="touchStart" bindtouchend="touchEnd">中文</view>
+    </view>
+    <view class="fu2">
+      <view >Hold To Talk</view>
+      <view class="china">长按说话</view>
+    </view>
+  </view>
+</view>

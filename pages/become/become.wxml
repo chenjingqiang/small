@@ -48,7 +48,7 @@
       </view>
     </view>
     <view class='yuyan_arr clearfix' wx-if="{{yuyan_arr_length!=0}}">
-      <view wx:for="{{yuyan_arr}}" wx:key="{{index}}" class='sss'  bindtap='remove_yuyan' data-index='{{index}}'>
+      <view wx:for="{{yuyan_arr}}" wx:key="index" class='sss'  bindtap='remove_yuyan' data-index='{{index}}'>
         {{item}}
         <text>x</text>
       </view>
@@ -151,7 +151,7 @@
       </view>
     </view>
     <view class='yuyan_arr clearfix' wx-if="{{yuyan2_arr_length!=0}}">
-      <view wx:for="{{yuyan2_arr}}" wx:key="{{index}}" class='sss'  bindtap='remove2_yuyan' data-index='{{index}}'>
+      <view wx:for="{{yuyan2_arr}}" wx:key="index" class='sss'  bindtap='remove2_yuyan' data-index='{{index}}'>
         {{item}}
         <text>x</text>
       </view>

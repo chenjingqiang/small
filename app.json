@@ -2,9 +2,10 @@
   "pages": [
     "pages/start/start",
     "pages/wode/wode",
+    "pages/uear/uear",
+    "pages/qiyue_list/qiyue_list",
     "pages/become/become",
     "pages/qiyue/qiyue",
-    "pages/qiyue_list/qiyue_list",
     "pages/fly/fly",
     "pages/release/release",
     "pages/liulan/liulan",
@@ -38,11 +39,18 @@
     "navigationBarBackgroundColor": "#799df1",
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": false,
-    "renderingMode": "seperated"
+    "renderingMode": "seperated",
+    "backgroundColor": "#799df1"
   },
   "permission": {
     "scope.userLocation": {
       "desc": "需要获取您的地理位置，请确认授权，否则地图功能将无法使用"
+    }
+  },
+  "plugins": {
+    "WechatSI": {
+      "version": "0.3.3",
+      "provider": "wx069ba97219f66d99"
     }
   },
   "sitemapLocation": "sitemap.json"

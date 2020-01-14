@@ -104,7 +104,7 @@ page{
   overflow: hidden;
 }
 .con{
-  margin-top: 667rpx;
+  margin-top: 657rpx;
   margin-left: 70rpx;
   margin-bottom: 100rpx;
 }
@@ -132,6 +132,20 @@ page{
   height: 90rpx;
   border: 2px solid #80DCFD;
   border-radius: 45rpx;
+  margin: 0 auto;
+  font-size: 40rpx;
+  color: #80DCFD;
+  text-align: center;
+  line-height: 90rpx;
+}
+.con2 {
+  display: flex;
+}
+.con2 view{
+  width: 280rpx;
+  height: 90rpx;
+  border: 2rpx solid #80DCFD;
+  border-radius: 71rpx;
   margin: 0 auto;
   font-size: 40rpx;
   color: #80DCFD;

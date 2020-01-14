@@ -13,21 +13,25 @@
     </view>
     <view class="bor"></view>
     <view class="tanchuang_text">
-      发布前您需联系我们的客服微信<text>{{kefu}}</text>进行询价才可以发布哦～
+      远程空中传译，请联系客服
+      <view>普通服务请进“求译”或“找翻译”栏目</view>
     </view>
     <view class="tc_sub" bindtap="copyBtn">
       复制客服微信
     </view>
     <view class="tc_sub2"  bindtap="go_kouyi">
-      我已询价，进行发布
+      进入空中传译
     </view>
   </view>
   <view class="con clearfix">
     <input placeholder="请输入房间号" bindinput='bindRoomNo'></input>
     <view class="sub" bindtap="joinRoom">进入语音</view>
   </view>
-  <view class="sub2" bindtap="open_tanchuang">联系客服</view>
-
+  <view class="con2">
+    <view  bindtap="go_uear">闪译</view>
+    <view  bindtap="open_tanchuang">优译</view>
+  </view>
+  
 
 
 

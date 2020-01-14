@@ -368,7 +368,7 @@ Page({
       wx.setStorageSync('share_cid', false)
       wx.setStorageSync('cid', '')
       wx.reLaunch({
-        url: '/pages/release/release',
+        url: '/pages/fly/fly',
       })
     }
   },

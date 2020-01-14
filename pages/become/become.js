@@ -90,9 +90,7 @@ Page({
             "Content-Type": "multipart/form-data"
           },
           success: function (res) {
-            console.log(res)
             var res=JSON.parse(res.data)
-            console.log(res.data.voiceUrl)
             that.setData({
               voiceurl: res.data.voiceUrl
             })
@@ -377,11 +375,9 @@ Page({
         wx.showLoading({
           title: '等待',
         })
-        //console.log(image_arr)
         for (var i = 0; i < image_arr.length; i++) {
           //旧照片不用上传
           if (image_arr[i].indexOf('uear')==-1){
-            console.log(image_arr[i])
             wx.uploadFile({
               url: '' + util.ajaxurl +'translator_upload_photo.php',
               filePath: image_arr[i],
@@ -391,7 +387,6 @@ Page({
               name: 'file',
               success: function (res) {
                 var data = JSON.parse(res.data)
-                console.log(data)
                 var aub_images = that.data.aub_images
                 aub_images.push(data.data.photoUrl)
                 var arr = aub_images

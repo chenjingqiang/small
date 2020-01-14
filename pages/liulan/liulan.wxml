@@ -29,7 +29,7 @@
     </view>
   </view>
   <view class='list_fu'>
-    <view class='list' wx:for="{{select}}" wx:key="{{index}}" bindtap='ckeak_detil' data-detil_id='{{item.openid}}'>
+    <view class='list' wx:for="{{select}}" wx:key="index" bindtap='ckeak_detil' data-detil_id='{{item.openid}}'>
        <image src='../image/year.png' class='year_img' wx-if="{{item.work_years!=0}}"></image>
        <view class='year' wx-if="{{item.work_years!=''}}">
         工作{{item.work_years}}年
@@ -64,11 +64,11 @@
           <view class='name clearfix'>
             <image src="../image/zuanshi2.png" class="zuanshi fl"  wx-if="{{item.member_status==1}}" ></image>
             <view class="fl">
-              <text wx:for="{{item.wx_name}}"  wx:for-item="name_list" wx:key="{{index}}" class="{{name_list.status==1? 'red': ''}}" wx-if="{{item.member_status==0}}">{{name_list.name}}</text>
-              <text wx:for="{{item.wx_name}}"  wx:for-item="name_list" wx:key="{{index}}" class="vip" wx-if="{{item.member_status==1}}">{{name_list.name}}</text>
+              <text wx:for="{{item.wx_name}}"  wx:for-item="name_list" wx:key="index" class="{{name_list.status==1? 'red': ''}}" wx-if="{{item.member_status==0}}">{{name_list.name}}</text>
+              <text wx:for="{{item.wx_name}}"  wx:for-item="name_list" wx:key="index" class="vip" wx-if="{{item.member_status==1}}">{{name_list.name}}</text>
             </view>
             <view class="fl hua" wx-if="{{item.flower_imgs}}" >
-              <image src="{{list}}" class="fl" wx:for="{{item.flower_imgs}}"   wx:for-item="list" wx:key="{{index}}"></image>
+              <image src="{{list}}" class="fl" wx:for="{{item.flower_imgs}}"   wx:for-item="list" wx:key="index"></image>
             </view>
             
           </view>
@@ -82,14 +82,14 @@
             </view>
           </view>
           <view class='biaoqian clearfix'>
-            <view wx:for="{{item.major_scene}}" wx:for-item="biaoqian_list" wx:key="{{index}}" class="{{biaoqian_list.status==1 ? 'red' : '' }}">
+            <view wx:for="{{item.major_scene}}" wx:for-item="biaoqian_list" wx:key="index" class="{{biaoqian_list.status==1 ? 'red' : '' }}">
               {{biaoqian_list.name}}
             </view>
             <image  src='../image/biaoqian_more.png' wx-if="{{item.major_scene.length==3}}"></image>
           </view>
           <view class='yuyan clearfix'>
             <image  src='../image/yuyan_more2.png' class='more2'></image>
-            <view wx:for="{{item.language}}" wx:for-item="yuyan_list" wx:key="{{index}}"  class="{{yuyan_list.status==1 ? 'red' : '' }}">
+            <view wx:for="{{item.language}}" wx:for-item="yuyan_list" wx:key="index"  class="{{yuyan_list.status==1 ? 'red' : '' }}">
               {{yuyan_list.name}}
             </view>
             <image  src='../image/yuyan_more.png' wx-if="{{item.language.length==3}}"></image>
@@ -114,6 +114,7 @@
     </view>
   </view>
   
+
 
 
 

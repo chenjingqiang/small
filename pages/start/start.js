@@ -47,7 +47,7 @@ Page({
         } else {
           //无分享 去首页
           wx.redirectTo({
-            url: '/pages/release/release',
+            url: '/pages/fly/fly',
           })
         }
       })
@@ -83,7 +83,7 @@ Page({
       } else {
         //无分享 去首页
         wx.redirectTo({
-          url: '/pages/release/release',
+          url: '/pages/fly/fly',
         })
       }
     }

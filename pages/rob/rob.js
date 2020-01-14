@@ -49,11 +49,10 @@ Page({
     var openid = wx.getStorageSync('openid') || ''
     var latitude = wx.getStorageSync('latitude') || ''
     var longitude = wx.getStorageSync('longitude') || ''
-    //console.log(1)
     this.setData({
       openid: openid,
-      longitude: longitude,
       latitude: latitude,
+      longitude: longitude,
       kong: false,
       yinying: true,
       t_f2: true,
@@ -104,7 +103,6 @@ Page({
       },
       method: 'GET',
       success: function (res) {
-        console.log(res.data.data)
         if (res.data.data == '') {
           that.setData({
             kong: true
@@ -168,7 +166,6 @@ Page({
     wx.redirectTo({
         url: '/pages/release/release',
       })
-   
   },
   //跳转列表
   translate: function () {
@@ -207,8 +204,8 @@ Page({
   //底部导航
   fabu: function () {
     wx.redirectTo({
-      //url: '/pages/rob/rob',
-      url: '/pages/release/release',
+      url: '/pages/rob/rob',
+      //url: '/pages/release/release',
     })
   },
   liulan: function () {

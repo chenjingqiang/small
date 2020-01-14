@@ -10,10 +10,10 @@
        <view></view>
     </view>
   </view>
-  <!-- <view class="title2">如有疑问联系客服 16600221126</view> -->
+  <view class="title2">如有疑问联系客服 16600221126</view>
   <image src="../image/qiyue_kong.png" class="qiyue_kong" wx-if="{{select==''}}"></image>
   <view class="list_fu" wx-if="{{select}}">
-    <view class="list" wx:for="{{select}}" wx:key="{{index}}">
+    <view class="list" wx:for="{{select}}" wx:key="index">
       <view class="tit clearfix">
         <view class="fl">订单金额：¥{{item.money}}</view>
         <view class="fr tit_r">{{item.show_status}}</view>

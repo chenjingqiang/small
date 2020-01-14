@@ -1,18 +1,18 @@
 
 <view class='release'>
   <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
+  
   <image class='shuaxin' src='../image/shuaxin.png' bindtap='shuaxin'></image>
   <view class='title clearfix'>
-    <view bindtap='release'>
-    </view>
     <view bindtap='translate'>
+    </view>
+    <view bindtap='release'>
     </view>
     <button open-type="getUserInfo" class='show-author2' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
   </view>
   <view class='zaixian'>
     <image src='../image/zaixian.png'></image>
     <view class='fl'>当前有<text>{{zaixian}}</text>位翻译官在线</view>
-    
   </view>
   <view class='con'>
     <!-- 空 -->

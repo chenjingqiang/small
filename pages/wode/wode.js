@@ -99,6 +99,12 @@ Page({
       url: '/pages/vip/vip',
     })
   },
+  go_zhuye:function(){
+    wx.setStorageSync('detil_id', this.data.openid)
+    wx.navigateTo({
+      url: '/pages/detil/detil',
+    })
+  },
   go_xiaoxi: function () {
     wx.navigateTo({
       url: '/pages/xiaoxi/xiaoxi',
@@ -188,8 +194,8 @@ Page({
   //底部导航
   fabu: function() {
     wx.redirectTo({
-      //url: '/pages/rob/rob',
-      url: '/pages/release/release',
+      url: '/pages/rob/rob',
+      //url: '/pages/release/release',
     })
   },
   liulan: function () {

@@ -1,12 +1,11 @@
 
 <view class='release'>
   <view class='yinying' wx-if="{{!yinying}}" catchtouchmove='true'></view>
-  
-  <image src="../image/rod_qp.png" class="rob_qp" bindtap="change_rob_qp" wx-if="{{rob_qp_tf==0}}"></image>
+  <!-- <image src="../image/rod_qp.png" class="rob_qp" bindtap="change_rob_qp" wx-if="{{rob_qp_tf==0}}"></image> -->
   <view class='title clearfix'>
-    <view bindtap='release'>
-    </view>
     <view bindtap='translate'>
+    </view>
+    <view bindtap='release'>
     </view>
     <button open-type="getUserInfo" class='show-author2' bindgetuserinfo="getUserInfo" wx-if="{{get_user}}"></button>
   </view>
@@ -70,7 +69,7 @@
   <view class='biaoqian_box' wx-if="{{biaoqian_box}}" catchtouchmove='true'>
     <view class='biaoqian_tit'>
       标签选择
-      <image src='/pages/image/x.png' bindtap='close_biaoqian'></image>
+      <image src='/pages/image/xx.png' bindtap='close_biaoqian'></image>
     </view>
     <text>选择标签，最多2个</text>
     <view class='biaoqian_select clearfix'>
@@ -83,8 +82,8 @@
     </view>
   </view>
   <view class='bor'></view>
-  <view class='con clearfix'>
-    <textarea class='textarea' placeholder='请输入您的项目需求...' maxlength="-1"  bindinput="inputs" wx-if="{{textarea_tf}}" value='{{value}}'></textarea>
+  <view class='con clearfix' id="textarea">
+    <textarea class='textarea'  placeholder='请输入您的项目需求...' maxlength="-1"  bindinput="inputs" wx-if="{{textarea_tf}}" value='{{value}}'></textarea>
     <view class='textarea' wx-if="{{!textarea_tf}}" style='box-sizing: border-box;padding-left:10rpx;padding-top:14rpx;'>
       {{value2}}
     </view>

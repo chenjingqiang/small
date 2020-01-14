@@ -90,6 +90,7 @@
   margin-top: 40rpx;
   margin-right: 40rpx;
 }
+
 .wode_btn{
   width: 260rpx;
   height: 60rpx;

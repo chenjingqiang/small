@@ -18,12 +18,93 @@ Page({
     template: 'bigsmall',
     get_user:true
   },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    //更新
+    const updateManager = wx.getUpdateManager()
+    updateManager.onCheckForUpdate(function (res) {
+      // 请求完新版本信息的回调
+      //console.log(res.hasUpdate)
+      if (res.hasUpdate) {
+        updateManager.onUpdateReady(function () {
+          wx.showModal({
+            title: '更新提示',
+            content: '新版本已经准备好，是否重启应用？',
+            success: function (res) {
+              updateManager.applyUpdate()
+            }
+          })
+        })
+        updateManager.onUpdateFailed(function () {
+          // 新的版本下载失败
+          wx.showModal({
+            title: '已经有新版本了哟~',
+            content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
+          })
+        })
+      }
+    })
+
+    var that=this
+    var openid = wx.getStorageSync('openid') || ''
+    var latitude = wx.getStorageSync('latitude') || ''
+    var longitude = wx.getStorageSync('longitude') || ''
+    that.setData({
+      openid: openid
+    })
+    if (longitude==''){
+      wx.getLocation({ // 请求位置信息
+        type: 'gcj02',
+        success(res) {
+          //console.log(res);
+          that.setData({
+            latitude: res.latitude,
+            longitude: res.longitude
+          })
+          wx.setStorageSync('latitude', res.latitude)
+          wx.setStorageSync('longitude', res.longitude)
+        }
+      }) 
+    }
+    if (app.globalData.userInfo.nickName) {
+      //console.log(app.globalData.userInfo)
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        get_user: false
+      })
+    } else {
+      app.userInfoReadyCallback = res => {
+        //console.log('userInfoReadyCallback: ', res.userInfo);
+        //console.log('获取用户信息成功');
+        this.setData({
+          userInfo: res.userInfo,
+          get_user: false
+        })
+      }
+    }
+  },
   // 绑定输房间号入框
   bindRoomNo: function (e) {
     var self = this;
     self.setData({
       roomNo: e.detail.value
     });
+  },
+  //获取用户头像
+  getUserInfo: function () {
+    var that = this
+    wx.getUserInfo({
+      success: function (res) {
+        //console.log(res.userInfo)
+        getApp().globalData.userInfo = res.userInfo
+        that.setData({
+          get_user: false,
+          userInfo: res.userInfo
+        })
+      }
+    })
   },
   // 进入rtcroom页面
   joinRoom: function () {
@@ -63,7 +144,7 @@ Page({
         room: self.data.roomNo
       },
       success: function (res) {
-        if(res.data.code==1){
+        if (res.data.code == 1) {
           self.data.userID = self.data.openid
           wx.request({
             url: '' + util.ajaxurl + 'demo1.php',
@@ -94,50 +175,24 @@ Page({
               });
             },
           })
-        }else{
+        } else {
           wx.showToast({
-            title: ''+res.data.message+'',
-            icon:'none'
+            title: '' + res.data.message + '',
+            icon: 'none'
           })
         }
-        
+
       }
     })
-    
+
 
 
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var that=this
-    var openid = wx.getStorageSync('openid') || ''
-    var latitude = wx.getStorageSync('latitude') || ''
-    var longitude = wx.getStorageSync('longitude') || ''
-    that.setData({
-      openid: openid,
-      latitude: latitude,
-      longitude: longitude
+  go_uear:function(){
+    wx.navigateTo({
+      url: '/pages/uear/uear',
     })
-    if (app.globalData.userInfo.nickName) {
-      //console.log(app.globalData.userInfo)
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        get_user: false
-      })
-    } else {
-      app.userInfoReadyCallback = res => {
-        //console.log('userInfoReadyCallback: ', res.userInfo);
-        //console.log('获取用户信息成功');
-        this.setData({
-          userInfo: res.userInfo,
-          get_user: false
-        })
-      }
-    }
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -221,8 +276,8 @@ Page({
   //底部导航
   fabu: function () {
     wx.redirectTo({
-      //url: '/pages/rob/rob',
-      url: '/pages/release/release',
+      url: '/pages/rob/rob',
+      //url: '/pages/release/release',
     })
   },
   liulan: function () {

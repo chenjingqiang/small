@@ -9,11 +9,15 @@
 }
 .title2{
   position: fixed;
-  top: 80;
   left: 0;
+  top: 80rpx;
   width: 100%;
+  height: 76rpx;
+  background: #fff6e2;
   text-align: center;
-  
+  line-height: 76rpx;
+  font-size: 28rpx;
+  color: #666;
 }
 .title view{
   width: 50%;
@@ -35,7 +39,7 @@
   margin-left: -32rpx;
 }
 .list_fu{
-  margin-top: 100rpx;
+  margin-top: 156rpx;
   background: #EBEBEB;
 }
 .list{

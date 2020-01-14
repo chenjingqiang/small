@@ -209,7 +209,7 @@
         </view>
       </view>
       <view class="list_fu" wx-if="{{select!=''}}">
-        <view class="list2 clearfix" wx:for="{{select}}" wx:key="{{index}}">
+        <view class="list2 clearfix" wx:for="{{select}}" wx:key="index">
           <image src="{{item.wx_img}}"  class="touxiang2 fl" ></image>
           <view class="fl">
             <view class="name">{{item.wx_name}}</view>

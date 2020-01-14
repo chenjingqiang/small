@@ -256,8 +256,8 @@ Page({
   //底部导航
   fabu: function () {
     wx.redirectTo({
-      //url: '/pages/rob/rob',
-      url: '/pages/release/release',
+      url: '/pages/rob/rob',
+      //url: '/pages/release/release',
     })
   },
   liulan: function () {

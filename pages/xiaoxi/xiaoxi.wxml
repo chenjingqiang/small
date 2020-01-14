@@ -1,7 +1,7 @@
 <view class="xiaoxi">
   <image src="../image/pinglunkong.jpg" class="kong" wx-if="{{select==''}}"></image>
   <view class="list_fu" wx-if="{{select!=''}}">
-    <view class="list clearfix" wx:for="{{select}}" wx:key="{{index}}" data-type="{{item.type}}" data-type_id="{{item.type_id}}" bindtap="go_xiangqing">
+    <view class="list clearfix" wx:for="{{select}}" wx:key="index" data-type="{{item.type}}" data-type_id="{{item.type_id}}" bindtap="go_xiangqing">
       <image src="{{item.wx_img}}"  class="fl"></image>
       <view class="fr right">
         <view class="clearfix">
