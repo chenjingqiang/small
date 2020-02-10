@@ -48,7 +48,9 @@ Page({
     charge_money:'',
     resume_money:'',
     resume_status:'',
-    resume_url:''
+    resume_url:'',
+    show_dy_c:'',
+    wx_dynamics:[]
   },
 
   /**
@@ -158,7 +160,6 @@ Page({
         }else{
           var baojia = '笔译费用：' + data.written_money + '元/千字 、口译费用：' + data.oral_money + '元/小时，' + data.other
         }
-       
         that.setData({
           nan_nv: data.wx_sex,
           name: data.wx_name,
@@ -193,7 +194,9 @@ Page({
           charge_money: data.charge_money,
           resume_status: data.resume_status,
           resume_url: data.resume_url,
-          resume_money: data.resume_money
+          resume_money: data.resume_money,
+          show_dy_c: data.show_dy_c,
+          wx_dynamics: data.wx_dynamics
         })
       },
       complete: function () {
@@ -234,6 +237,12 @@ Page({
   onShow: function () {
     var that=this
     util.get_title(that)
+  },
+  //跳转动态
+  go_dongtai:function(){
+    wx.navigateTo({
+      url: '../dongtai/dongtai',
+    })
   },
   //跳转简历
   go_jianli:function(){
@@ -509,6 +518,43 @@ Page({
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },
+    })
+  },
+  previewImg3: function (e) {
+    var index = e.currentTarget.dataset.imgindex
+    var imgArr = e.currentTarget.dataset.photourl
+    wx.previewImage({
+      current: index,     //当前图片地址
+      urls: imgArr,               //所有要预览的图片的地址集合 数组形式
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  //删除动态
+  shanchu_dongtai:function(e){
+    var that=this
+    var id=e.currentTarget.dataset.dongtai_id
+    console.log(id)
+    wx.request({
+      url: '' + util.ajaxurl + 'delete_dynamic.php',
+      data: {
+       id:id
+      },
+      method: 'GET',
+      success: function (res) {
+        if (res.data.code==1){
+          wx.showToast({
+            title: res.data.message,
+          })
+          that.onLoad()
+        }else{
+          wx.showToast({
+            icon:'none',
+            title: res.data.message,
+          })
+        }
+      }
     })
   },
   //调起输入框

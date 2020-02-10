@@ -1,0 +1,27 @@
+<!--pages/dongtai/dongtai.wxml-->
+<view class="dongtai">
+  <view class="top clearfix">
+    <view class="fl" bindtap="quxiao">取消</view>
+    <view class="{{t_f ? 'fr sub' : 'fr sub2'}}" bindtap="sub">发表</view>
+  </view>
+  <view class="con">
+    <textarea placeholder="分享新鲜事…" value="{{value}}" bindinput="get_value" ></textarea>
+    <view class="qiang">
+      <view class='ims'>
+        <view class='image_arr_fu clearfix'>
+          <block wx:for="{{image_arr}}" wx:key="index">
+            <view class="q-image-wrap">
+              <!-- 图片缩略图  -->
+              <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+              <!-- 移除图片的按钮  -->
+              <image src='../image/x22.png' class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"></image>
+            </view>
+          </block>
+          <view class='add fl' bindtap='chooseImage'  wx:if="{{image_arr.length < 9}}">
+            +
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

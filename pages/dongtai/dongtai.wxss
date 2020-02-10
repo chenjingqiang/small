@@ -1,0 +1,89 @@
+/* pages/dongtai/dongtai.wxss */
+.top{
+  height: 102rpx;
+  line-height: 102rpx;
+  padding: 0 40rpx;
+  font-size: 32rpx;
+  color: #333333;
+  border: 2rpx solid #ebebeb;
+  margin-bottom: 38rpx;
+}
+.sub{
+  width: 150rpx;
+  height: 60rpx;
+  background: #F19F42;
+  border-radius: 6rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #fff;
+  margin-top: 20rpx;
+}
+.sub2{
+  width: 150rpx;
+  height: 60rpx;
+  border-radius: 6rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #fff;
+  margin-top: 20rpx;
+  background: #ccc;
+}
+.con {
+  width: 670rpx;
+  margin: 0 auto;
+}
+.con textarea{
+  width: 670rpx;
+  font-size: 32rpx;
+  color: #333333;
+  letter-spacing: 0.14rpx;
+  text-align: justify;
+  height: 180rpx;
+}
+.qiang .tt{
+  font-size: 32rpx;
+  color: #333333;
+  text-align: left;
+  margin-top: 40rpx;
+}
+.qiang .tt text{
+  font-size: 26rpx;
+  color: #999;
+  margin-left: 6rpx;
+}
+.qiang .add{
+  width: 210rpx;
+  height: 210rpx;
+  line-height: 210rpx;
+  text-align: center;
+  font-size: 100rpx;
+  color: #aaa;
+  border: 2rpx dashed #aaa;
+}
+.qiang .ims {
+  width: 690rpx;
+  overflow: hidden;
+  margin-top: 30rpx;
+}
+.image_arr_fu{
+  width: 710rpx;
+}
+.q-image-wrap{
+  float: left;
+  width: 210rpx;
+  height: 210rpx;
+  position: relative;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+.q-image-wrap image{
+  width: 210rpx;
+  height: 210rpx;
+}
+.q-image-wrap .q-image-remover{
+  position: absolute;
+  width: 35rpx;
+  height: 35rpx;
+  right: 0;
+  top: 0;
+}

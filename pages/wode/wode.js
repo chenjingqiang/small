@@ -52,7 +52,6 @@ Page({
     util.get_title(this)
     util.get_red(this)
     //翻译官认证状态
-    console.log(1)
     wx.request({
       //判断
       url: '' + util.ajaxurl +'translator_status.php',

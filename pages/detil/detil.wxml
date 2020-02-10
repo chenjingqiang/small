@@ -195,10 +195,29 @@
         {{jingli}}
       </view>
     </view>
-
-    <!-- 评论 -->
     <view class="bor2">
     </view>
+    <view class="dongtai">
+      动态
+      <image src="../image/dongtai.png" wx-if="{{show_dy_c==1}}" bindtap="go_dongtai"></image>
+    </view>
+    <view class="dongtai_con">
+      <view class="dongtai_list" wx:for="{{wx_dynamics}}" wx:key="index">
+        <view class="dongtai_list_tit">{{item.dy_text}}</view>
+        <view class="photoUrls2 clearfix" wx-if="{{item.dy_photoUrl!=''}}">
+          <image wx:for="{{item.dy_photoUrl}}" wx:key="index" mode="aspectFill" wx:for-item="item2" src="{{item2}}" bindtap='previewImg3' data-photoUrl="{{item.dy_photoUrl}}" data-imgindex="{{index}}"></image>
+        </view>
+        <view class="dongtai_time">
+          <view class="fl">{{item.datetime}}</view>
+          <view class="fr shanchu" wx-if="{{show_dy_c==1}}" data-dongtai_id="{{item.id}}" bindtap="shanchu_dongtai">删除</view>
+        </view>
+      </view>
+      
+    </view>
+    
+    <view class="bor2" style="margin-top:-2rpx;">
+    </view>
+    <!-- 评论 -->
     <view class="con2">
       <view class="con2_title">
         <view class="fl" style="color:#333;">

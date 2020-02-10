@@ -42,9 +42,9 @@
     <text class="fl" wx-if="{{member_status==1}}">VIP用户</text>
     <image src='../image/fl.png' class="right" ></image>
   </view>
-  <view style="width:670rpx;margin:0 auto;height:1px;background:#ccc;">
+  <view style="width:670rpx;margin:0 auto;height:1px;background:#ccc;"  wx-if="{{code==1}}">
   </view>
-  <view class="vip clearfix" bindtap="go_zhuye" style="color: #333;">
+  <view class="vip clearfix" bindtap="go_zhuye" style="color: #333;" wx-if="{{code==1}}">
     <image src='../image/zhuye.png' class="zuanshi fl" ></image>
     <text class="fl">个人主页</text>
     <image src='../image/fl.png' class="right" ></image>

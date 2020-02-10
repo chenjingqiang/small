@@ -259,6 +259,16 @@
   margin-right: 18rpx;
   margin-bottom: 15rpx;
 }
+.photoUrls2{
+  width: 700rpx;
+}
+.photoUrls2 image{
+  float: left;
+  width: 210rpx;
+  height: 210rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
 .list_r{
   width: 470rpx;
 }
@@ -511,9 +521,47 @@
   height: 105rpx;
   background: #fff;
 }
-
-
-
+.dongtai{
+  padding-left:40rpx; 
+  height: 107rpx;
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: bold;
+  line-height: 107rpx;
+  border-bottom: 2rpx solid #EBEBEB;
+}
+.dongtai image{
+  width: 128rpx;
+  height: 107rpx;
+  float: right;
+}
+.dongtai_con{
+}
+.dongtai_list{
+  width: 670rpx;
+  margin: 0 auto;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid #EBEBEB;
+}
+.dongtai_list_tit{
+  font-size: 32rpx;
+  color: #333333;
+  margin-bottom: 30rpx;
+  margin-top: 40rpx;
+}
+.dongtai_time{
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 24rpx;
+  color: #777777;
+}
+.dongtai_time .shanchu{
+  width: 70rpx;
+  height: 70rpx;
+  font-size: 25rpx;
+  color: #799df1;
+  text-align: center;
+}
 
 
 

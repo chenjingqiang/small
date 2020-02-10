@@ -138,7 +138,7 @@ Page({
           },
           method: 'GET',
           success: function (res) {
-            console.log(res.data.data)
+            //console.log(res.data.data)
             that.setData({
               code: res.data.code
             })
