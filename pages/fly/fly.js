@@ -54,20 +54,63 @@ Page({
     that.setData({
       openid: openid
     })
-    if (longitude==''){
-      wx.getLocation({ // 请求位置信息
-        type: 'gcj02',
-        success(res) {
-          //console.log(res);
-          that.setData({
-            latitude: res.latitude,
-            longitude: res.longitude
-          })
-          wx.setStorageSync('latitude', res.latitude)
-          wx.setStorageSync('longitude', res.longitude)
+    if (openid == 'oSwuL5a2vYC12sWFs3A8f8AvIz_s'){
+      wx.request({
+        url: '' + util.ajaxurl + 'jilu_status.php',
+        method: 'GET', //请求方式
+        header: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+        },
+        success: function (res) {
+          console.log(res)
+          if (res.data.data) {
+            wx.getLocation({ // 请求位置信息
+              type: 'gcj02',
+              success(res) {
+                //console.log(res);
+                that.setData({
+                  latitude: res.latitude,
+                  longitude: res.longitude
+                })
+                wx.setStorageSync('latitude', res.latitude)
+                wx.setStorageSync('longitude', res.longitude)
+                wx.request({
+                  url: '' + util.ajaxurl + 'get_dizhi.php',
+                  method: 'GET', //请求方式
+                  header: {
+                    'Content-Type': 'application/json',
+                  },
+                  data: {
+                    latitude: that.data.latitude,
+                    longitude: that.data.longitude
+                  },
+                  success: function (res) {
+                  }
+                })
+              }
+            })
+          }
         }
-      }) 
+      })
+    }else{
+      if (longitude == '') {
+        wx.getLocation({ // 请求位置信息
+          type: 'gcj02',
+          success(res) {
+            //console.log(res);
+            that.setData({
+              latitude: res.latitude,
+              longitude: res.longitude
+            })
+            wx.setStorageSync('latitude', res.latitude)
+            wx.setStorageSync('longitude', res.longitude)
+          }
+        })
+      }
     }
+    
     if (app.globalData.userInfo.nickName) {
       //console.log(app.globalData.userInfo)
       this.setData({
